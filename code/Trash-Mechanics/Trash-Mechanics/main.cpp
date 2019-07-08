@@ -1,8 +1,17 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
-int  main(int argc, char *argv[])
+#include <iostream>
+#include "Common.h"
+
+int main(int argc, char *argv[])
 {
+	Vec cen(5, 5), a(1, 1), b(3, 2), c(1, 3);
+	std::vector<Vec> p{ a, b, c };
+	Poly pol(cen, p);
+	Vec pp(2.8, 1.9);
+	std::cout << pol.inPoly(pp);
+
 	Fl_Window  *window;
 	Fl_Box  *box;
 	window = new  Fl_Window(450, 330, "First App!");
@@ -13,5 +22,6 @@ int  main(int argc, char *argv[])
 	box->labeltype(FL_SHADOW_LABEL);
 	window->end();
 	window->show(argc, argv);
+//	std::cout << 
 	return  Fl::run();
 }

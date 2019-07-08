@@ -1,6 +1,21 @@
 #pragma once
 #include <vector>
 #include <string.h>
+#include <cmath>
+#include <iostream>
+#include <stdlib.h>
+#define max(a,b) (((a) > (b)) ? (a) : (b))
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+
+const double pi = 3.1415926;
+const double NearDist = 5.0;
+const double eps = 0.01;
+const double INF = (double)1.0e100;
+
+static bool inPoint = false;
+static bool inEdge = false;
+
+
 typedef enum
 {
 	PractiseMode = 0,
@@ -30,30 +45,55 @@ private:
 	double m_X;
 	double m_Y;
 public:
-	bool setX(double x);
-	bool setY(double y);
-	double getX();
-	double getY();
-	bool setXY(double x, double y);
-	double getAngle();
-	double getMagnitude();
+	Vec();
+	Vec(const double &x, const double &y);
+	Vec operator +(const Vec &x) const;
+	Vec operator -(const Vec &x) const;
+	Vec& operator +=(const Vec &x);
+	Vec& operator -=(const Vec &x);
+	Vec& operator =(const Vec &x);
+	bool setX(const double &x);
+	bool setY(const double &y);
+	double getX() const;
+	double getY() const;
+	bool setXY(const double &x, const double &y);
+	double getAngle() const;
+	double getMagnitude() const;
+	void show() const;
+	virtual ~Vec();
 };
 
-class Line
+class Segment
 {
 private:
 	Vec m_Vertex1;
 	Vec m_Vertex2;
 public:
+	Segment() : m_Vertex1(), m_Vertex2() {};
+	Segment(const Vec &v1, const Vec &v2) : m_Vertex1(v1), m_Vertex2(v2) {}
+	bool setV1(const Vec &v) { m_Vertex1 = v;  return true; }
+	bool setV2(const Vec &v) { m_Vertex2 = v; return true; }
+	Vec getV1() const { return m_Vertex1; } 
+	Vec getV2() const { return m_Vertex2; } 
+	virtual ~Segment() {}
 };
 
-class Polygon
+class Poly
 {
 private:
 	Vec m_CenterPosition;
-	std::vector<Vec> m_Position;
-	//string mImage;
+	std::vector<Vec> m_Point; /* All the points must be arranged in an anti-clockwise order*/
+	int m_PointNum;
+	//string m_Image;
 public:
-	bool intersection(Line l);
-	bool inPolygon(Vec vec);
+	Poly(): m_CenterPosition() { m_PointNum = 0; }
+	Poly(const Vec &center, const std::vector<Vec> &P) : m_CenterPosition(center), m_Point(P), m_PointNum(P.size()) {}
+	bool setPoly(const Vec &center, const std::vector<Vec> &P);
+	//bool isIntersected(const Segment &s) const;
+	bool inPoly(const Vec &v) const;
+	virtual ~Poly() {}
 };
+
+double VecToVecDist(const Vec &v1, const Vec &v2);
+double VecToSegmentDist(const Vec &v, const Segment &s);
+double VecAngle(const Vec &v, const Vec &v1, const Vec &v2);
