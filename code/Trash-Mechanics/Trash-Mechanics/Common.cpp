@@ -97,7 +97,7 @@ Vec::~Vec()
 
 
 
-bool Poly::setPoly(const Vec & center, const std::vector<Vec>& P)
+bool Poly::setPoly(const Vec &center, const std::vector<Vec> &P)
 {
 	m_CenterPosition = center;
 	m_Point = P;
