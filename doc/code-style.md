@@ -18,4 +18,18 @@
   eg.
 
   double VecAngle(const Vec &v, const Vec &v1, const Vec &v2) {}
+  
+- 如果需要对stl模板中的常量容器（如const vector）进行访问，请使用const_iterator而不是iterator
+
+  eg.
+
+  ```c++
+  for (std::vector<Vec>::const_iterator i = m_Point.begin(); i != m_Point.end(); i++)
+  {
+  	//
+  }
+  ```
+  
+  
+  
 
