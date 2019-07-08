@@ -1,5 +1,5 @@
-# Physics-Simulator
-An easy physics simulator ---- our first try for C++ project
+# Trash-Mechanics
+An simple game in which you need to classify your garbages and throw them into correct dustbin, coded with C++ and FLTK library.
 
 # Tool Specification
 Coding System : Visual Studio (Windows 10 SDK Ver 10.0.17134.0) 
