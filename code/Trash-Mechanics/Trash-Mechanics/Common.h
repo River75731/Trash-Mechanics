@@ -7,7 +7,7 @@
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
-const double pi = 3.1415926;
+const double pi = 3.141592653589793;
 const double NearDist = 5.0;
 const double eps = 0.01;
 const double INF = (double)1.0e100;
@@ -49,8 +49,12 @@ public:
 	Vec(const double &x, const double &y);
 	Vec operator +(const Vec &x) const;
 	Vec operator -(const Vec &x) const;
+	Vec operator *(const double &x) const; // multiplied by scaler
+	double operator ^(const Vec &x) const; // dot product
+	double operator %(const Vec &x) const; // X product
 	Vec& operator +=(const Vec &x);
 	Vec& operator -=(const Vec &x);
+	Vec& operator *=(const double &x); // multiplied by scaler
 	Vec& operator =(const Vec &x);
 	bool setX(const double &x);
 	bool setY(const double &y);
@@ -60,6 +64,8 @@ public:
 	double getAngle() const;
 	double getMagnitude() const;
 	void show() const;
+	void rotate(const Vec &center, const double &angle);
+	void rotate(const double &angle);
 	virtual ~Vec();
 };
 
@@ -73,27 +79,41 @@ public:
 	Segment(const Vec &v1, const Vec &v2) : m_Vertex1(v1), m_Vertex2(v2) {}
 	bool setV1(const Vec &v) { m_Vertex1 = v;  return true; }
 	bool setV2(const Vec &v) { m_Vertex2 = v; return true; }
+	bool set(const Vec &v1, const Vec &v2) { m_Vertex1 = v1;  m_Vertex1 = v2; return true; }
 	Vec getV1() const { return m_Vertex1; } 
 	Vec getV2() const { return m_Vertex2; } 
+
 	virtual ~Segment() {}
 };
 
 class Poly
 {
 private:
-	Vec m_CenterPosition;
+	Vec m_CenterPoint;
 	std::vector<Vec> m_Point; /* All the points must be arranged in an anti-clockwise order*/
 	int m_PointNum;
 	//string m_Image;
 public:
-	Poly(): m_CenterPosition() { m_PointNum = 0; }
-	Poly(const Vec &center, const std::vector<Vec> &P) : m_CenterPosition(center), m_Point(P), m_PointNum(P.size()) {}
+	Poly(): m_CenterPoint() { m_PointNum = 0; }
+	Poly(const Vec &center, const std::vector<Vec> &P) : m_CenterPoint(center), m_Point(P), m_PointNum(P.size()) {}
 	bool setPoly(const Vec &center, const std::vector<Vec> &P);
+	int getPointNum() const { return m_PointNum; }
+	std::vector<Vec> getPoint() const { return m_Point; }
 	//bool isIntersected(const Segment &s) const;
-	bool inPoly(const Vec &v) const;
+	bool inPoly_Vec(const Vec &v) const;
+	bool inPoly_PolyVec(const Poly &pol) const;
+	Vec getInterPoint(const Poly &pol) const; //return the intersection point of this and pol polygons; if none, return originPoint
+	Segment getInterSegment(const Poly &pol) const; //return the intersection segment of this and pol polygons; if none, return emptySegment
+	bool move(const Vec &v);
+	bool rotate(const Vec &center, const double &angle);
+	bool rotate(const double &angle); // center is the mass center
+
 	virtual ~Poly() {}
 };
 
 double VecToVecDist(const Vec &v1, const Vec &v2);
 double VecToSegmentDist(const Vec &v, const Segment &s);
 double VecAngle(const Vec &v, const Vec &v1, const Vec &v2);
+
+extern Vec originPoint;
+extern Segment emptySegment;
