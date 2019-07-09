@@ -1,5 +1,6 @@
 #include "Common.h"
 
+Vec originPoint(0, 0);
 Vec::Vec()
 {
 	m_X = m_Y = 0;
@@ -23,6 +24,24 @@ Vec Vec::operator -(const Vec &x) const
 	return t;
 }
 
+Vec Vec::operator *(const double &x) const
+{
+	Vec t(x * this->getX(), x * this->getY());
+	return t;
+	
+}
+
+double Vec::operator %(const Vec & x) const
+{
+	return (this->getX() * x.getY() - x.getX() * this->getY());
+}
+
+double Vec::operator ^(const Vec & x) const
+{
+	return (this->getX() * x.getX() + this->getY() * x.getY());
+}
+
+
 Vec& Vec::operator +=(const Vec & x)
 {
 	this->m_X += x.m_X;
@@ -34,6 +53,12 @@ Vec& Vec::operator -=(const Vec & x)
 {
 	this->m_X -= x.m_X;
 	this->m_Y -= x.m_Y;
+	return (*this);
+}
+
+Vec & Vec::operator*=(const double & x)
+{
+	(*this) = (*this) * x;
 	return (*this);
 }
 
@@ -83,11 +108,16 @@ void Vec::show() const
 	std::cout << "X " << m_X << " Y " << m_Y << std::endl;
 }
 
-bool Vec::setXY(const double &x, const double &y)
+void Vec::rotate(const Vec & center, const double &angle)
 {
-	this->m_X = x;
-	this->m_Y = y;
-	return true;
+	Vec diff = (*this) - center;
+	double r = diff.getMagnitude(), tAngle = diff.getAngle() + angle;
+	this->setXY(center.getX() + r * cos(tAngle), center.getY() + r * sin(tAngle));
+}
+
+void Vec::rotate(const double & angle)
+{
+	this->Vec::rotate(originPoint, angle);
 }
 
 Vec::~Vec()
@@ -95,11 +125,20 @@ Vec::~Vec()
 	return;
 }
 
+bool Vec::setXY(const double &x, const double &y)
+{
+	this->m_X = x;
+	this->m_Y = y;
+	return true;
+}
+
+
+
 
 
 bool Poly::setPoly(const Vec &center, const std::vector<Vec> &P)
 {
-	m_CenterPosition = center;
+	m_CenterPoint = center;
 	m_Point = P;
 	m_PointNum = P.size();
 	return false;
@@ -134,6 +173,30 @@ bool Poly::inPoly(const Vec &v) const
 	if (fabs(angleSum - 2 * pi) < eps) 
 		return true;
 	return false;
+}
+
+bool Poly::move(const Vec & v)
+{
+	for (std::vector<Vec>::iterator i = m_Point.begin(); i != m_Point.end(); i++)
+	{
+		(*i) += v;
+	}
+	return false;
+}
+
+bool Poly::rotate(const Vec & center, const double & angle)
+{
+	for (std::vector<Vec>::iterator i = m_Point.begin(); i != m_Point.end(); i++)
+	{
+		i->rotate(center, angle);
+	}
+	return true;
+}
+
+bool Poly::rotate(const double & angle)
+{
+	this->rotate(this->m_CenterPoint, angle);
+	return true;
 }
 
 double VecToVecDist(const Vec &v1, const Vec &v2)
