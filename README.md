@@ -3,17 +3,17 @@ A simple game in which you need to classify your garbages and throw them into co
 
 # To-do List
 
-- ### RigidBody::Collide
+- ## RigidBody::Collide
 
-- ### ShowPolyWithPNG
+- ## ShowPolyWithPNG
 
-- #### View layer
+- ### View layer
 
-- #### Model layer
+- ### Model layer
 
-- ##### ViewModel layer
+- #### ViewModel layer
 
-- ##### App layer
+- #### App layer
 
 - ...
 
