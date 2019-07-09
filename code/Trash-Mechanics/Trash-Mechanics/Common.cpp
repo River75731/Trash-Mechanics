@@ -298,7 +298,7 @@ double VecAngle(const Vec &v, const Vec &v1, const Vec &v2)
 	return acos(x);
 }
 
-RigidBodyModel::RigidBodyModel(Poly InputShape, double InputMass, double InputInertiaConstant, Vec InputVelocity, double InputAngularVelocity) {
+RigidBody::RigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity) {
 	m_Shape = InputShape;
 	m_Mass = InputMass;
 	m_InertiaConstant = InputInertiaConstant;
@@ -306,21 +306,58 @@ RigidBodyModel::RigidBodyModel(Poly InputShape, double InputMass, double InputIn
 	m_AngularVelocity = InputAngularVelocity;
 }
 
-void RigidBodyModel::applyForce(Vec NewForce) {
+void RigidBody::applyForce(const Vec &NewForce) {
 	m_Force += NewForce;
 }
 
-void RigidBodyModel::removeForce(Vec NewForce) {
+void RigidBody::removeForce(const Vec &NewForce) {
 	m_Force -= NewForce;
 }
 
-void RigidBodyModel::simulate(double dt) {
+double RigidBody::m() const{
+	return m_Mass;
+}
+
+Vec RigidBody::v() const{
+	return m_Velocity;
+}
+
+double RigidBody::vAbs() const{
+	return m_Velocity.getMagnitude();
+}
+
+double RigidBody::i() const{
+	return m_InertiaConstant;
+}
+double RigidBody::w() const{
+	return m_AngularVelocity;
+}
+
+void RigidBody::move(const double &dt) {
 	/* dx=v*dt */
 	m_Shape.move(m_Velocity*dt);
+}
+
+void RigidBody::accelerate(const double &dt) {
 	/* F=ma */
 	m_Velocity += (m_Force / m_Mass) * dt;
+}
+
+void RigidBody::rotate(const double &dt) {
 	/* dtheta=omega*dt */
 	m_Shape.rotate(m_AngularVelocity*dt);
-	/* M=Jbeta */
+}
+
+void RigidBody::collide(RigidBody &Tag) {
 	/* TBD */
+	/*double Ek1 =
+		0.5*m()*vAbs()*vAbs() +
+		0.5*i()*w()*w() +
+		0.5*Tag.m()*Tag.vAbs()*Tag.vAbs() +
+		0.5*Tag.i()*Tag.w()*Tag.w();
+	double f = 10000;
+	double dt = 0.1;
+	while (m_Shape.inPoly_PolyVec(Tag.m_Shape)) {
+
+	}*/
 }

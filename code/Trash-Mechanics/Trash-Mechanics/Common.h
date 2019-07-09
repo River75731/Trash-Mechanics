@@ -113,7 +113,7 @@ public:
 	virtual ~Poly() {}
 };
 
-class RigidBodyModel {
+class RigidBody {
 private:
 	Poly m_Shape;
 	Vec m_Force;
@@ -122,10 +122,18 @@ private:
 	double m_InertiaConstant;
 	double m_AngularVelocity;
 public:
-	RigidBodyModel(Poly InputShape, double InputMass, double InputInertiaConstant, Vec InputVelocity, double InputAngularVelocity);
-	void applyForce(Vec NewForce);
-	void removeForce(Vec NewForce);
-	void simulate(double dt);
+	RigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity);
+	double m() const; /* Mass */
+	Vec v() const; /* Velocity */
+	double vAbs() const; /* Magnitude of velocity */
+	double i() const; /* Inertia constant */
+	double w() const; /* Angular velocity */
+	void applyForce(const Vec &NewForce);
+	void removeForce(const Vec &NewForce);
+	void move(const double &dt);
+	void accelerate(const double &dt);
+	void rotate(const double &dt);
+	void collide(RigidBody &Tag);/* Will modify this rigidbody and tag rigidbody!!! */
 };
 
 double VecToVecDist(const Vec &v1, const Vec &v2);
