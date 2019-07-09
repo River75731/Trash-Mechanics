@@ -297,3 +297,30 @@ double VecAngle(const Vec &v, const Vec &v1, const Vec &v2)
 	//std::cout << x << std::endl;
 	return acos(x);
 }
+
+RigidBodyModel::RigidBodyModel(Poly InputShape, double InputMass, double InputInertiaConstant, Vec InputVelocity, double InputAngularVelocity) {
+	m_Shape = InputShape;
+	m_Mass = InputMass;
+	m_InertiaConstant = InputInertiaConstant;
+	m_Velocity = InputVelocity;
+	m_AngularVelocity = InputAngularVelocity;
+}
+
+void RigidBodyModel::applyForce(Vec NewForce) {
+	m_Force += NewForce;
+}
+
+void RigidBodyModel::removeForce(Vec NewForce) {
+	m_Force -= NewForce;
+}
+
+void RigidBodyModel::simulate(double dt) {
+	/* dx=v*dt */
+	m_Shape.move(m_Velocity*dt);
+	/* F=ma */
+	m_Velocity += (m_Force / m_Mass) * dt;
+	/* dtheta=omega*dt */
+	m_Shape.rotate(m_AngularVelocity*dt);
+	/* M=Jbeta */
+	/* TBD */
+}
