@@ -27,14 +27,16 @@ int main(int argc, char *argv[])
 	v.push_back(Vec(50, 50));
 	v.push_back(Vec(100, 200));
 	v.push_back(Vec(150, 50));
-	new Fl_Poly(v);
+	Fl_Poly* p1 = new Fl_Poly(v);
 
 	std::vector<Vec> v2;
 	v2.push_back(Vec(250, 150));
 	v2.push_back(Vec(300, 200));
 	v2.push_back(Vec(350, 150));
 	v2.push_back(Vec(300, 50));
-	new Fl_Poly(v2,FL_RED);
+	Fl_Poly* p2 = new Fl_Poly(v2,FL_RED);
+
+	free(p1);
 
 	box->labeltype(FL_SHADOW_LABEL);
 	window->end();
