@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	std::vector<Vec> p{ a, b, c };
 	Poly pol(cen, p);
 	Vec pp(2.8, 1.9);
-	std::cout << pol.inPoly(pp);
+//	std::cout << pol.inPoly(pp);
 
 	Fl_Window  *window;
 	Fl_Box  *box;

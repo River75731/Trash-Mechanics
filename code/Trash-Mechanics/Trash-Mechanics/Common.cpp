@@ -1,6 +1,8 @@
 #include "Common.h"
 
 Vec originPoint(0, 0);
+Segment emptySegment(originPoint, originPoint);
+
 Vec::Vec()
 {
 	m_X = m_Y = 0;
@@ -56,7 +58,7 @@ Vec& Vec::operator -=(const Vec & x)
 	return (*this);
 }
 
-Vec & Vec::operator*=(const double & x)
+Vec & Vec::operator *=(const double & x)
 {
 	(*this) = (*this) * x;
 	return (*this);
@@ -156,8 +158,10 @@ bool Poly::isIntersected(const Segment &s) const
 	return false;
 }*/
 
-bool Poly::inPoly(const Vec &v) const
+bool Poly::inPoly_Vec(const Vec &v) const
 {
+	if (this->m_PointNum == 1)
+		return false;
 	inPoint = false;
 	inEdge = false;
 	double angleSum = 0.0;
@@ -173,6 +177,47 @@ bool Poly::inPoly(const Vec &v) const
 	if (fabs(angleSum - 2 * pi) < eps) 
 		return true;
 	return false;
+}
+
+bool Poly::inPoly_PolyVec(const Poly &pol) const
+{
+	for (std::vector<Vec>::const_iterator i = pol.getPoint().begin(); i != pol.getPoint().end(); i++)
+	{
+		if (this->inPoly_Vec(*i))
+			return true;
+	}
+	return false;
+}
+
+Vec Poly::getInterPoint(const Poly & pol) const
+{
+	for (std::vector<Vec>::const_iterator i = pol.getPoint().begin(); i != pol.getPoint().end(); i++)
+	{
+		if (this->inPoly_Vec(*i))
+			return *i;
+	}
+	return originPoint;
+}
+
+Segment Poly::getInterSegment(const Poly & pol) const
+{
+	if (inPoly_PolyVec(pol) == false)
+		return emptySegment;
+	double m = INF;
+	Segment ms;
+	for (std::vector<Vec>::const_iterator i = pol.getPoint().begin(); i != pol.getPoint().end(); i++)
+	{
+		Vec v1(*i), v2;
+		if (i == m_Point.end() - 1) v2 = *(m_Point.begin());
+		else v2 = *(i + 1);
+		Segment s(v1, v2);
+		if (m > VecToSegmentDist(*i, s))
+		{
+			m = VecToSegmentDist(*i, s);
+			ms.set(v1, v2);
+		}
+	}
+	return ms;
 }
 
 bool Poly::move(const Vec & v)

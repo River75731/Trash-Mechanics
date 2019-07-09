@@ -79,8 +79,10 @@ public:
 	Segment(const Vec &v1, const Vec &v2) : m_Vertex1(v1), m_Vertex2(v2) {}
 	bool setV1(const Vec &v) { m_Vertex1 = v;  return true; }
 	bool setV2(const Vec &v) { m_Vertex2 = v; return true; }
+	bool set(const Vec &v1, const Vec &v2) { m_Vertex1 = v1;  m_Vertex1 = v2; return true; }
 	Vec getV1() const { return m_Vertex1; } 
 	Vec getV2() const { return m_Vertex2; } 
+
 	virtual ~Segment() {}
 };
 
@@ -98,7 +100,10 @@ public:
 	int getPointNum() const { return m_PointNum; }
 	std::vector<Vec> getPoint() const { return m_Point; }
 	//bool isIntersected(const Segment &s) const;
-	bool inPoly(const Vec &v) const;
+	bool inPoly_Vec(const Vec &v) const;
+	bool inPoly_PolyVec(const Poly &pol) const;
+	Vec getInterPoint(const Poly &pol) const; //return the intersection point of this and pol polygons; if none, return originPoint
+	Segment getInterSegment(const Poly &pol) const; //return the intersection segment of this and pol polygons; if none, return emptySegment
 	bool move(const Vec &v);
 	bool rotate(const Vec &center, const double &angle);
 	bool rotate(const double &angle); // center is the mass center
@@ -111,3 +116,4 @@ double VecToSegmentDist(const Vec &v, const Segment &s);
 double VecAngle(const Vec &v, const Vec &v1, const Vec &v2);
 
 extern Vec originPoint;
+extern Segment emptySegment;
