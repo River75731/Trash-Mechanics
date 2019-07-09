@@ -2,7 +2,9 @@
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
 #include <iostream>
+#include <vector>
 #include "Common.h"
+#include "View-Polygon.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,9 +21,23 @@ int main(int argc, char *argv[])
 	box->box(FL_FLAT_BOX);
 	box->labelsize(36);
 	box->labelfont(FL_BOLD + FL_ITALIC);
+
+
+	std::vector<Vec> v;
+	v.push_back(Vec(50, 50));
+	v.push_back(Vec(100, 200));
+	v.push_back(Vec(150, 50));
+	new Fl_Poly(v);
+
+	std::vector<Vec> v2;
+	v2.push_back(Vec(250, 150));
+	v2.push_back(Vec(300, 200));
+	v2.push_back(Vec(350, 150));
+	v2.push_back(Vec(300, 50));
+	new Fl_Poly(v2,FL_RED);
+
 	box->labeltype(FL_SHADOW_LABEL);
 	window->end();
 	window->show(argc, argv);
-//	std::cout << 
 	return  Fl::run();
 }
