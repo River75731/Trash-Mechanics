@@ -113,6 +113,21 @@ public:
 	virtual ~Poly() {}
 };
 
+class RigidBodyModel {
+private:
+	Poly m_Shape;
+	Vec m_Force;
+	Vec m_Velocity;
+	double m_Mass;
+	double m_InertiaConstant;
+	double m_AngularVelocity;
+public:
+	RigidBodyModel(Poly InputShape, double InputMass, double InputInertiaConstant, Vec InputVelocity, double InputAngularVelocity);
+	void applyForce(Vec NewForce);
+	void removeForce(Vec NewForce);
+	void simulate(double dt);
+};
+
 double VecToVecDist(const Vec &v1, const Vec &v2);
 double VecToSegmentDist(const Vec &v, const Segment &s);
 double VecAngle(const Vec &v, const Vec &v1, const Vec &v2);
