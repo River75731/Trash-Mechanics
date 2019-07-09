@@ -27,12 +27,18 @@
     <ClCompile Include="View-Polygon.cpp">
       <Filter>SourceFile\View</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="View-Polygon.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,13 +10,11 @@ void Fl_Poly::draw() {
 }
 
 Fl_Poly::Fl_Poly(std::vector<Vec> InputVertices): Fl_Box(1, 1, 1, 1, "") {
-	m_RelatedBox = new Fl_Box(1, 1, 1, 1, "");
 	m_Vertices = InputVertices;
 	m_Color = FL_BLACK;
 }
 
 Fl_Poly::Fl_Poly(std::vector<Vec> InputVertices, Fl_Color InputColor) : Fl_Box(1, 1, 1, 1, "") {
-	m_RelatedBox = new Fl_Box(1, 1, 1, 1, "");
 	m_Vertices = InputVertices;
 	m_Color = InputColor;
 }
