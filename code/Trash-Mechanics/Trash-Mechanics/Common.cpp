@@ -29,8 +29,13 @@ Vec Vec::operator -(const Vec &x) const
 Vec Vec::operator *(const double &x) const
 {
 	Vec t(x * this->getX(), x * this->getY());
+	return t;	
+}
+
+Vec Vec::operator/(const double & x) const
+{
+	Vec t(this->getX() / x, this->getY() / x);
 	return t;
-	
 }
 
 double Vec::operator %(const Vec & x) const
@@ -61,6 +66,12 @@ Vec& Vec::operator -=(const Vec & x)
 Vec & Vec::operator *=(const double & x)
 {
 	(*this) = (*this) * x;
+	return (*this);
+}
+
+Vec & Vec::operator/=(const double & x)
+{
+	(*this) = (*this) / x;
 	return (*this);
 }
 
