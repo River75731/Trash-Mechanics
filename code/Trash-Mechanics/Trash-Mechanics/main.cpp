@@ -13,11 +13,10 @@ int main(int argc, char *argv[])
 	cen.rotate(a, pi / 4);
 	cen.show();
 	b *= 1.1;
-	(b * 1.1).show();
+	(b / 1.1).show();
 	std::vector<Vec> p{ a, b, c };
 	Poly pol(cen, p);
 	Vec pp(2.8, 1.9);
-//	std::cout << pol.inPoly(pp);
 
 	Fl_Window  *window;
 	Fl_Box  *box;

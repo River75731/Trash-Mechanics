@@ -50,11 +50,13 @@ public:
 	Vec operator +(const Vec &x) const;
 	Vec operator -(const Vec &x) const;
 	Vec operator *(const double &x) const; // multiplied by scaler
+	Vec operator /(const double &x) const; // divided by scaler
 	double operator ^(const Vec &x) const; // dot product
 	double operator %(const Vec &x) const; // X product
 	Vec& operator +=(const Vec &x);
 	Vec& operator -=(const Vec &x);
 	Vec& operator *=(const double &x); // multiplied by scaler
+	Vec& operator /=(const double &x); // divided by scaler
 	Vec& operator =(const Vec &x);
 	bool setX(const double &x);
 	bool setY(const double &y);
