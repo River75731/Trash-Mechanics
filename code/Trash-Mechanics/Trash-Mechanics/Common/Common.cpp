@@ -149,6 +149,14 @@ bool Vec::setXY(const double &x, const double &y)
 
 
 
+bool Poly::setPoly(const Poly & poly)
+{
+	m_CenterPoint = poly.m_CenterPoint; 
+	m_Point = poly.m_Point;
+	m_PointNum = poly.m_PointNum;
+	return true;
+}
+
 bool Poly::setPoly(const Vec &center, const std::vector<Vec> &P)
 {
 	m_CenterPoint = center;

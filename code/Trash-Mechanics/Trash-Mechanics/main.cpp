@@ -9,7 +9,7 @@
 #include "Others/View-Polygon.h"
 #include "ViewModel/MyFLTK.h"
 #include "Model/Model.h"
-
+/*
 int main(int argc, char *argv[])
 {
 	int w = Fl::w() / 2, h = Fl::h() / 2;
@@ -31,6 +31,6 @@ int main(int argc, char *argv[])
 		a->show();
 		box.hide();
 		a->color(FL_RED);
-		a->show();*/
+		a->show();
 		return Fl::run();
-}
+}*/

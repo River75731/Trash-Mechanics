@@ -129,8 +129,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Others\Message.cpp" />
+    <ClCompile Include="Others\View-Polygon.cpp" />
     <ClCompile Include="ViewModel\MyFLTK.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="demo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="Others\Message.h" />
+    <ClInclude Include="Others\View-Polygon.h" />
     <ClInclude Include="ViewModel\MyFLTK.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

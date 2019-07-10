@@ -98,6 +98,7 @@ private:
 public:
 	Poly(): m_CenterPoint() { m_PointNum = 0; }
 	Poly(const Vec &center, const std::vector<Vec> &P) : m_CenterPoint(center), m_Point(P), m_PointNum(P.size()) {}
+	bool setPoly(const Poly &poly);
 	bool setPoly(const Vec &center, const std::vector<Vec> &P);
 	int getPointNum() const { return m_PointNum; }
 	std::vector<Vec> getPoint() const { return m_Point; }

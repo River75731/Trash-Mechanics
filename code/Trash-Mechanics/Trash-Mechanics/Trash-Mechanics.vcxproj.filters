@@ -60,7 +60,10 @@
     <ClCompile Include="App\App.cpp">
       <Filter>SourceFile\App</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="Others\View-Polygon.cpp">
+      <Filter>SourceFile\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="demo.cpp">
       <Filter>SourceFile</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="App\Window.h">
       <Filter>SourceFile\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Others\View-Polygon.h">
+      <Filter>SourceFile\Others</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
