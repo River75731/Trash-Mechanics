@@ -10,15 +10,11 @@
 #include "ViewModel/MyFLTK.h"
 #include "Model/Model.h"
 
-class Parameter;
-class Command;
-class Model;
-class ViewModel;
-class View;
+
 
 //class CreatePolyCommand : public Command;
 
-class Parameter
+class Parameter // base Parameter class
 {
 private:
 
@@ -26,7 +22,7 @@ public:
 	Parameter() {}
 };
 
-class PolyParameter : public Parameter
+class PolyParameter : public Parameter 
 {
 private:
 	Poly poly_;
@@ -35,7 +31,7 @@ public:
 	Poly getPoly() const { return poly_; }
 };
 
-class Command
+class Command // base Command class
 {
 protected:
 	std::shared_ptr<Parameter> param_;
@@ -53,10 +49,10 @@ public:
 class Model
 {
 private:
-	Poly poly_;
+	Poly poly_; //test
 public:
 	Model() :poly_() {}
-	void createPoly(Poly poly)
+	void createPoly(Poly poly) // receiver funtion of Model from ViewModel
 	{
 		poly_.setPoly(poly);
 	}
