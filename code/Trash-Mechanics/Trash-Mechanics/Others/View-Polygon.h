@@ -2,7 +2,7 @@
 #include <FL/Fl_Box.H>
 #include <FL/fl_draw.H>
 #include <vector>
-#include "Common.h"
+#include "../Common/Common.h"
 
 class Fl_Poly :public Fl_Box {
 protected:

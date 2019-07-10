@@ -5,10 +5,10 @@
 #include <Fl_Shared_Image.H>
 #include <iostream>
 #include <vector>
-#include "Common.h"
-#include "View-Polygon.h"
+#include "Common/Common.h"
+#include "Others/View-Polygon.h"
 #include "ViewModel/MyFLTK.h"
-#include "Model.h"
+#include "Model/Model.h"
 
 int main(int argc, char *argv[])
 {

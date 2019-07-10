@@ -28,50 +28,56 @@
     <Filter Include="SourceFile\Model">
       <UniqueIdentifier>{67f42434-4791-477b-bac5-76015d769387}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\Others">
+      <UniqueIdentifier>{b06b85ac-f19b-4b35-85bb-2341712311ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>SourceFile</Filter>
     </ClCompile>
-    <ClCompile Include="View-Polygon.cpp">
-      <Filter>SourceFile\View</Filter>
-    </ClCompile>
     <ClCompile Include="ViewModel\MyFLTK.cpp">
       <Filter>SourceFile\ViewModel</Filter>
-    </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>SourceFile\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Common.cpp">
-      <Filter>SourceFile\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>SourceFile\Model</Filter>
     </ClCompile>
     <ClCompile Include="ViewModel\MyShape.cpp">
       <Filter>SourceFile\ViewModel</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Common.cpp">
+      <Filter>SourceFile\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\Command.cpp">
+      <Filter>SourceFile\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Model.cpp">
+      <Filter>SourceFile\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Others\View-Polygon.cpp">
+      <Filter>SourceFile\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Others\Message.cpp">
+      <Filter>SourceFile\Others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="View-Polygon.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Message.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="ViewModel\MyShape.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="ViewModel\MyFLTK.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
+    <ClInclude Include="Others\Message.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Others\View-Polygon.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Model.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Command.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
