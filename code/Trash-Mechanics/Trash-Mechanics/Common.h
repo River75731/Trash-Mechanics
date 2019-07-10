@@ -134,6 +134,7 @@ public:
 	void accelerate(const double &dt);
 	void rotate(const double &dt);
 	void collide(RigidBody &Tag);/* Will modify this rigidbody and tag rigidbody!!! */
+	Poly getShape() const;
 };
 
 double VecToVecDist(const Vec &v1, const Vec &v2);

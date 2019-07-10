@@ -361,3 +361,7 @@ void RigidBody::collide(RigidBody &Tag) {
 
 	}*/
 }
+
+Poly RigidBody::getShape() const{
+	return m_Shape;
+}
