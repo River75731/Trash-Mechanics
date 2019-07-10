@@ -84,3 +84,15 @@ Based on https://www.cnblogs.com/lulipro/p/10120917.html
 17. Project ( On the top ) -- output template -- Project template -- name:FLTK -- Finish
 18. Now you can use it by "New project -- FLTK project"
 
+## Omit "Fl/" dir
+If you have completed the procedure above, you can use header files in FLTK by:
+```c++
+#include <Fl/xxx.H>
+```
+But you may find that some source code will use a more simple method:
+```c++
+#include <xxx.H>
+```
+To do so, you need to:
+1. Add C:\Program Files (x86)\Microsoft Visual Studio\2017\[Your VS distribution version]\VC\Tools\MSVC\[Your MSVC version]\include\FL to Properties > C/C++ > General > Additional Include Directories for all configurations. For me, this is C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\include\FL
+2. Rename math.h in Fl/ folder, for it's conflict with standard math.h.

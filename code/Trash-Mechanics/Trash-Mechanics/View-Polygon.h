@@ -12,8 +12,9 @@ protected:
 	void draw();
 	/* Overwrite Fl_box::draw() */
 public:
-	Fl_Poly(std::vector<Vec> InputVertices);
-	Fl_Poly(std::vector<Vec> InputVertices, Fl_Color InputColor);
+	Fl_Poly(std::vector<Vec> InputVertices, Fl_Color InputColor = FL_BLACK);
+	Fl_Poly(const Poly &InputPoly, Fl_Color InputColor = FL_BLACK);
+	Fl_Poly(const RigidBody &InputRigidBody, Fl_Color InputColor = FL_BLACK);
 	/* First creates an box and then overwrite its draw() */
 	~Fl_Poly();
 };

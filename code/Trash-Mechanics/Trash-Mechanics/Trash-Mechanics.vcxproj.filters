@@ -36,6 +36,9 @@
     <ClCompile Include="ViewModel\MyFLTK.cpp">
       <Filter>SourceFile\ViewModel</Filter>
     </ClCompile>
+    <ClCompile Include="Message.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
@@ -48,6 +51,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="MyFLTK.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

@@ -237,10 +237,11 @@ bool Poly::move(const Vec & v)
 	{
 		(*i) += v;
 	}
+	m_CenterPoint += v;
 	return false;
 }
 
-bool Poly::rotate(const Vec & center, const double & angle)
+bool Poly::rotate(const double & angle, const Vec & center)
 {
 	for (std::vector<Vec>::iterator i = m_Point.begin(); i != m_Point.end(); i++)
 	{
@@ -251,7 +252,7 @@ bool Poly::rotate(const Vec & center, const double & angle)
 
 bool Poly::rotate(const double & angle)
 {
-	this->rotate(this->m_CenterPoint, angle);
+	this->rotate(angle, this->m_CenterPoint);
 	return true;
 }
 
@@ -360,4 +361,8 @@ void RigidBody::collide(RigidBody &Tag) {
 	while (m_Shape.inPoly_PolyVec(Tag.m_Shape)) {
 
 	}*/
+}
+
+Poly RigidBody::getShape() const{
+	return m_Shape;
 }

@@ -107,7 +107,7 @@ public:
 	Vec getInterPoint(const Poly &pol) const; //return the intersection point of this and pol polygons; if none, return originPoint
 	Segment getInterSegment(const Poly &pol) const; //return the intersection segment of this and pol polygons; if none, return emptySegment
 	bool move(const Vec &v);
-	bool rotate(const Vec &center, const double &angle);
+	bool rotate(const double &angle, const Vec &center);
 	bool rotate(const double &angle); // center is the mass center
 
 	virtual ~Poly() {}
@@ -134,6 +134,7 @@ public:
 	void accelerate(const double &dt);
 	void rotate(const double &dt);
 	void collide(RigidBody &Tag);/* Will modify this rigidbody and tag rigidbody!!! */
+	Poly getShape() const;
 };
 
 double VecToVecDist(const Vec &v1, const Vec &v2);
