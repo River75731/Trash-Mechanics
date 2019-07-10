@@ -127,11 +127,13 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="View-Polygon.cpp" />
+    <ClCompile Include="ViewModel\MyFLTK.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="View-Polygon.h" />
+    <ClInclude Include="ViewModel\MyFLTK.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
