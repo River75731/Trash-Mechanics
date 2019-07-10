@@ -132,8 +132,8 @@
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="MyFLTK.h" />
     <ClInclude Include="View-Polygon.h" />
-    <ClInclude Include="ViewModel\MyFLTK.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

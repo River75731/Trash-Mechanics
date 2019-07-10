@@ -7,18 +7,20 @@
 #include <vector>
 #include "Common.h"
 #include "View-Polygon.h"
-using namespace std;
+#include "ViewModel/MyFLTK.h"
+#include "Model.h"
+
 int main(int argc, char *argv[])
 {
+
 		fl_register_images();
-		Fl_Window     win(720, 486);
+		MyWindow* a = new MyWindow();
 		Fl_Box        box(10, 10, 11, 11);
 		Fl_Box box2(100, 100, 101, 101);
 		Fl_PNG_Image  png(".//Images//1.png");
 		box.image(png);
 		box2.image(png);
-		win.show();
-		box2.hide();
-		win.redraw();
+		a->color(FL_RED);
+		a->show();
 		return(Fl::run());
 }

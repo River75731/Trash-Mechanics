@@ -47,7 +47,7 @@
     <ClInclude Include="Model.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="ViewModel\MyFLTK.h">
+    <ClInclude Include="MyFLTK.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
