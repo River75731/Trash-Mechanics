@@ -57,6 +57,19 @@ MyWindow::MyWindow(MyPoint topleft, const int &width, const int &height, const s
 	MyWindow::color(color);
 }
 
+void MyWindow::draw()
+{
+	Fl_Double_Window::draw();
+	for (std::vector<MyShape>::iterator i = Shapeset.begin(); i != Shapeset.end(); i++) i->draw();
+	return;
+}
+
+void MyWindow::add(const MyShape & s)
+{
+	Shapeset.push_back(s);
+	return;
+}
+
 MyWindow::~MyWindow()
 {
 	return;
