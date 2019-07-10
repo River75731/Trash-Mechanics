@@ -39,6 +39,9 @@
     <ClCompile Include="Message.cpp">
       <Filter>SourceFile</Filter>
     </ClCompile>
+    <ClCompile Include="ViewModel\MyShape.cpp">
+      <Filter>SourceFile\ViewModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
@@ -50,10 +53,13 @@
     <ClInclude Include="Model.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="MyFLTK.h">
+    <ClInclude Include="Message.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Message.h">
+    <ClInclude Include="ViewModel\MyShape.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModel\MyFLTK.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

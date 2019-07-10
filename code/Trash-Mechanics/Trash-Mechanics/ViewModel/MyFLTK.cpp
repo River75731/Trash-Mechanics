@@ -1,5 +1,4 @@
 #include "MyFLTK.h"
-#include <string>
 
 MyPoint::MyPoint()
 {
@@ -34,6 +33,14 @@ bool MyPoint::setY(const int &y)
 	return true;
 }
 
+bool MyPoint::setXY(const int & x, const int & y)
+{
+	m_X = x;
+	m_Y = y;
+	return true;
+}
+
+
 MyPoint::~MyPoint()
 {
 	return;
@@ -48,4 +55,9 @@ MyWindow::MyWindow(MyPoint topleft, const int &width, const int &height, const s
 	:Fl_Double_Window(topleft.getX(), topleft.getY(), width, height, name.c_str())
 {
 	MyWindow::color(color);
+}
+
+MyWindow::~MyWindow()
+{
+	return;
 }
