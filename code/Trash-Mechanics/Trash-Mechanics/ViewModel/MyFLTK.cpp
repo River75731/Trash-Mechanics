@@ -92,6 +92,12 @@ MySegment::~MySegment()
 	return;
 }
 
+MyPolygon::MyPolygon(const int & lw, const Fl_Color & ec, const Fl_Color & fc)
+	:MyShape(lw,ec,fc)
+{
+	return;
+}
+
 MyPolygon::MyPolygon(const std::vector<MyPoint>& ps, const int & lw, const Fl_Color & ec, const Fl_Color & fc)
 	:MyShape(lw, ec, fc)
 {
@@ -109,8 +115,9 @@ void MyPolygon::draw()
 	fl_end_polygon();
 	fl_color(m_edgecolor);
 	fl_line_style(FL_SOLID, m_linewidth);
-	for (std::vector<MyPoint>::iterator i = Pointset.begin(); i < Pointset.end() - 2; i++)
+	for (std::vector<MyPoint>::iterator i = Pointset.begin(); i < Pointset.end() - 1; i++)
 		fl_line(i->getX(), i->getY(), (i + 1)->getX(), (i + 1)->getY());
+	fl_line((Pointset.end() - 1)->getX(), (Pointset.end() - 1)->getY(), Pointset.begin()->getX(), Pointset.begin()->getY());
 	return;
 }
 

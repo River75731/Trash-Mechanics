@@ -43,6 +43,7 @@ public:
 
 class MyPolygon : public MyShape {
 public:
+	MyPolygon(const int &lw, const Fl_Color &ec, const Fl_Color &fc);
 	MyPolygon(const std::vector<MyPoint> &ps, const int &lw, const Fl_Color &ec, const Fl_Color &fc);
 	void draw();
 	virtual ~MyPolygon();
