@@ -31,6 +31,12 @@
     <Filter Include="SourceFile\Others">
       <UniqueIdentifier>{b06b85ac-f19b-4b35-85bb-2341712311ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\App">
+      <UniqueIdentifier>{8efbe492-a4df-46e2-bf6e-11b166f631cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Window">
+      <UniqueIdentifier>{4fd53991-d5dd-4c91-9d74-70b67426d3a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -48,11 +54,14 @@
     <ClCompile Include="Model\Model.cpp">
       <Filter>SourceFile\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Others\View-Polygon.cpp">
-      <Filter>SourceFile\Others</Filter>
-    </ClCompile>
     <ClCompile Include="Others\Message.cpp">
       <Filter>SourceFile\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="App\App.cpp">
+      <Filter>SourceFile\App</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>SourceFile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,9 +69,6 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Others\Message.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Others\View-Polygon.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Model\Model.h">
@@ -73,6 +79,15 @@
     </ClInclude>
     <ClInclude Include="Command\Command.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\Parameter.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="App\App.h">
+      <Filter>SourceFile\App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Window.h">
+      <Filter>SourceFile\Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,20 +1,17 @@
 #pragma once
 #include <memory>
-
-class Parameters
-{
-public:
-	Parameters();
-};
+#include "Parameter.h"
 
 class Command
 {
 protected:
-	std::shared_ptr<Parameters> params;
+	std::shared_ptr<Parameter> param_;
 public:
-	Command();
-	void set_parameters(std::shared_ptr<Parameters> parameters) {
-		params = parameters;
-	}
+	Command() {}
+	Command(std::shared_ptr<Parameter> param) : param_(param) {}
+	void set_parameters(std::shared_ptr<Parameter> param) { param_ = param; }
+
+	//    Parameters& get_params_handle();
+	//    void set_view_model(std::shared_ptr<ViewModel> viewmodel);
 	virtual void exec() = 0;
 };
