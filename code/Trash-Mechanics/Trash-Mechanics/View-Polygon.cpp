@@ -9,17 +9,17 @@ void Fl_Poly::draw() {
 	fl_color(FL_BLACK);
 }
 
-Fl_Poly::Fl_Poly(std::vector<Vec> InputVertices, Fl_Color InputColor = FL_BLACK) : Fl_Box(1, 1, 1, 1, "") {
+Fl_Poly::Fl_Poly(std::vector<Vec> InputVertices, Fl_Color InputColor) : Fl_Box(1, 1, 1, 1, "") {
 	m_Vertices = InputVertices;
 	m_Color = InputColor;
 }
 
-Fl_Poly::Fl_Poly(const Poly &InputPoly, Fl_Color InputColor = FL_BLACK) : Fl_Box(1, 1, 1, 1, "") {
+Fl_Poly::Fl_Poly(const Poly &InputPoly, Fl_Color InputColor) : Fl_Box(1, 1, 1, 1, "") {
 	m_Vertices = InputPoly.getPoint();
 	m_Color = InputColor;
 }
 
-Fl_Poly::Fl_Poly(const RigidBody &InputRigidBody, Fl_Color InputColor = FL_BLACK) : Fl_Box(1, 1, 1, 1, "") {
+Fl_Poly::Fl_Poly(const RigidBody &InputRigidBody, Fl_Color InputColor) : Fl_Box(1, 1, 1, 1, "") {
 	m_Vertices = InputRigidBody.getShape().getPoint();
 	m_Color = InputColor;
 }
