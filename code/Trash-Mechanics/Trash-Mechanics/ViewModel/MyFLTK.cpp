@@ -92,6 +92,12 @@ MySegment::~MySegment()
 	return;
 }
 
+MyPolygon::MyPolygon(const int & lw, const Fl_Color & ec, const Fl_Color & fc)
+	:MyShape(lw,ec,fc)
+{
+	return;
+}
+
 MyPolygon::MyPolygon(const std::vector<MyPoint>& ps, const int & lw, const Fl_Color & ec, const Fl_Color & fc)
 	:MyShape(lw, ec, fc)
 {
@@ -109,8 +115,9 @@ void MyPolygon::draw()
 	fl_end_polygon();
 	fl_color(m_edgecolor);
 	fl_line_style(FL_SOLID, m_linewidth);
-	for (std::vector<MyPoint>::iterator i = Pointset.begin(); i < Pointset.end() - 2; i++)
+	for (std::vector<MyPoint>::iterator i = Pointset.begin(); i < Pointset.end() - 1; i++)
 		fl_line(i->getX(), i->getY(), (i + 1)->getX(), (i + 1)->getY());
+	fl_line((Pointset.end() - 1)->getX(), (Pointset.end() - 1)->getY(), Pointset.begin()->getX(), Pointset.begin()->getY());
 	return;
 }
 
@@ -130,18 +137,20 @@ MyWindow::MyWindow(MyPoint topleft, const int &width, const int &height, const s
 	:Fl_Double_Window(topleft.getX(), topleft.getY(), width, height, name.c_str())
 {
 	MyWindow::color(color);
+	show();
 }
 
 void MyWindow::draw()
 {
 	Fl_Double_Window::draw();
-	for (std::vector<MyShape>::iterator i = Shapeset.begin(); i != Shapeset.end(); i++) i->draw();
+	for (std::vector<MyShape*>::iterator i = Shapeset.begin(); i != Shapeset.end(); i++) (*i)->draw();
+	//for (int i = 0; i < Shapeset.size(); i++) Shapeset[i]->draw();
 	return;
 }
 
-void MyWindow::add(const MyShape & s)
+void MyWindow::add(MyShape & s)
 {
-	Shapeset.push_back(s);
+	Shapeset.push_back(&s);
 	return;
 }
 

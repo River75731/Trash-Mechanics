@@ -12,14 +12,15 @@
 
 int main(int argc, char *argv[])
 {
-	MyWindow *window = new MyWindow();
-	MySegment line1(MyPoint(100, 50), MyPoint(300 , 50), 5, FL_RED);
-	window->add(line1);
-	fl_color(FL_RED);
-	fl_line_style(FL_SOLID, 100);
-	fl_line(Fl::w()/4, Fl::h()/2, Fl::w()*3/4, Fl::h()/2);
-	window->show();
-
+	int w = Fl::w() / 2, h = Fl::h() / 2;
+	MyWindow window(MyPoint(w/2,h/2),w,h,"TEST",FL_WHITE);
+	MySegment line1(MyPoint(100, 50), MyPoint(300 , 50), 5, FL_BLUE);
+	window.add(line1);
+	MyPolygon r(5, FL_GREEN, FL_RED);
+	r.add(MyPoint(100, 100));
+	r.add(MyPoint(100, 200));
+	r.add(MyPoint(200, 200));
+	window.add(r);
 		/*fl_register_images();
 		MyWindow* a = new MyWindow();
 		Fl_Box        box(10, 10, 11, 11);
@@ -31,5 +32,5 @@ int main(int argc, char *argv[])
 		box.hide();
 		a->color(FL_RED);
 		a->show();*/
-		return(Fl::run());
+		return Fl::run();
 }
