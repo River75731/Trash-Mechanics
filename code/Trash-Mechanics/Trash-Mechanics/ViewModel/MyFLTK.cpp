@@ -130,18 +130,20 @@ MyWindow::MyWindow(MyPoint topleft, const int &width, const int &height, const s
 	:Fl_Double_Window(topleft.getX(), topleft.getY(), width, height, name.c_str())
 {
 	MyWindow::color(color);
+	show();
 }
 
 void MyWindow::draw()
 {
 	Fl_Double_Window::draw();
-	for (std::vector<MyShape>::iterator i = Shapeset.begin(); i != Shapeset.end(); i++) i->draw();
+	for (std::vector<MyShape*>::iterator i = Shapeset.begin(); i != Shapeset.end(); i++) (*i)->draw();
+	//for (int i = 0; i < Shapeset.size(); i++) Shapeset[i]->draw();
 	return;
 }
 
-void MyWindow::add(const MyShape & s)
+void MyWindow::add(MyShape & s)
 {
-	Shapeset.push_back(s);
+	Shapeset.push_back(&s);
 	return;
 }
 

@@ -51,11 +51,11 @@ public:
 class MyWindow : public Fl_Double_Window
 {
 private:
-	std::vector<MyShape> Shapeset;
+	std::vector<MyShape*> Shapeset;
 public:
 	MyWindow(); 
 	MyWindow(MyPoint topleft,const int &width,const int &height,const std::string &name ,const Fl_Color &color);
 	void draw();
-	void add(const MyShape &s);
+	void add(MyShape &s);
 	virtual ~MyWindow();
 };
