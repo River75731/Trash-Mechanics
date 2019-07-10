@@ -19,25 +19,34 @@
     <Filter Include="SourceFile\ViewModel">
       <UniqueIdentifier>{af5cff67-4ee7-4122-88b4-3a8c03d78f09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\Command">
+      <UniqueIdentifier>{4800352a-a859-47df-bcbc-05e113753102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Common">
+      <UniqueIdentifier>{c58d7894-b40d-498f-b73f-9b2785f8ff12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Model">
+      <UniqueIdentifier>{67f42434-4791-477b-bac5-76015d769387}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>SourceFile</Filter>
     </ClCompile>
-    <ClCompile Include="Common.cpp">
-      <Filter>SourceFile</Filter>
-    </ClCompile>
     <ClCompile Include="View-Polygon.cpp">
       <Filter>SourceFile\View</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>SourceFile</Filter>
     </ClCompile>
     <ClCompile Include="ViewModel\MyFLTK.cpp">
       <Filter>SourceFile\ViewModel</Filter>
     </ClCompile>
-    <ClCompile Include="Message.cpp">
-      <Filter>SourceFile</Filter>
+    <ClCompile Include="Command.cpp">
+      <Filter>SourceFile\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>SourceFile\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>SourceFile\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +63,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Message.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
