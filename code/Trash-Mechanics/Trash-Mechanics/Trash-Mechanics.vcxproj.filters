@@ -39,9 +39,6 @@
     <ClCompile Include="ViewModel\MyFLTK.cpp">
       <Filter>SourceFile\ViewModel</Filter>
     </ClCompile>
-    <ClCompile Include="ViewModel\MyShape.cpp">
-      <Filter>SourceFile\ViewModel</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Common.cpp">
       <Filter>SourceFile\Common</Filter>
     </ClCompile>
@@ -59,9 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ViewModel\MyShape.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="ViewModel\MyFLTK.h">
       <Filter>Header</Filter>
     </ClInclude>

@@ -9,13 +9,15 @@
 #include "Others/View-Polygon.h"
 #include "ViewModel/MyFLTK.h"
 #include "Model/Model.h"
-#include "ViewModel/MyShape.h"
 
 int main(int argc, char *argv[])
 {
 	MyWindow *window = new MyWindow();
-	MySegment line1(MyPoint(Fl::w() / 4, Fl::h() / 4), MyPoint(Fl::w() * 3 / 4, Fl::h() / 4), 5, FL_WHITE);
+	MySegment line1(MyPoint(100, 50), MyPoint(300 , 50), 5, FL_RED);
 	window->add(line1);
+	fl_color(FL_RED);
+	fl_line_style(FL_SOLID, 100);
+	fl_line(Fl::w()/4, Fl::h()/2, Fl::w()*3/4, Fl::h()/2);
 	window->show();
 
 		/*fl_register_images();
