@@ -63,7 +63,22 @@
     <ClCompile Include="demo.cpp">
       <Filter>SourceFile</Filter>
     </ClCompile>
-    <ClCompile Include="View\MyFLTK.cpp">
+    <ClCompile Include="View\ViewPoint.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\ViewShape.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\ViewSegment.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
+    <ClCompile Include="View\ViewPolygon.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\ViewCircle.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\ViewWindow.cpp">
       <Filter>SourceFile\View</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,11 +104,29 @@
     <ClInclude Include="App\Window.h">
       <Filter>SourceFile\Window</Filter>
     </ClInclude>
-    <ClInclude Include="View\MyFLTK.h">
+    <ClInclude Include="View\ViewPoint.h">
       <Filter>SourceFile\View</Filter>
     </ClInclude>
     <ClInclude Include="Others\View-Polygon.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="View\GUI.h">
+      <Filter>SourceFile\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ViewShape.h">
+      <Filter>SourceFile\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ViewSegment.h">
+      <Filter>SourceFile\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ViewPolygon.h">
+      <Filter>SourceFile\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ViewCircle.h">
+      <Filter>SourceFile\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ViewWindow.h">
+      <Filter>SourceFile\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

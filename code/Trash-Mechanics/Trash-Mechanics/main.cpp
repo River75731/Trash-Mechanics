@@ -5,13 +5,14 @@
 #include <iostream>
 #include <vector>
 #include "Common/Common.h"
-#include "Others/View-Polygon.h"
-#include "View/MyFLTK.h"
+//#include "Others/View-Polygon.h"
+//#include "View/MyFLTK.h"
 #include "Model/Model.h"
+#include "View/GUI.h"
 
 int main(int argc, char *argv[])
 {
-	int w = Fl::w() / 2, h = Fl::h() / 2;
+/*	int w = Fl::w() / 2, h = Fl::h() / 2;
 	MyWindow window(MyPoint(w/2,h/2),w,h,"TEST",FL_WHITE);
 	MySegment line1(MyPoint(100, 50), MyPoint(300 , 50), 5, FL_BLUE);
 	window.add(line1);
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
 	r.add(MyPoint(100, 200));
 	r.add(MyPoint(200, 200));
 	fl_register_images();
-	Fl_Box        box(10, 10, 11, 11);
+	Fl_Box        box(0, 0, 1, 1);
 	Fl_PNG_Image  png(".//Images//1.png");
 	box.image(png);
 	Fl_Box box2(100, 100, 101, 101);
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
 	box2.image(png);
 	window.show();
 	window.add(r);
-	MyCircle c1(MyPoint(300, 50), 20, 5, FL_BLUE, FL_RED);
+	MyCircle c1(MyPoint(w, 0), 20, 5, FL_BLUE, FL_RED);
 	window.add(c1);
 	int x = 300, y = 50, dx = 1, dy = 1;
 	int x2 = 400, y2 = 40, dx2 = 3, dy2 = 2;
@@ -59,5 +60,26 @@ int main(int argc, char *argv[])
 	win.redraw();
 	win.show();
 	win.resize(50, 100, 400, 400);*/
+
+
+	ViewWindow window(400,100,800,500,"NNN Page",FL_WHITE);
+	ViewSegment line1(ViewPoint(100, 50), ViewPoint(300, 50),1);
+	ViewCircle c1(ViewPoint(200, 100), 20, 2);
+	ViewPolygon p1({ ViewPoint(100,100),ViewPoint(100,200),ViewPoint(200,200) }, 3);
+	window.attach(line1);
+	window.attach(c1);
+	window.attach(p1);
+	window.show();
+	int x = 300, y = 50, dx = 1, dy = 1;
+	while (1)
+	{
+		x += dx;
+		y += dy;
+		if (y >= 500 || y <= 20) dy = -dy;
+		if (x >= 800 || x <= 20) dx = -dx;
+		line1.setp2(ViewPoint(x,y));
+		Fl::check();
+		Fl::redraw();
+	}
 		return Fl::run();
 }
