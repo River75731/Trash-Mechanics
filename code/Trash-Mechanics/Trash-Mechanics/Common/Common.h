@@ -47,6 +47,7 @@ private:
 public:
 	Vec();
 	Vec(const double &x, const double &y);
+	Vec(const Vec &v);
 	Vec operator +(const Vec &x) const;
 	Vec operator -(const Vec &x) const;
 	Vec operator *(const double &x) const; // multiplied by scaler
@@ -100,6 +101,7 @@ public:
 	Poly(const Vec &center, const std::vector<Vec> &P) : m_CenterPoint(center), m_Point(P), m_PointNum(P.size()) {}
 	bool setPoly(const Poly &poly);
 	bool setPoly(const Vec &center, const std::vector<Vec> &P);
+	Vec getCenterPoint() const { return m_CenterPoint; }
 	int getPointNum() const { return m_PointNum; }
 	std::vector<Vec> getPoint() const { return m_Point; }
 	//bool isIntersected(const Segment &s) const;

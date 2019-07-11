@@ -11,8 +11,10 @@
 #include "Model/Model.h"
 
 
-
+/*
 //class CreatePolyCommand : public Command;
+
+
 
 class Parameter // base Parameter class
 {
@@ -43,6 +45,27 @@ public:
 	//    Parameters& get_params_handle();
 	//    void set_view_model(std::shared_ptr<ViewModel> viewmodel);
 	virtual void exec() = 0;
+};
+
+class Notification
+{
+protected:
+
+public:
+	Notification() {}
+	virtual void exec() = 0;
+};
+
+class ModelToViewModelNotification : public Notification
+{
+private:
+	std::shared_ptr<ViewModel> viewmodel;
+public:
+	ModelToViewModelNotification(std::shared_ptr<ViewModel> VM):viewmodel(VM){}
+	void exec()
+	{
+		viewmodel->notified();
+	}
 };
 
 
@@ -82,6 +105,10 @@ public: // the functions for ViewModel to control Model
 	{
 		model->createPoly(poly);
 	} 
+	void execDrawPolyCommand(Poly poly)
+	{
+		model->createPoly(poly);
+	}
 
 public: // the function to be binded with setfuntion in view
 	std::shared_ptr<Command> getCreatePolyCommand() 
