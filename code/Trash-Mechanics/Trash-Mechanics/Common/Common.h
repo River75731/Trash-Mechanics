@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 #define min(a,b) (((a) < (b)) ? (a) : (b))
+#define Power pow
+#define Sqrt sqrt
+#define K_Resilence 1
 
 const double pi = 3.141592653589793;
 const double NearDist = 5.0;
@@ -101,6 +104,8 @@ private:
 public:
 	Poly(): m_CenterPoint() { m_PointNum = 0; }
 	Poly(const Vec &center, const std::vector<Vec> &P) : m_CenterPoint(center), m_Point(P), m_PointNum(P.size()) {}
+	Poly(const Poly &poly);
+	Poly& operator =(const Poly &poly);
 	bool setPoly(const Poly &poly);
 	bool setPoly(const Vec &center, const std::vector<Vec> &P);
 	Vec getCenterPoint() const { return m_CenterPoint; }
@@ -126,20 +131,24 @@ private:
 	double m_Mass;
 	double m_InertiaConstant;
 	double m_AngularVelocity;
+	RigidBody *m_LastCollision;
 public:
 	RigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity);
+	RigidBody(const RigidBody &RB);
+	RigidBody& operator = (const RigidBody &RB);
 	double m() const; /* Mass */
 	Vec v() const; /* Velocity */
 	double vAbs() const; /* Magnitude of velocity */
 	double i() const; /* Inertia constant */
 	double w() const; /* Angular velocity */
 	void applyForce(const Vec &NewForce);
-	void removeForce(const Vec &NewForce);
+	void removeForce();
 	void move(const double &dt);
 	void accelerate(const double &dt);
 	void rotate(const double &dt);
-	void collide(RigidBody &Tag);/* Will modify this rigidbody and tag rigidbody!!! */
+	bool collide(RigidBody &Tag);/* Will modify this rigidbody and tag rigidbody!!! */
 	Poly getShape() const;
+	void cmdPrint() const;
 };
 
 double VecToVecDist(const Vec &v1, const Vec &v2);
@@ -147,4 +156,5 @@ double VecToSegmentDist(const Vec &v, const Segment &s);
 double VecAngle(const Vec &v, const Vec &v1, const Vec &v2);
 
 extern Vec originPoint;
+extern Vec gravity;
 extern Segment emptySegment;
