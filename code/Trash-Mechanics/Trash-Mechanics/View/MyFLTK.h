@@ -2,9 +2,12 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Double_Window.H>
+#include <FL/Fl_PNG_Image.H>
 #include <FL/fl_draw.H>
+#include <FL/Fl_Box.H>
 #include <vector>
 #include <string>
+#define MAXPNG 100
 
 class MyPoint
 {
@@ -48,6 +51,33 @@ public:
 	void draw();
 	virtual ~MyPolygon();
 };
+
+class MyCircle : public MyShape {
+private:
+	int radius;
+public:
+	MyCircle(const MyPoint &p, const int &r, const int &lw, const Fl_Color &ec, const Fl_Color &fc);
+	void draw();
+	void redirect(const MyPoint &p, const int &r);
+	virtual ~MyCircle();
+};
+
+/*
+class MyImage : public MyShape {
+private:
+	MyPoint m_topleft;
+	int m_width;
+	int m_height;
+	int m_index;
+	Fl_PNG_Image m_png;
+	static Fl_Box m_box[MAXPNG];
+public:
+	static int Imagenum;
+	MyImage(const MyPoint &tl, const int &w, const int &h, const std::string path, const int &lw = 1, const Fl_Color &ec = FL_BLACK, const Fl_Color &fc = FL_BLACK);
+	void draw();
+	void relocate(const MyPoint &tl,const int &w,const int &h);
+	virtual ~MyImage();
+};*/
 
 class MyWindow : public Fl_Double_Window
 {
