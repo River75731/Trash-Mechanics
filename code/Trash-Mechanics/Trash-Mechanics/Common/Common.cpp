@@ -206,17 +206,23 @@ bool Poly::inPoly_Vec(const Vec &v) const
 
 bool Poly::inPoly_PolyVec(const Poly &pol) const
 {
-	for (std::vector<Vec>::const_iterator i = pol.getPoint().begin(); i != pol.getPoint().end(); i++)
+	std::vector<Vec> myvec = pol.getPoint();
+
+	for (std::vector<Vec>::iterator i = myvec.begin(); i != myvec.end(); i++)
 	{
-		if (this->inPoly_Vec(*i))
+		if (this->inPoly_Vec(*i)) {
+			printf("(%.2lf,%.2lf)\n", i->getX(), i->getY());
 			return true;
+		}
+			
 	}
 	return false;
 }
 
 Vec Poly::getInterPoint(const Poly & pol) const
 {
-	for (std::vector<Vec>::const_iterator i = pol.getPoint().begin(); i != pol.getPoint().end(); i++)
+	std::vector<Vec> myvec;
+	for (std::vector<Vec>::const_iterator i = myvec.begin(); i != myvec.end(); i++)
 	{
 		if (this->inPoly_Vec(*i))
 			return *i;
@@ -230,9 +236,9 @@ Segment Poly::getInterSegment(const Poly & pol) const
 		return emptySegment;
 	double m = INF;
 	Segment ms;
-	for (std::vector<Vec>::const_iterator i = pol.getPoint().begin(); i != pol.getPoint().end(); i++)
+	for (std::vector<Vec>::const_iterator i = m_Point.begin(); i != m_Point.end(); i++)
 	{
-		Vec v1(*i), v2;
+		Vec v1(*i), v2; 
 		if (i == m_Point.end() - 1) v2 = *(m_Point.begin());
 		else v2 = *(i + 1);
 		Segment s(v1, v2);
@@ -242,6 +248,7 @@ Segment Poly::getInterSegment(const Poly & pol) const
 			ms.set(v1, v2);
 		}
 	}
+	printf("(%.2lf,%.2lf)->(%.2lf,%.2lf)\n", ms.getV1().getX(), ms.getV1().getX(), ms.getV2().getX(), ms.getV2().getY());
 	return ms;
 }
 
@@ -364,17 +371,53 @@ void RigidBody::rotate(const double &dt) {
 }
 
 void RigidBody::collide(RigidBody &Tag) {
-	/* TBD */
-	/*double Ek1 =
-		0.5*m()*vAbs()*vAbs() +
-		0.5*i()*w()*w() +
-		0.5*Tag.m()*Tag.vAbs()*Tag.vAbs() +
-		0.5*Tag.i()*Tag.w()*Tag.w();
-	double f = 10000;
-	double dt = 0.1;
-	while (m_Shape.inPoly_PolyVec(Tag.m_Shape)) {
-
-	}*/
+#define Power pow
+#define Sqrt sqrt
+#define Resilence 10000
+	/* Tag insert into this */
+	double cax = Tag.getShape().getCenterPoint().getX();
+	double cay = Tag.getShape().getCenterPoint().getY();
+	double vax = Tag.v().getX();
+	double vay = Tag.v().getY();
+	double wa = Tag.w();
+	double ma = Tag.m();
+	double ia = Tag.i();
+	double cbx = getShape().getCenterPoint().getX();
+	double cby = getShape().getCenterPoint().getY();
+	double vbx = v().getX();
+	double vby = v().getY();
+	double wb = w();
+	double mb = m();
+	double ib = i();
+	double ox = getShape().getInterPoint(Tag.getShape()).getX();
+	double oy = getShape().getInterPoint(Tag.getShape()).getY();
+	double fx = Resilence;
+	Vec dir = getShape().getInterSegment(Tag.getShape()).getV2() - getShape().getInterSegment(Tag.getShape()).getV1();
+	double fy = -dir.getX()*fx / dir.getY();
+	if (Vec(ox - cax, oy - cay) ^ Vec(fx, fy)) { fx *= -1; fy *= -1; }
+	double k = 1;
+	double deltat_sln1 = (ia*ib*ma*mb*(-(fx*vax) - fy * vay + fx * vbx + fy * vby + cay * fx*wa - cax * fy*wa + fy * ox*wa - fx * oy*wa - cby * fx*wb +
+		cbx * fy*wb - fy * ox*wb + fx * oy*wb + Sqrt(((-1 + k)*
+		(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
+			Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
+			2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy)))*
+			(ma*(Power(vax, 2) + Power(vay, 2)) + mb * (Power(vbx, 2) + Power(vby, 2)) + ia * Power(wa, 2) +
+				ib * Power(wb, 2))) / (ia*ib*ma*mb) +
+			Power(fy*(vay - vby + cax * wa - ox * wa - cbx * wb + ox * wb) +
+				fx * (vax - vbx - cay * wa + oy * wa + cby * wb - oy * wb), 2)))) /
+				(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
+					Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
+					2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy)));
+	double deltat_sln2 = -((ia*ib*ma*mb*(fx*vax + fy * vay - fx * vbx - fy * vby - cay * fx*wa + cax * fy*wa - fy * ox*wa + fx * oy*wa + cby * fx*wb - cbx * fy*wb + fy * ox*wb - fx * oy*wb +
+		Sqrt(((-1 + k)*(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
+			Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
+			2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy)))*
+			(ma*(Power(vax, 2) + Power(vay, 2)) + mb * (Power(vbx, 2) + Power(vby, 2)) + ia * Power(wa, 2) + ib * Power(wb, 2))) / (ia*ib*ma*mb) +
+			Power(fy*(vay - vby + cax * wa - ox * wa - cbx * wb + ox * wb) + fx * (vax - vbx - cay * wa + oy * wa + cby * wb - oy * wb), 2)))) /
+			(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
+				Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
+				2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy))));
+	printf("sln1:%lf  sln2:%lf\n", deltat_sln1, deltat_sln2);;
 }
 
 Poly RigidBody::getShape() const{
