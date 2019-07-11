@@ -87,6 +87,7 @@ void MySegment::draw()
 	return;
 }
 
+
 MySegment::~MySegment()
 {
 	return;
@@ -130,14 +131,13 @@ MyPolygon::~MyPolygon()
 
 MyWindow::MyWindow() :Fl_Double_Window(Fl::w() / 4, Fl::h() / 4, Fl:: w() / 2, Fl:: h() / 2, "New Page")
 {
-	MyWindow::color(FL_BLACK);
+	MyWindow::color(FL_WHITE);
 }
 
 MyWindow::MyWindow(MyPoint topleft, const int &width, const int &height, const std::string &name, const Fl_Color &color)
 	:Fl_Double_Window(topleft.getX(), topleft.getY(), width, height, name.c_str())
 {
 	MyWindow::color(color);
-	show();
 }
 
 void MyWindow::draw()
@@ -158,3 +158,67 @@ MyWindow::~MyWindow()
 {
 	return;
 }
+
+/*
+MyImage::MyImage(const MyPoint & tl, const int & w, const int & h, const std::string path, const int & lw, const Fl_Color & ec, const Fl_Color & fc)
+	:MyShape(lw, ec, fc), m_png(path.c_str())
+{
+	m_width = w;
+	m_height = h;
+	m_index = Imagenum;
+	Imagenum++;
+	return;
+}
+
+void MyImage::draw()
+{
+	m_box[m_index].image(m_png);
+	m_box[m_index].resize(m_topleft.getX(), m_topleft.getY(), m_width, m_height);
+	m_box[m_index].show();
+}
+
+
+void MyImage::relocate(const MyPoint & tl, const int & w, const int & h)
+{
+	m_topleft = tl;
+	m_width = w;
+	m_height = h;
+	return;
+}
+
+MyImage::~MyImage()
+{
+	return;
+}
+*/
+
+MyCircle::MyCircle(const MyPoint & p, const int & r, const int & lw, const Fl_Color & ec, const Fl_Color & fc)
+	:MyShape(lw, ec, fc)
+{
+	add(p);
+	radius = r;
+	return;
+}
+
+void MyCircle::draw()
+{
+	fl_line_style(FL_SOLID, m_linewidth);
+	fl_color(m_fillcolor);
+	fl_pie(Pointset[0].getX(), Pointset[0].getY(), 2 * radius, 2 * radius, 0, 360);
+	fl_color(m_edgecolor);
+	fl_arc(Pointset[0].getX(), Pointset[0].getY(), 2 * radius, 2 * radius, 0, 360);
+}
+
+void MyCircle::redirect(const MyPoint & p, const int & r)
+{
+	Pointset[0].setXY(p.getX(), p.getY());
+	radius = r;
+	return;
+}
+
+MyCircle::~MyCircle()
+{
+	return;
+}
+
+
