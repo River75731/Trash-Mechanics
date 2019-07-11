@@ -485,10 +485,10 @@ Poly RigidBody::getShape() const
 
 void RigidBody::cmdPrint() const 
 {
-	printf("Rigidbody Id[%d] Address[%x]:\n", m_Id, this);
+	printf("Rigidbody Id[%d] Address[%X]:\n", m_Id, (unsigned int)this);
 	printf("	ctr: (%lf,%lf)\n", m_Shape.getCenterPoint().getX(), m_Shape.getCenterPoint().getY());
 	printf("	vertices num: %d\n", m_Shape.getPoint().size());
-	for (int i = 0; i < m_Shape.getPoint().size(); i++) printf("	(%lf,%lf)\n", m_Shape.getPoint()[i].getX(), m_Shape.getPoint()[i].getY());
+	for (unsigned int i = 0; i < m_Shape.getPoint().size(); i++) printf("	(%lf,%lf)\n", m_Shape.getPoint()[i].getX(), m_Shape.getPoint()[i].getY());
 }
 
 int RigidBody::getId() const {

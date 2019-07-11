@@ -131,6 +131,7 @@
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Others\View-Polygon.cpp" />
     <ClCompile Include="demo.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="ViewModel\ViewModel.cpp" />
     <ClCompile Include="View\MyFLTK.cpp" />
     <ClCompile Include="View\View.cpp" />

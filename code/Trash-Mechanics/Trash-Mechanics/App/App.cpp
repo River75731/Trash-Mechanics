@@ -3,6 +3,8 @@
 App::App():view(new View), model(new Model), viewmodel(new ViewModel), windows(new Windows)
 {
 	viewmodel->bind(model);
+	viewmodel->bind(view);
+	viewmodel->bind(windows);
 	windows->setCreatePolyCommand(viewmodel->getCreatePolyCommand()); // bind the view & viewmodel command
 	//std::cout << "!";
 }

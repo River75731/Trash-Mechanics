@@ -8,7 +8,7 @@
 #include "Others/View-Polygon.h"
 #include "View/MyFLTK.h"
 #include "Model/Model.h"
-
+/*
 int main(int argc, char *argv[])
 {
 	int w = Fl::w() / 2, h = Fl::h() / 2;
@@ -48,16 +48,7 @@ int main(int argc, char *argv[])
 		Fl::redraw();
 	}
 	
-	//window.color(FL_RED);
-	/*Fl_Window     win(720, 486);
-	fl_register_images();
-	win.show();
-	//MyWindow win;
-	Fl_Box        box(0,0,400,400);
-	Fl_PNG_Image  png(".//Images//1.png");
-	box.image(png);
-	win.redraw();
-	win.show();
-	win.resize(50, 100, 400, 400);*/
+
 		return Fl::run();
 }
+*/

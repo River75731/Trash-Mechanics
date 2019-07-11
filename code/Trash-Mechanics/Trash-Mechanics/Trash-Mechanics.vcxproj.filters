@@ -75,6 +75,9 @@
     <ClCompile Include="Common\Common-Based.cpp">
       <Filter>SourceFile\Common</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Model\Model.h">
