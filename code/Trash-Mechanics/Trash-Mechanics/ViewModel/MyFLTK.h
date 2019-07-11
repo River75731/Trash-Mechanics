@@ -51,6 +51,17 @@ public:
 	void draw();
 	virtual ~MyPolygon();
 };
+
+class MyCircle : public MyShape {
+private:
+	int radius;
+public:
+	MyCircle(const MyPoint &p, const int &r, const int &lw, const Fl_Color &ec, const Fl_Color &fc);
+	void draw();
+	void redirect(const MyPoint &p, const int &r);
+	virtual ~MyCircle();
+};
+
 /*
 class MyImage : public MyShape {
 private:

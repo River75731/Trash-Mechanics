@@ -28,16 +28,22 @@ int main(int argc, char *argv[])
 	box2.image(png);
 	window.show();
 	window.add(r);
+	MyCircle c1(MyPoint(300, 50), 20, 5, FL_BLUE, FL_RED);
+	window.add(c1);
 	int x = 300, y = 50, dx = 1, dy = 1;
+	int x2 = 400, y2 = 40, dx2 = 3, dy2 = 2;
 	while (1)
 	{
+		x2 += dx2;
+		y2 += dy2;
 		x += dx;
 		y += dy;
-		box.resize(x, y, 1, 1);
-		if (y >= 500) dy = -1;
-		if (y <= 20) dy = 1;
-		if (x >= 700) dx = -1;
-		if (x <= 20) dx = 1;
+		box.resize(x2, y2, 1, 1);
+		c1.redirect(MyPoint(x, y), 20);
+		if (y2 >= 500||y2<=20) dy2 = -dy2;
+		if (x2 >= 800 || x2 <= 20) dx2 = -dx2;
+		if (y >= 500 || y <= 20) dy = -dy;
+		if (x >= 700 || x <= 20) dx = -dx;
 		Fl::check();
 		Fl::redraw();
 	}

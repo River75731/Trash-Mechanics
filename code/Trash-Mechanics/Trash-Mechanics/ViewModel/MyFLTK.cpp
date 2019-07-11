@@ -191,3 +191,34 @@ MyImage::~MyImage()
 	return;
 }
 */
+
+MyCircle::MyCircle(const MyPoint & p, const int & r, const int & lw, const Fl_Color & ec, const Fl_Color & fc)
+	:MyShape(lw, ec, fc)
+{
+	add(p);
+	radius = r;
+	return;
+}
+
+void MyCircle::draw()
+{
+	fl_line_style(FL_SOLID, m_linewidth);
+	fl_color(m_fillcolor);
+	fl_pie(Pointset[0].getX(), Pointset[0].getY(), 2 * radius, 2 * radius, 0, 360);
+	fl_color(m_edgecolor);
+	fl_arc(Pointset[0].getX(), Pointset[0].getY(), 2 * radius, 2 * radius, 0, 360);
+}
+
+void MyCircle::redirect(const MyPoint & p, const int & r)
+{
+	Pointset[0].setXY(p.getX(), p.getY());
+	radius = r;
+	return;
+}
+
+MyCircle::~MyCircle()
+{
+	return;
+}
+
+
