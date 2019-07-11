@@ -1,6 +1,19 @@
 #pragma once
-#include "../Common/Common.h"
 #include "../Model/Model.h"
-#include "../Command/Command.h"
-#include "../ViewModel/myFLTK.h"
+#include "../View/View.h"
+#include "../ViewModel/ViewModel.h"
+#include "../Windows/Windows.h"
 
+class App
+{
+private:
+	std::shared_ptr<View> view;
+	std::shared_ptr<Model> model;
+	std::shared_ptr<ViewModel> viewmodel;
+	std::shared_ptr<Windows> windows;
+public:
+	App();
+	void StartWorld();
+	void test();
+
+};

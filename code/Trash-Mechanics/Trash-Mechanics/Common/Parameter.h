@@ -1,7 +1,6 @@
 #pragma once
-#include "..\Common\Common.h"
-#include <memory>
-#include <Fl_Widget.H>
+#include "..\Common\Common-Base.h"
+
 
 class Parameter
 {
