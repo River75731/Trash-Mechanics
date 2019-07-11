@@ -13,7 +13,7 @@ void ViewModel::bind(std::shared_ptr<View> view)
 
 void ViewModel::bind(std::shared_ptr<Windows> windows)
 {
-	this->windows = windows;
+//	this->windows = windows;
 }
 
 ViewModel::ViewModel()
