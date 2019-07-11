@@ -1,24 +1,34 @@
 #include "Model.h"
 
 PhysicsSpace::PhysicsSpace() {
-	m_StepSize = 0.01; /* 100ms */
+	m_StepSize = DEFAULT_STEPSIZE; /* 10ms */
 	m_Force = originPoint;
 }
 
 void PhysicsSpace::addRigidBody(const RigidBody InputRigidBody) {
-	m_RigidBodySet.push_back(InputRigidBody);
+	if(m_RigidBodySet.size()<RB_MAXN) m_RigidBodySet.push_back(InputRigidBody);
+	else printf("You cannot have more than %d rigid bodies.", RB_MAXN);
 }
 
 void PhysicsSpace::addRigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity) {
 	m_RigidBodySet.push_back(RigidBody(InputShape, InputMass, InputInertiaConstant, InputVelocity, InputAngularVelocity));
 }
 
-void PhysicsSpace::setStepSize(double dt) {
+void PhysicsSpace::deleteRigidBody(const int & InputId) {
+	for (std::vector<RigidBody>::iterator i = m_RigidBodySet.begin(); i != m_RigidBodySet.end(); ) {
+		if (i->getId() == InputId)
+			i = m_RigidBodySet.erase(i);
+		else
+			i++;
+	}
+}
+
+void PhysicsSpace::setStepSize(const double &dt) {
 	m_StepSize = dt;
 }
 
-void PhysicsSpace::flyTime(int n) {
-	while (n--) {
+void PhysicsSpace::goStep(const int &n) {
+	for (int i = 0; i < n; i++) {
 		for (std::vector<RigidBody>::iterator i = m_RigidBodySet.begin(); i != m_RigidBodySet.end(); i++) {
 			i->applyForce(m_Force);
 			i->accelerate(m_StepSize);
@@ -37,6 +47,10 @@ void PhysicsSpace::flyTime(int n) {
 
 void PhysicsSpace::addForceField(const Vec & InputForce) {
 	m_Force += InputForce;
+}
+
+Vec PhysicsSpace::getForceField() {
+	return m_Force;
 }
 
 std::vector<RigidBody> PhysicsSpace::getRigidBodys() {

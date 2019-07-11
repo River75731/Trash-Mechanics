@@ -4,11 +4,13 @@
 #include <cmath>
 #include <iostream>
 #include <stdlib.h>
+#include "../Command/Command.h"
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define Power pow
 #define Sqrt sqrt
 #define K_Resilence 1
+#define DEBUG_COMMON 0
 
 const double pi = 3.141592653589793;
 const double NearDist = 5.0;
@@ -17,7 +19,6 @@ const double INF = (double)1.0e100;
 
 static bool inPoint = false;
 static bool inEdge = false;
-
 
 typedef enum
 {
@@ -131,7 +132,9 @@ private:
 	double m_Mass;
 	double m_InertiaConstant;
 	double m_AngularVelocity;
-	RigidBody *m_LastCollision;
+	static int IdCount;
+	int m_Id;
+	int m_IdLastCollision;
 public:
 	RigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity);
 	RigidBody(const RigidBody &RB);
@@ -149,6 +152,7 @@ public:
 	bool collide(RigidBody &Tag);/* Will modify this rigidbody and tag rigidbody!!! */
 	Poly getShape() const;
 	void cmdPrint() const;
+	int getId() const;
 };
 
 double VecToVecDist(const Vec &v1, const Vec &v2);

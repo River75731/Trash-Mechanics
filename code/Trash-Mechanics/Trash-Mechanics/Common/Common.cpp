@@ -3,6 +3,7 @@
 Vec originPoint(0, 0);
 Vec gravity(0, 9.8);
 Segment emptySegment(originPoint, originPoint);
+int RigidBody::IdCount = 0;
 
 Vec::Vec()
 {
@@ -36,7 +37,7 @@ Vec Vec::operator -(const Vec &x) const
 Vec Vec::operator *(const double &x) const
 {
 	Vec t(x * this->getX(), x * this->getY());
-	return t;	
+	return t;
 }
 
 Vec Vec::operator/(const double & x) const
@@ -169,7 +170,7 @@ Poly & Poly::operator=(const Poly & poly)
 
 bool Poly::setPoly(const Poly & poly)
 {
-	m_CenterPoint = poly.m_CenterPoint; 
+	m_CenterPoint = poly.m_CenterPoint;
 	m_Point = poly.m_Point;
 	m_PointNum = poly.m_PointNum;
 	return true;
@@ -195,13 +196,10 @@ bool Poly::inPoly_Vec(const Vec &v) const
 		Vec v1(*i), v2;
 		if (i == m_Point.end() - 1) v2 = *(m_Point.begin());
 		else v2 = *(i + 1);
-	//	v.show(); v1.show(); v2.show();
 		angleSum += VecAngle(v, v1, v2);
-	//	std::cout << VecAngle(v, v1, v2) << ' ' << angleSum << std::endl;
-	//	std::cout << inPoint << ' ' << inEdge << std::endl;
 		if (inPoint || inEdge) return true;
 	}
-	if (fabs(angleSum - 2 * pi) < eps) 
+	if (fabs(angleSum - 2 * pi) < eps)
 		return true;
 	return false;
 }
@@ -213,10 +211,9 @@ bool Poly::inPoly_PolyVec(const Poly &pol) const
 	for (std::vector<Vec>::iterator i = myvec.begin(); i != myvec.end(); i++)
 	{
 		if (this->inPoly_Vec(*i)) {
-		//	printf("(%.2lf,%.2lf)\n", i->getX(), i->getY());
 			return true;
 		}
-			
+
 	}
 	return false;
 }
@@ -241,7 +238,7 @@ Segment Poly::getInterSegment(const Poly & pol) const
 	Vec v(getInterPoint(pol));
 	for (std::vector<Vec>::const_iterator i = m_Point.begin(); i != m_Point.end(); i++)
 	{
-		Vec v1(*i), v2; 
+		Vec v1(*i), v2;
 		if (i == (m_Point.end() - 1)) v2 = *(m_Point.begin());
 		else v2 = *(i + 1);
 		Segment s(v1, v2);
@@ -325,7 +322,8 @@ RigidBody::RigidBody(const Poly &InputShape, const double &InputMass, const doub
 	m_InertiaConstant = InputInertiaConstant;
 	m_Velocity = InputVelocity;
 	m_AngularVelocity = InputAngularVelocity;
-	m_LastCollision = NULL;
+	m_IdLastCollision = NULL;
+	m_Id = ++IdCount;
 }
 
 RigidBody::RigidBody(const RigidBody & RB) {
@@ -334,8 +332,9 @@ RigidBody::RigidBody(const RigidBody & RB) {
 	m_Velocity = RB.m_Velocity;
 	m_InertiaConstant = RB.m_InertiaConstant;
 	m_AngularVelocity = RB.m_AngularVelocity;
-	m_LastCollision = RB.m_LastCollision;
+	m_IdLastCollision = RB.m_IdLastCollision;
 	m_Mass = RB.m_Mass;
+	m_Id = RB.m_Id;
 }
 
 RigidBody & RigidBody::operator=(const RigidBody & RB) {
@@ -344,8 +343,9 @@ RigidBody & RigidBody::operator=(const RigidBody & RB) {
 	m_Velocity = RB.m_Velocity;
 	m_InertiaConstant = RB.m_InertiaConstant;
 	m_AngularVelocity = RB.m_AngularVelocity;
-	m_LastCollision = RB.m_LastCollision;
+	m_IdLastCollision = RB.m_IdLastCollision;
 	m_Mass = RB.m_Mass;
+	m_Id = RB.m_Id;
 	return *this;
 }
 
@@ -357,22 +357,22 @@ void RigidBody::removeForce() {
 	m_Force = originPoint;
 }
 
-double RigidBody::m() const{
+double RigidBody::m() const {
 	return m_Mass;
 }
 
-Vec RigidBody::v() const{
+Vec RigidBody::v() const {
 	return m_Velocity;
 }
 
-double RigidBody::vAbs() const{
+double RigidBody::vAbs() const {
 	return m_Velocity.getMagnitude();
 }
 
-double RigidBody::i() const{
+double RigidBody::i() const {
 	return m_InertiaConstant;
 }
-double RigidBody::w() const{
+double RigidBody::w() const {
 	return m_AngularVelocity;
 }
 
@@ -393,11 +393,10 @@ void RigidBody::rotate(const double &dt) {
 
 bool RigidBody::collide(RigidBody &Tag) {
 	if (m_Shape.inPoly_PolyVec(Tag.m_Shape) == false) {
-		printf("Not intersected!\n");
-		if (m_LastCollision == &Tag) m_LastCollision = NULL;
+		if (m_IdLastCollision == Tag.m_Id) m_IdLastCollision = NULL;
 		return false;
 	}
-	m_LastCollision = &Tag;
+	m_IdLastCollision = Tag.m_Id;
 	/* Tag insert into this */
 	double cax = Tag.getShape().getCenterPoint().getX();
 	double cay = Tag.getShape().getCenterPoint().getY();
@@ -432,9 +431,12 @@ bool RigidBody::collide(RigidBody &Tag) {
 	}
 	if (Vec(ox - cax, oy - cay) ^ Vec(fx, fy)) { fx *= -1; fy *= -1; }
 	double k = 0.99;
-	printf("A: m=%.2lf i=%.2lf v=(%.2lf,%.2lf) w=%.2lf\n", ma, ia, vax, vay, wa);
-	printf("B: m=%.2lf i=%.2lf v=(%.2lf,%.2lf) w=%.2lf\n", mb, ib, vbx, vby, wb);
+
+#if DEBUG_COMMON==1 
+	printf("A(before collision): m=%.2lf i=%.2lf v=(%.2lf,%.2lf) w=%.2lf\n", ma, ia, vax, vay, wa);
+	printf("B(before collision): m=%.2lf i=%.2lf v=(%.2lf,%.2lf) w=%.2lf\n", mb, ib, vbx, vby, wb);
 	printf("f=(%.2lf,%.2lf)\n", fx, fy);
+#endif
 	double deltat = (2 * (-(fx*vax) - fy * vay + fx * vbx + fy * vby + cay * fx*wa - cax * fy*wa + fy * ox*wa - fx * oy*wa - cby * fx*wb + cbx * fy*wb - fy * ox*wb + fx * oy*wb)) /
 		((Power(cay, 2)*Power(fx, 2)) / ia - (2 * cax*cay*fx*fy) / ia + (Power(cax, 2)*Power(fy, 2)) / ia + (Power(cby, 2)*Power(fx, 2)) / ib - (2 * cbx*cby*fx*fy) / ib +
 		(Power(cbx, 2)*Power(fy, 2)) / ib + Power(fx, 2) / ma + Power(fy, 2) / ma + Power(fx, 2) / mb + Power(fy, 2) / mb + (2 * cay*fx*fy*ox) / ia - (2 * cax*Power(fy, 2)*ox) / ia +
@@ -462,25 +464,33 @@ bool RigidBody::collide(RigidBody &Tag) {
 			(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
 				Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
 				2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy))));*/
-	//printf("pfc:%lf sln1:%lf  sln2:%lf\n", deltat, deltat_sln1, deltat_sln2);
 	vax += fx / ma * deltat;
 	vay += fy / ma * deltat;
 	wa += ((cax - ox)*fy - (cay - oy)*fx) / ia * deltat;
 	vbx -= fx / mb * deltat;
 	vby -= fy / mb * deltat;
 	wb -= ((cbx - ox)*fy - (cby - oy)*fx) / ib * deltat;
-	printf("A(after): m=%.2lf i=%.2lf v=(%lf,%lf) w=%lf\n", ma, ia, vax, vay, wa);
-	printf("B(after): m=%.2lf i=%.2lf v=(%lf,%lf) w=%lf\n", mb, ib, vbx, vby, wb);
+#if DEBUG_COMMON==1
+	printf("collision time:%lf\n", deltat);
+	printf("A(after collision): m=%.2lf i=%.2lf v=(%lf,%lf) w=%lf\n", ma, ia, vax, vay, wa);
+	printf("B(after collision): m=%.2lf i=%.2lf v=(%lf,%lf) w=%lf\n", mb, ib, vbx, vby, wb);
+#endif
 	return true;
 }
 
-Poly RigidBody::getShape() const{
+Poly RigidBody::getShape() const 
+{
 	return m_Shape;
 }
 
-void RigidBody::cmdPrint() const {
-	printf("Rigidbody:\n");
-	printf("	ctr: (%lf,%lf)\n",m_Shape.getCenterPoint().getX(), m_Shape.getCenterPoint().getY());
+void RigidBody::cmdPrint() const 
+{
+	printf("Rigidbody Id[%d] Address[%x]:\n", m_Id, this);
+	printf("	ctr: (%lf,%lf)\n", m_Shape.getCenterPoint().getX(), m_Shape.getCenterPoint().getY());
 	printf("	vertices num: %d\n", m_Shape.getPoint().size());
 	for (int i = 0; i < m_Shape.getPoint().size(); i++) printf("	(%lf,%lf)\n", m_Shape.getPoint()[i].getX(), m_Shape.getPoint()[i].getY());
+}
+
+int RigidBody::getId() const {
+	return m_Id;
 }
