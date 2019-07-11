@@ -11,7 +11,7 @@
 #include "Model/Model.h"
 
 
-
+/*
 //class CreatePolyCommand : public Command;
 
 
@@ -204,4 +204,4 @@ int main(int argc, char *argv[])
 	app.test();
 	system("PAUSE");
 	return 0;
-}
+}*/

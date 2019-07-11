@@ -14,6 +14,12 @@ Vec::Vec(const double &x, const double &y)
 	m_Y = y;
 }
 
+Vec::Vec(const Vec & v)
+{
+	this->m_X = v.getX();
+	this->m_Y = v.getY();
+}
+
 Vec Vec::operator +(const Vec &x) const
 {
 	Vec t(this->m_X + x.m_X, this->m_Y + x.m_Y);
