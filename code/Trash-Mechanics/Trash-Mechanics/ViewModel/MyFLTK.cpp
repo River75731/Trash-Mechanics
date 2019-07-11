@@ -87,6 +87,7 @@ void MySegment::draw()
 	return;
 }
 
+
 MySegment::~MySegment()
 {
 	return;
@@ -154,6 +155,40 @@ void MyWindow::add(MyShape & s)
 }
 
 MyWindow::~MyWindow()
+{
+	return;
+}
+
+int MyImage::Imagenum = 0;
+Fl_Box MyImage::m_box[MAXPNG];
+
+MyImage::MyImage(const MyPoint & tl, const int & w, const int & h, const std::string path, const int & lw, const Fl_Color & ec, const Fl_Color & fc)
+	:MyShape(lw, ec, fc), m_png(path.c_str())
+{
+	m_width = w;
+	m_height = h;
+	m_index = Imagenum;
+	Imagenum++;
+	return;
+}
+
+void MyImage::draw()
+{
+	m_box[m_index].image(m_png);
+	m_box[m_index].resize(m_topleft.getX(), m_topleft.getY(), m_width, m_height);
+	m_box[m_index].show();
+}
+
+
+void MyImage::relocate(const MyPoint & tl, const int & w, const int & h)
+{
+	m_topleft = tl;
+	m_width = w;
+	m_height = h;
+	return;
+}
+
+MyImage::~MyImage()
 {
 	return;
 }

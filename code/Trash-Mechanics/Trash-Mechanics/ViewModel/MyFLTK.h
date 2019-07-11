@@ -2,9 +2,12 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Double_Window.H>
+#include <FL/Fl_PNG_Image.H>
 #include <FL/fl_draw.H>
+#include <FL/Fl_Box.H>
 #include <vector>
 #include <string>
+#define MAXPNG 100
 
 class MyPoint
 {
@@ -50,8 +53,19 @@ public:
 };
 
 class MyImage : public MyShape {
+private:
+	MyPoint m_topleft;
+	int m_width;
+	int m_height;
+	int m_index;
+	Fl_PNG_Image m_png;
 public:
-	//MyImage(const MyPoint topleft, const )
+	static int Imagenum;
+	static Fl_Box m_box[MAXPNG];
+	MyImage(const MyPoint &tl, const int &w, const int &h, const std::string path, const int &lw = 1, const Fl_Color &ec = FL_BLACK, const Fl_Color &fc = FL_BLACK);
+	void draw();
+	void relocate(const MyPoint &tl,const int &w,const int &h);
+	virtual ~MyImage();
 };
 
 class MyWindow : public Fl_Double_Window
