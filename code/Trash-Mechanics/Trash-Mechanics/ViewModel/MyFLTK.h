@@ -49,6 +49,11 @@ public:
 	virtual ~MyPolygon();
 };
 
+class MyImage : public MyShape {
+public:
+	//MyImage(const MyPoint topleft, const )
+};
+
 class MyWindow : public Fl_Double_Window
 {
 private:

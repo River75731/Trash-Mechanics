@@ -130,14 +130,13 @@ MyPolygon::~MyPolygon()
 
 MyWindow::MyWindow() :Fl_Double_Window(Fl::w() / 4, Fl::h() / 4, Fl:: w() / 2, Fl:: h() / 2, "New Page")
 {
-	MyWindow::color(FL_BLACK);
+	MyWindow::color(FL_WHITE);
 }
 
 MyWindow::MyWindow(MyPoint topleft, const int &width, const int &height, const std::string &name, const Fl_Color &color)
 	:Fl_Double_Window(topleft.getX(), topleft.getY(), width, height, name.c_str())
 {
 	MyWindow::color(color);
-	show();
 }
 
 void MyWindow::draw()

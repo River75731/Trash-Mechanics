@@ -1,8 +1,8 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
-#include <Fl_PNG_Image.H>
-#include <Fl_Shared_Image.H>
+#include <FL/Fl_PNG_Image.H>
+#include <FL/Fl_Shared_Image.H>
 #include <iostream>
 #include <vector>
 #include "Common/Common.h"
@@ -170,11 +170,11 @@ ViewModel::ViewModel()
 	createPolyCommand = std::static_pointer_cast<Command, CreatePolyCommand>
 		(std::shared_ptr<CreatePolyCommand>(new CreatePolyCommand(std::shared_ptr<ViewModel>(this))));
 }
-
+/*
 int main(int argc, char *argv[])
 {
 	App app;
 	app.test();
 	system("PAUSE");
 	return 0;
-}
+}*/
