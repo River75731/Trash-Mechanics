@@ -195,9 +195,11 @@ bool Poly::inPoly_Vec(const Vec &v) const
 		Vec v1(*i), v2;
 		if (i == m_Point.end() - 1) v2 = *(m_Point.begin());
 		else v2 = *(i + 1);
+	//	v.show(); v1.show(); v2.show();
 		angleSum += VecAngle(v, v1, v2);
+	//	std::cout << VecAngle(v, v1, v2) << ' ' << angleSum << std::endl;
+	//	std::cout << inPoint << ' ' << inEdge << std::endl;
 		if (inPoint || inEdge) return true;
-		//std::cout << VecAngle(v, v1, v2) << ' ' << angleSum << std::endl;
 	}
 	if (fabs(angleSum - 2 * pi) < eps) 
 		return true;
@@ -211,7 +213,7 @@ bool Poly::inPoly_PolyVec(const Poly &pol) const
 	for (std::vector<Vec>::iterator i = myvec.begin(); i != myvec.end(); i++)
 	{
 		if (this->inPoly_Vec(*i)) {
-			printf("(%.2lf,%.2lf)\n", i->getX(), i->getY());
+		//	printf("(%.2lf,%.2lf)\n", i->getX(), i->getY());
 			return true;
 		}
 			
@@ -221,7 +223,7 @@ bool Poly::inPoly_PolyVec(const Poly &pol) const
 
 Vec Poly::getInterPoint(const Poly & pol) const
 {
-	std::vector<Vec> myvec;
+	std::vector<Vec> myvec = pol.getPoint();
 	for (std::vector<Vec>::const_iterator i = myvec.begin(); i != myvec.end(); i++)
 	{
 		if (this->inPoly_Vec(*i))
@@ -236,19 +238,24 @@ Segment Poly::getInterSegment(const Poly & pol) const
 		return emptySegment;
 	double m = INF;
 	Segment ms;
+	Vec v(getInterPoint(pol));
 	for (std::vector<Vec>::const_iterator i = m_Point.begin(); i != m_Point.end(); i++)
 	{
 		Vec v1(*i), v2; 
-		if (i == m_Point.end() - 1) v2 = *(m_Point.begin());
+		if (i == (m_Point.end() - 1)) v2 = *(m_Point.begin());
 		else v2 = *(i + 1);
 		Segment s(v1, v2);
-		if (m > VecToSegmentDist(*i, s))
+		if (m > VecToSegmentDist(v, s))
 		{
-			m = VecToSegmentDist(*i, s);
+			m = VecToSegmentDist(v, s);
 			ms.set(v1, v2);
 		}
+	//	std::cout << VecToSegmentDist(v, s) << ' ' << m << std::endl;
+		//std::cout << '!';
+		//v1.show(); v2.show();
+		//std::cout << '?' << std::endl;
+		//printf("(%.2lf,%.2lf)->(%.2lf,%.2lf)\n", ms.getV1().getX(), ms.getV1().getX(), ms.getV2().getX(), ms.getV2().getY());
 	}
-	printf("(%.2lf,%.2lf)->(%.2lf,%.2lf)\n", ms.getV1().getX(), ms.getV1().getX(), ms.getV2().getX(), ms.getV2().getY());
 	return ms;
 }
 
@@ -292,7 +299,9 @@ double VecToSegmentDist(const Vec &v, const Segment &s)
 	double B = v2.getX() - v1.getX();
 	double C = v1.getX() * v2.getY() - v2.getX() * v1.getY();
 	double d3 = fabs(A * v.getX() + B * v.getY() + C) / sqrt(A * A + B * B);
-	return min(min(d1, d2), d3);
+	if (((v - v1) ^ (v2 - v1)) >= 0 && ((v - v2) ^ (v1 - v2)) >= 0)
+		return d3;
+	return min(d1, d2);
 }
 
 double VecAngle(const Vec &v, const Vec &v1, const Vec &v2)
@@ -305,17 +314,12 @@ double VecAngle(const Vec &v, const Vec &v1, const Vec &v2)
 		inPoint = true;
 		return 0.0;
 	}
+	if (VecToSegmentDist(v, Segment(v1, v2)) < eps)
+	{
+		inEdge = true;
+		return 0;
+	}
 	long double x = (a * a + b * b - c * c) / (2 * a * b);
-	if (fabs(x - 1) < eps) 
-	{
-		inEdge = true;
-		return 0;
-	}
-	if (fabs(x + 1) < eps)
-	{
-		inEdge = true;
-		return 0;
-	}
 	//std::cout << x << std::endl;
 	return acos(x);
 }

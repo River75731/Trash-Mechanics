@@ -80,9 +80,11 @@ private:
 public:
 	Segment() : m_Vertex1(), m_Vertex2() {};
 	Segment(const Vec &v1, const Vec &v2) : m_Vertex1(v1), m_Vertex2(v2) {}
+	Segment(const Segment &s):m_Vertex1(s.getV1()), m_Vertex2(s.getV2()){}
+	Segment& operator =(const Segment &s) { m_Vertex1 = s.getV1(); m_Vertex2 = s.getV2(); }
 	bool setV1(const Vec &v) { m_Vertex1 = v;  return true; }
 	bool setV2(const Vec &v) { m_Vertex2 = v; return true; }
-	bool set(const Vec &v1, const Vec &v2) { m_Vertex1 = v1;  m_Vertex1 = v2; return true; }
+	bool set(const Vec &v1, const Vec &v2) { m_Vertex1 = v1;  m_Vertex2 = v2; return true; }
 	Vec getV1() const { return m_Vertex1; } 
 	Vec getV2() const { return m_Vertex2; } 
 
