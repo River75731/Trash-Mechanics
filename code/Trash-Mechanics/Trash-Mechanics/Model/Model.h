@@ -2,7 +2,7 @@
 #include "../Common/Common.h"
 
 const int RB_MAXN = 100;
-const int DEFAULT_STEPSIZE = 0.01;
+const double DEFAULT_STEPSIZE = 0.01;
 
 class PhysicsSpace {
 private:
@@ -19,4 +19,21 @@ public:
 	void addForceField(const Vec &InputForce);
 	Vec getForceField();
 	std::vector<RigidBody> getRigidBodys();
+};
+
+
+class Model
+{
+private:
+	Poly poly_; //test
+public:
+	Model() :poly_() {}
+	void createPoly(Poly poly) // receiver funtion of Model from ViewModel
+	{
+		poly_.setPoly(poly);
+	}
+	void test()
+	{
+		std::cout << "PointNum = " << poly_.getPointNum() << std::endl;
+	}
 };

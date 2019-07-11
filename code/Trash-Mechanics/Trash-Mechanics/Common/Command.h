@@ -1,8 +1,10 @@
 #pragma once
-#include <memory>
+#include "..\Common\Common.h"
 #include "Parameter.h"
 
-class Command
+
+
+class Command // base Command class
 {
 protected:
 	std::shared_ptr<Parameter> param_;
@@ -13,5 +15,6 @@ public:
 
 	//    Parameters& get_params_handle();
 	//    void set_view_model(std::shared_ptr<ViewModel> viewmodel);
-	virtual void exec() = 0;
+	virtual void pass() = 0;
 };
+

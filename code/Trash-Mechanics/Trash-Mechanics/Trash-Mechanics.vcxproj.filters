@@ -19,9 +19,6 @@
     <Filter Include="SourceFile\ViewModel">
       <UniqueIdentifier>{af5cff67-4ee7-4122-88b4-3a8c03d78f09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFile\Command">
-      <UniqueIdentifier>{4800352a-a859-47df-bcbc-05e113753102}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SourceFile\Common">
       <UniqueIdentifier>{c58d7894-b40d-498f-b73f-9b2785f8ff12}</UniqueIdentifier>
     </Filter>
@@ -34,25 +31,19 @@
     <Filter Include="SourceFile\App">
       <UniqueIdentifier>{8efbe492-a4df-46e2-bf6e-11b166f631cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFile\Window">
-      <UniqueIdentifier>{4fd53991-d5dd-4c91-9d74-70b67426d3a7}</UniqueIdentifier>
+    <Filter Include="SourceFile\Windows">
+      <UniqueIdentifier>{6b3f6d07-a29f-45d8-9a94-7039745cccaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Command">
+      <UniqueIdentifier>{0e3a257f-ccc2-43b0-8b13-58b70f661676}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>SourceFile</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Common.cpp">
-      <Filter>SourceFile\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Command\Command.cpp">
-      <Filter>SourceFile\Command</Filter>
-    </ClCompile>
     <ClCompile Include="Model\Model.cpp">
       <Filter>SourceFile\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Others\Message.cpp">
-      <Filter>SourceFile\Others</Filter>
     </ClCompile>
     <ClCompile Include="App\App.cpp">
       <Filter>SourceFile\App</Filter>
@@ -66,34 +57,64 @@
     <ClCompile Include="View\MyFLTK.cpp">
       <Filter>SourceFile\View</Filter>
     </ClCompile>
+    <ClCompile Include="ViewModel\ViewModel.cpp">
+      <Filter>SourceFile\ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="View\View.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Windows.cpp">
+      <Filter>SourceFile\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Command.cpp">
+      <Filter>SourceFile\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Parameter.cpp">
+      <Filter>SourceFile\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Common-Based.cpp">
+      <Filter>SourceFile\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Others\Message.h">
+    <ClInclude Include="Model\Model.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Model\Model.h">
+    <ClInclude Include="Others\View-Polygon.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Command.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Parameter.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="App\App.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="View\View.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="View\MyFLTK.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModel\ViewModel.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Windows.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common-Base.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Common\Common.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Command\Command.h">
-      <Filter>Header</Filter>
+    <ClInclude Include="Command\CreatePolyCommand.h">
+      <Filter>SourceFile\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Command\Parameter.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="App\App.h">
-      <Filter>SourceFile\App</Filter>
-    </ClInclude>
-    <ClInclude Include="App\Window.h">
-      <Filter>SourceFile\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="View\MyFLTK.h">
-      <Filter>SourceFile\View</Filter>
-    </ClInclude>
-    <ClInclude Include="Others\View-Polygon.h">
-      <Filter>Header</Filter>
+    <ClInclude Include="Command\Command-List.h">
+      <Filter>SourceFile\Command</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
