@@ -124,29 +124,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\App.cpp" />
-    <ClCompile Include="Command\Command.cpp" />
-    <ClCompile Include="Common\Common.cpp" />
+    <ClCompile Include="Common\Command.cpp" />
+    <ClCompile Include="Common\Common-Based.cpp" />
+    <ClCompile Include="Common\Parameter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model\Model.cpp" />
-    <ClCompile Include="Others\Message.cpp" />
-    <ClCompile Include="Others\View-Polygon.cpp" />
     <ClCompile Include="demo.cpp" />
+    <ClCompile Include="ViewModel\ViewModel.cpp" />
     <ClCompile Include="View\ViewCircle.cpp" />
     <ClCompile Include="View\ViewPoint.cpp" />
     <ClCompile Include="View\ViewPolygon.cpp" />
     <ClCompile Include="View\ViewSegment.cpp" />
     <ClCompile Include="View\ViewShape.cpp" />
     <ClCompile Include="View\ViewWindow.cpp" />
+    <ClCompile Include="Windows\Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h" />
-    <ClInclude Include="App\Window.h" />
-    <ClInclude Include="Command\Command.h" />
-    <ClInclude Include="Command\Parameter.h" />
+    <ClInclude Include="Command\Command-List.h" />
+    <ClInclude Include="Command\CreatePolyCommand.h" />
+    <ClInclude Include="Common\Command.h" />
+    <ClInclude Include="Common\Common-Base.h" />
     <ClInclude Include="Common\Common.h" />
+    <ClInclude Include="Common\Parameter.h" />
     <ClInclude Include="Model\Model.h" />
-    <ClInclude Include="Others\Message.h" />
-    <ClInclude Include="Others\View-Polygon.h" />
+    <ClInclude Include="ViewModel\ViewModel.h" />
     <ClInclude Include="View\GUI.h" />
     <ClInclude Include="View\ViewCircle.h" />
     <ClInclude Include="View\ViewPoint.h" />
@@ -154,6 +156,7 @@
     <ClInclude Include="View\ViewSegment.h" />
     <ClInclude Include="View\ViewShape.h" />
     <ClInclude Include="View\ViewWindow.h" />
+    <ClInclude Include="Windows\Windows.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

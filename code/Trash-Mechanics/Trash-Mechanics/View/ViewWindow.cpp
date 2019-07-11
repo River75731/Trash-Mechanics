@@ -105,7 +105,7 @@ bool ViewWindow::setcolor(const Fl_Color & c)
 
 void ViewWindow::draw()
 {
-	Fl_Double_Window draw();
+	Fl_Double_Window::draw();
 	for (std::vector<ViewShape*>::iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++)
 		if ((*i)->getvisible()) (*i)->draw();
 }

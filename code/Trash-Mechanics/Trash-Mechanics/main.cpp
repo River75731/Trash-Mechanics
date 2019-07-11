@@ -4,7 +4,7 @@
 #include <FL/Fl_Shared_Image.H>
 #include <iostream>
 #include <vector>
-#include "Common/Common.h"
+#include "Common/Common-Base.h"
 //#include "Others/View-Polygon.h"
 //#include "View/MyFLTK.h"
 #include "Model/Model.h"
@@ -63,13 +63,14 @@ int main(int argc, char *argv[])
 
 
 	ViewWindow window(400,100,800,500,"NNN Page",FL_WHITE);
-	ViewSegment line1(ViewPoint(100, 50), ViewPoint(300, 50),1);
-	ViewCircle c1(ViewPoint(200, 100), 20, 2);
+	ViewSegment line1(ViewPoint(100, 50), ViewPoint(300, 50), 1, 1, 5);
+	ViewCircle c1(ViewPoint(200, 100), 20, 2, 1, 3, FL_BLUE, FL_RED);
 	ViewPolygon p1({ ViewPoint(100,100),ViewPoint(100,200),ViewPoint(200,200) }, 3);
 	window.attach(line1);
 	window.attach(c1);
 	window.attach(p1);
 	window.show();
+	window.setcolor(FL_YELLOW);
 	int x = 300, y = 50, dx = 1, dy = 1;
 	while (1)
 	{
@@ -77,7 +78,7 @@ int main(int argc, char *argv[])
 		y += dy;
 		if (y >= 500 || y <= 20) dy = -dy;
 		if (x >= 800 || x <= 20) dx = -dx;
-		line1.setp2(ViewPoint(x,y));
+		c1.setCircle(ViewPoint(x,y));
 		Fl::check();
 		Fl::redraw();
 	}
