@@ -4,8 +4,11 @@ PhysicsSpace::PhysicsSpace() {
 	m_StepSize = 100; /* 100ms */
 }
 
-void PhysicsSpace::addRigidBody(Poly InputShape, double InputMass, double InputInertiaConstant, Vec InputVelocity = originPoint, double InputAngularVelocity = 0) {
-	/* Default velocity = zero=vector and angular-velocity = 0 */
+void PhysicsSpace::addRigidBody(const RigidBody InputRigidBody) {
+	m_RigidBodySet.push_back(InputRigidBody);
+}
+
+void PhysicsSpace::addRigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity) {
 	m_RigidBodySet.push_back(RigidBody(InputShape, InputMass, InputInertiaConstant, InputVelocity, InputAngularVelocity));
 }
 

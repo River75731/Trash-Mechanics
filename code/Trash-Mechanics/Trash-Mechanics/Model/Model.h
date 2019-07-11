@@ -7,7 +7,8 @@ private:
 	double m_StepSize;
 public:
 	PhysicsSpace();
-	void addRigidBody(Poly InputShape, double InputMass, double InputInertiaConstant, Vec InputVelocity, double InputAngularVelocity);
+	void addRigidBody(const RigidBody InputRigidBody);
+	void addRigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity);
 	void setStepSize(double dt);
 	void flyTime(double dt);
 	std::vector<RigidBody> getRigidBodys();
