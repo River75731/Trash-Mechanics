@@ -8,7 +8,7 @@
 #include "Others/View-Polygon.h"
 #include "View/MyFLTK.h"
 #include "Model/Model.h"
-/*
+
 int main(int argc, char *argv[])
 {
 	int w = Fl::w() / 2, h = Fl::h() / 2;
@@ -51,4 +51,3 @@ int main(int argc, char *argv[])
 
 		return Fl::run();
 }
-*/
