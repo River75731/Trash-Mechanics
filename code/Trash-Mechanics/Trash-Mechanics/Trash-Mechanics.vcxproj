@@ -130,8 +130,8 @@
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Others\Message.cpp" />
     <ClCompile Include="Others\View-Polygon.cpp" />
-    <ClCompile Include="ViewModel\MyFLTK.cpp" />
     <ClCompile Include="demo.cpp" />
+    <ClCompile Include="View\MyFLTK.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h" />
@@ -142,7 +142,7 @@
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="Others\Message.h" />
     <ClInclude Include="Others\View-Polygon.h" />
-    <ClInclude Include="ViewModel\MyFLTK.h" />
+    <ClInclude Include="View\MyFLTK.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

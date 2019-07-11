@@ -42,9 +42,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>SourceFile</Filter>
     </ClCompile>
-    <ClCompile Include="ViewModel\MyFLTK.cpp">
-      <Filter>SourceFile\ViewModel</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Common.cpp">
       <Filter>SourceFile\Common</Filter>
     </ClCompile>
@@ -66,11 +63,11 @@
     <ClCompile Include="demo.cpp">
       <Filter>SourceFile</Filter>
     </ClCompile>
+    <ClCompile Include="View\MyFLTK.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ViewModel\MyFLTK.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="Others\Message.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -92,8 +89,11 @@
     <ClInclude Include="App\Window.h">
       <Filter>SourceFile\Window</Filter>
     </ClInclude>
+    <ClInclude Include="View\MyFLTK.h">
+      <Filter>SourceFile\View</Filter>
+    </ClInclude>
     <ClInclude Include="Others\View-Polygon.h">
-      <Filter>SourceFile\Others</Filter>
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
