@@ -9,9 +9,9 @@
 #include "Others/View-Polygon.h"
 #include "ViewModel/MyFLTK.h"
 #include "Model/Model.h"
-
-
 /*
+
+
 //class CreatePolyCommand : public Command;
 
 
@@ -56,15 +56,15 @@ public:
 	virtual void exec() = 0;
 };
 
-class ModelToViewModelNotification : public Notification
+class DrawPolylNotification : public Notification
 {
 private:
 	std::shared_ptr<ViewModel> viewmodel;
 public:
-	ModelToViewModelNotification(std::shared_ptr<ViewModel> VM):viewmodel(VM){}
+	DrawPolylNotification(std::shared_ptr<ViewModel> VM):viewmodel(VM){}
 	void exec()
 	{
-		viewmodel->notified();
+		viewmodel->execDrawPolylNotification();
 	}
 };
 
