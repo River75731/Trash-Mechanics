@@ -159,9 +159,7 @@ MyWindow::~MyWindow()
 	return;
 }
 
-int MyImage::Imagenum = 0;
-Fl_Box MyImage::m_box[MAXPNG];
-
+/*
 MyImage::MyImage(const MyPoint & tl, const int & w, const int & h, const std::string path, const int & lw, const Fl_Color & ec, const Fl_Color & fc)
 	:MyShape(lw, ec, fc), m_png(path.c_str())
 {
@@ -192,3 +190,4 @@ MyImage::~MyImage()
 {
 	return;
 }
+*/

@@ -12,7 +12,6 @@
 int main(int argc, char *argv[])
 {
 	int w = Fl::w() / 2, h = Fl::h() / 2;
-	MyImage::Imagenum = 0;
 	MyWindow window(MyPoint(w/2,h/2),w,h,"TEST",FL_WHITE);
 	MySegment line1(MyPoint(100, 50), MyPoint(300 , 50), 5, FL_BLUE);
 	window.add(line1);
@@ -29,7 +28,7 @@ int main(int argc, char *argv[])
 	box2.image(png);
 	window.show();
 	window.add(r);
-	int x = 300, y = 50, dx = 0, dy = 1;
+	int x = 300, y = 50, dx = 1, dy = 1;
 	while (1)
 	{
 		x += dx;
@@ -37,6 +36,8 @@ int main(int argc, char *argv[])
 		box.resize(x, y, 1, 1);
 		if (y >= 500) dy = -1;
 		if (y <= 20) dy = 1;
+		if (x >= 700) dx = -1;
+		if (x <= 20) dx = 1;
 		Fl::check();
 		Fl::redraw();
 	}
