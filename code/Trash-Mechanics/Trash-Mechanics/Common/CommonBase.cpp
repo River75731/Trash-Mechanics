@@ -158,24 +158,24 @@ Vec getTriangleCenter(const Vec &v1, const Vec &v2, const Vec &v3)
 	return Vec((v1 + v2 + v3) / 3);
 }
 
-void Poly::clacCenterPoint()
+void Poly::clacCenterPointAndArea()
 {
 	Vec v(*(m_Point.begin()));
 	m_CenterPoint.setXY(0, 0);
-	double totalArea = 0.0;
+	m_area = 0.0;
 	for (std::vector<Vec>::iterator i = (m_Point.begin() + 1); i != (m_Point.end() - 1); i++)
 	{
 		Vec v1(*i), v2(*(i + 1));
 		double area = getTriangleArea(v, v1, v2);
 		m_CenterPoint += getTriangleCenter(v, v1, v2) * area;
-		totalArea += area;
+		m_area += area;
 	}
-	m_CenterPoint /= totalArea;
+	m_CenterPoint /= m_area;
 }
 
 Poly::Poly(const std::vector<Vec>& P) : m_Point(P), m_PointNum(P.size())
 {
-	clacCenterPoint();
+	clacCenterPointAndArea();
 }
 
 Poly::Poly(const Poly & poly)
@@ -183,6 +183,7 @@ Poly::Poly(const Poly & poly)
 	m_CenterPoint = poly.m_CenterPoint;
 	m_Point = poly.m_Point;
 	m_PointNum = poly.m_PointNum;
+	m_area = poly.getArea();
 }
 
 Poly & Poly::operator=(const Poly & poly)
@@ -190,6 +191,7 @@ Poly & Poly::operator=(const Poly & poly)
 	m_CenterPoint = poly.m_CenterPoint;
 	m_Point = poly.m_Point;
 	m_PointNum = poly.m_PointNum;
+	m_area = poly.getArea();
 	return *this;
 }
 
@@ -198,6 +200,7 @@ bool Poly::setPoly(const Poly & poly)
 	m_CenterPoint = poly.m_CenterPoint;
 	m_Point = poly.m_Point;
 	m_PointNum = poly.m_PointNum;
+	m_area = poly.getArea();
 	return true;
 }
 
@@ -205,7 +208,8 @@ bool Poly::setPoly(const Vec &center, const std::vector<Vec> &P)
 {
 	m_CenterPoint = center;
 	m_Point = P;
-	m_PointNum = P.size();
+	m_PointNum = P.size(); 
+	clacCenterPointAndArea();
 	return false;
 }
 
@@ -346,14 +350,46 @@ double getTriangleArea(const Vec & v, const Vec & v1, const Vec & v2)
 	return ((v1 - v) % (v2 - v)) * 0.5;
 }
 
-RigidBody::RigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity) {
+double getTriangleInertiaConstant(const Vec & v1, const Vec & v2, const Vec & v3)
+{
+	double a = (v1 - v2).getMagnitude();
+	double b = (v2 - v3).getMagnitude();
+	double c = (v1 - v3).getMagnitude();
+	return (a * a + b * b + c * c) / 36;
+}
+
+void RigidBody::clacInertiaConstant()
+{
+
+	m_InertiaConstant = 0.0;
+	double rou = m_Mass / m_Shape.getArea();
+	std::cout << "rou = " << rou << "mass = " << m_Mass << "area = " << m_Shape.getArea();
+	Vec v(*(m_Shape.getPoint().begin()));
+	Vec vc(m_Shape.getCenterPoint());
+	//std::cout << '?';	
+	std::vector<Vec> point(m_Shape.getPoint());
+	std::cout << point.size();
+	for (std::vector<Vec>::iterator i = (point.begin() + 1); i != (point.end() - 1); i++)
+	{
+		Vec v1(*i), v2(*(i + 1));
+		double dS = getTriangleArea(v, v1, v2);
+		double dm = rou * dS;
+		double ICaxis = getTriangleInertiaConstant(v, v1, v2) * dm;
+		double ICreal = ICaxis + dm * ((v - vc).getMagnitude() * (v - vc).getMagnitude());
+		m_InertiaConstant += ICreal;
+	}
+	std::cout << "IC = "<<m_InertiaConstant << std::endl;
+
+}
+
+RigidBody::RigidBody(const Poly &InputShape, const double &InputMass, const Vec &InputVelocity, const double &InputAngularVelocity) {
 	m_Shape = InputShape;
 	m_Mass = InputMass;
-	m_InertiaConstant = InputInertiaConstant;
 	m_Velocity = InputVelocity;
 	m_AngularVelocity = InputAngularVelocity;
 	m_IdLastCollision = NULL;
 	m_Id = ++IdCount;
+	clacInertiaConstant();
 }
 
 RigidBody::RigidBody(const RigidBody & RB) {

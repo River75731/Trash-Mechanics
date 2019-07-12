@@ -12,7 +12,7 @@ private:
 public:
 	PhysicsSpace();
 	void addRigidBody(const RigidBody InputRigidBody);
-	void addRigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity);
+	void addRigidBody(const Poly &InputShape, const double &InputMass, const Vec &InputVelocity, const double &InputAngularVelocity);
 	void deleteRigidBody(const int &InputId);
 	void setStepSize(const double &dt);
 	void goStep(const int &n);

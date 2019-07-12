@@ -10,8 +10,8 @@ void PhysicsSpace::addRigidBody(const RigidBody InputRigidBody) {
 	else printf("You cannot have more than %d rigid bodies.", RB_MAXN);
 }
 
-void PhysicsSpace::addRigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity) {
-	m_RigidBodySet.push_back(RigidBody(InputShape, InputMass, InputInertiaConstant, InputVelocity, InputAngularVelocity));
+void PhysicsSpace::addRigidBody(const Poly &InputShape, const double &InputMass, const Vec &InputVelocity, const double &InputAngularVelocity) {
+	m_RigidBodySet.push_back(RigidBody(InputShape, InputMass, InputVelocity, InputAngularVelocity));
 }
 
 void PhysicsSpace::deleteRigidBody(const int & InputId) {

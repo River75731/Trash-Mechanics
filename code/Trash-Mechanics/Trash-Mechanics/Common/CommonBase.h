@@ -110,16 +110,18 @@ private:
 	Vec m_CenterPoint;
 	std::vector<Vec> m_Point; /* All the points must be arranged in an anti-clockwise order*/
 	int m_PointNum;
-	void clacCenterPoint();
+	double m_area;
+	void clacCenterPointAndArea();
 	//string m_Image;
 public:
-	Poly(): m_CenterPoint(0.0, 0.0), m_PointNum(0) {}
+	Poly(): m_CenterPoint(0.0, 0.0), m_PointNum(0), m_area(0.0) {}
 	Poly(const std::vector<Vec> &P);
 	Poly(const Poly &poly);
 	Poly& operator =(const Poly &poly);
 	bool setPoly(const Poly &poly);
 	bool setPoly(const Vec &center, const std::vector<Vec> &P);
 	Vec getCenterPoint() const { return m_CenterPoint; }
+	double getArea() const { return m_area; }
 	int getPointNum() const { return m_PointNum; }
 	std::vector<Vec> getPoint() const { return m_Point; }
 	//bool isIntersected(const Segment &s) const;
@@ -146,8 +148,10 @@ private:
 	static int IdCount;
 	int m_Id;
 	int m_IdLastCollision;
+	void clacInertiaConstant();
+
 public:
-	RigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity);
+	RigidBody(const Poly &InputShape, const double &InputMass, const Vec &InputVelocity, const double &InputAngularVelocity);
 	RigidBody(const RigidBody &RB);
 	RigidBody& operator = (const RigidBody &RB);
 	double m() const; /* Mass */
