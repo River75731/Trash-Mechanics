@@ -84,6 +84,9 @@
     <ClCompile Include="Common\CommonBase.cpp">
       <Filter>SourceFile\Common</Filter>
     </ClCompile>
+    <ClCompile Include="Command\CreatePolyCommand.cpp">
+      <Filter>SourceFile\Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h">

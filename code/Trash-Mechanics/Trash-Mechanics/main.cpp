@@ -62,19 +62,24 @@ int main(int argc, char *argv[])
 	win.resize(50, 100, 400, 400);*/
 
 	
-
+	/*Poly pp(std::vector<Vec>{Vec(1, 1), Vec(2, 1), Vec(2, 2), Vec(1, 2)});
+	pp.getCenterPoint().show();
+	//getTriangleCenter(Vec(1, 1), Vec(1, 50), Vec(800, 50)).show();
+	//std::cout << getTriangleArea(Vec(1, 1), Vec(2, 2), Vec(2, 3)) << std::endl;
+	system("pause");*/
+	
 	ViewWindow window(400,100,800,500,"NNN Page",FL_WHITE);
 
 	
 	std::vector<ViewPolygon>p;
 	PhysicsSpace world;
 	double INF = 1000000000000000;
-	world.addRigidBody(Poly(Vec(200, 10), std::vector<Vec>{Vec(1, 1), Vec(1, 50), Vec(800, 50), Vec(800, 1)}), INF, INF, Vec(0, 0), 0);
-	world.addRigidBody(Poly(Vec(200, 10), std::vector<Vec>{Vec(1, 400), Vec(1, 450), Vec(800, 450), Vec(800, 400)}), INF, INF, Vec(0, 0), 0);
-	world.addRigidBody(Poly(Vec(200, 10), std::vector<Vec>{Vec(1, 50), Vec(1, 400), Vec(50, 400), Vec(50, 1)}), INF, INF, Vec(0, 0), 0);
-	world.addRigidBody(Poly(Vec(200, 10), std::vector<Vec>{Vec(700, 50), Vec(700, 400), Vec(750, 400), Vec(750, 50)}), INF, INF, Vec(0, 0), 0);
-	world.addRigidBody(Poly(Vec(350, 270), std::vector<Vec>{Vec(200, 250), Vec(200, 300), Vec(400, 300), Vec(400, 250)}), 10, 20000, Vec(0, 0), -0.1);
-	world.addRigidBody(Poly(Vec(250, 150), std::vector<Vec>{Vec(200, 100), Vec(250, 200), Vec(300, 100)}), 10, 10000, Vec(10, 10), 0.2);
+	world.addRigidBody(Poly(std::vector<Vec>{Vec(1, 1), Vec(1, 50), Vec(800, 50), Vec(800, 1)}), INF, INF, Vec(0, 0), 0);
+	world.addRigidBody(Poly(std::vector<Vec>{Vec(1, 400), Vec(1, 450), Vec(800, 450), Vec(800, 400)}), INF, INF, Vec(0, 0), 0);
+	world.addRigidBody(Poly(std::vector<Vec>{Vec(1, 50), Vec(1, 400), Vec(50, 400), Vec(50, 1)}), INF, INF, Vec(0, 0), 0);
+	world.addRigidBody(Poly(std::vector<Vec>{Vec(700, 50), Vec(700, 400), Vec(750, 400), Vec(750, 50)}), INF, INF, Vec(0, 0), 0);
+	world.addRigidBody(Poly(std::vector<Vec>{Vec(200, 250), Vec(200, 300), Vec(400, 300), Vec(400, 250)}), 10, 20000, Vec(0, 0), -0.1);
+	world.addRigidBody(Poly(std::vector<Vec>{Vec(200, 100), Vec(250, 200), Vec(300, 100)}), 10, 10000, Vec(10, 10), 0.2);
 	//world.addRigidBody(Poly(Vec(250, 150), std::vector<Vec>{Vec(200, 100), Vec(250, 200), Vec(300, 100)}), 10, 10000, Vec(10, 10), 0.2);
 	int n = world.getRigidBodys().size();
 	for (int i = 0; i < n; i++) {
@@ -88,7 +93,7 @@ int main(int argc, char *argv[])
 
 	window.show();
 	window.setcolor(FL_YELLOW);
-
+	//window.copy_label("wow");
 	while (1)
 	{
 		world.goStep(1);

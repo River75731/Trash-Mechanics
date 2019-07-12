@@ -10,13 +10,21 @@ public:
 	Parameter(){}
 };
 
-class PolyParameter : public Parameter
+class ShapeParameter : public Parameter
+{
+private:
+	int id_;
+
+public:
+	ShapeParameter(int id) : id_(id) {}
+	int getId() const { return id_; }
+};
+
+class PolyParameter : public ShapeParameter
 {
 private:
 	Poly poly_;
-	Fl_Color color_;
 public:
-	PolyParameter(Poly poly, Fl_Color color = FL_BLACK) :poly_(poly), color_(color){}
+	PolyParameter(Poly poly, int id = 0) :ShapeParameter(id), poly_(poly) {}
 	Poly getPoly() const { return poly_; }
-	Fl_Color getColor() const { return color_; }
 };
