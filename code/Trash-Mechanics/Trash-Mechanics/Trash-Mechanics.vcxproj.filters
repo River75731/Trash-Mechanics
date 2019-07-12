@@ -69,20 +69,20 @@
     <ClCompile Include="View\ViewSegment.cpp">
       <Filter>SourceFile\View</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Common-Based.cpp">
-      <Filter>SourceFile\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Parameter.cpp">
       <Filter>SourceFile\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Command.cpp">
-      <Filter>SourceFile\Command</Filter>
     </ClCompile>
     <ClCompile Include="ViewModel\ViewModel.cpp">
       <Filter>SourceFile\ViewModel</Filter>
     </ClCompile>
     <ClCompile Include="Windows\Windows.cpp">
       <Filter>SourceFile\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\CommandBase.cpp">
+      <Filter>SourceFile\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\CommonBased.cpp">
+      <Filter>SourceFile\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +110,6 @@
     <ClInclude Include="View\ViewWindow.h">
       <Filter>SourceFile\View</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Common-Base.h">
-      <Filter>SourceFile\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Common.h">
       <Filter>SourceFile\Common</Filter>
     </ClInclude>
@@ -125,17 +122,23 @@
     <ClInclude Include="Command\CreatePolyCommand.h">
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Command\Command-List.h">
-      <Filter>SourceFile\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Command.h">
-      <Filter>SourceFile\Command</Filter>
-    </ClInclude>
     <ClInclude Include="ViewModel\ViewModel.h">
       <Filter>SourceFile\ViewModel</Filter>
     </ClInclude>
     <ClInclude Include="Windows\Windows.h">
       <Filter>SourceFile\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="View\View.h">
+      <Filter>SourceFile\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\CommandBase.h">
+      <Filter>SourceFile\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\CommandList.h">
+      <Filter>SourceFile\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\CommonBase.h">
+      <Filter>SourceFile\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

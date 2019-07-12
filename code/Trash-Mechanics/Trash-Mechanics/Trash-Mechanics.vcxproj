@@ -124,8 +124,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\App.cpp" />
-    <ClCompile Include="Common\Command.cpp" />
-    <ClCompile Include="Common\Common-Based.cpp" />
+    <ClCompile Include="Common\CommandBase.cpp" />
+    <ClCompile Include="Common\CommonBased.cpp" />
     <ClCompile Include="Common\Parameter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model\Model.cpp" />
@@ -141,15 +141,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h" />
-    <ClInclude Include="Command\Command-List.h" />
+    <ClInclude Include="Command\CommandList.h" />
     <ClInclude Include="Command\CreatePolyCommand.h" />
-    <ClInclude Include="Common\Command.h" />
-    <ClInclude Include="Common\Common-Base.h" />
+    <ClInclude Include="Common\CommandBase.h" />
+    <ClInclude Include="Common\CommonBase.h" />
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="Common\Parameter.h" />
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="ViewModel\ViewModel.h" />
     <ClInclude Include="View\GUI.h" />
+    <ClInclude Include="View\View.h" />
     <ClInclude Include="View\ViewCircle.h" />
     <ClInclude Include="View\ViewPoint.h" />
     <ClInclude Include="View\ViewPolygon.h" />

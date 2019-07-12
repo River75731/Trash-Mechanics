@@ -1,3 +1,15 @@
+## The Entire Process
+
+#### e.g. User click a button in order to create a polygon, what's going on?
+
+- #### The Windows layer activate a callback function
+
+- #### 
+
+
+
+
+
 # forget this now
 
 

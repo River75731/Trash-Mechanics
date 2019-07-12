@@ -1,5 +1,5 @@
 #pragma once
-#include "..\Common\Command.h"
+#include "..\Common\CommandBase.h"
 #include "..\ViewModel\ViewModel.h"
 
 class CreatePolyCommand : public Command {

@@ -1,5 +1,5 @@
 #include "ViewModel.h"
-#include "../Command/Command-List.h"
+#include "../Command/CommandList.h"
 
 void ViewModel::bind(std::shared_ptr<Model> model)
 {

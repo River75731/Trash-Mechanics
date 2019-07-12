@@ -1,5 +1,5 @@
 #pragma once
-#include "..\Common\Common-Base.h"
+#include "..\Common\CommonBase.h"
 
 
 class Parameter
