@@ -18,16 +18,28 @@ void ViewModel::bind(std::shared_ptr<Windows> windows)
 
 ViewModel::ViewModel()
 {
-	createPolyCommand = std::static_pointer_cast<Command, CreatePolyCommand>
-		(std::shared_ptr<CreatePolyCommand>(new CreatePolyCommand(std::shared_ptr<ViewModel>(this))));
+	createRigidBodyDataCommand = std::static_pointer_cast<Command, CreateRigidBodyDataCommand>
+		(std::shared_ptr<CreateRigidBodyDataCommand>(new CreateRigidBodyDataCommand(std::shared_ptr<ViewModel>(this))));
 }
 
-void ViewModel::execCreatePolyCommand(Poly poly)
+
+void ViewModel::execCreateRigidBodyDataCommand(RigidBody rb)
 {
-	model->createPoly(poly);
+	model->createRigidBodyData(rb);
 }
 
-std::shared_ptr<Command> ViewModel:: getCreatePolyCommand()
+void ViewModel::execCreatePolyViewCommand(Poly poly, int id)
 {
-	return createPolyCommand;
+	view->createPolyView(poly, id);
+}
+
+
+std::shared_ptr<Command> ViewModel::getCreateRigidBodyDataCommand()
+{
+	return createRigidBodyDataCommand;
+}
+
+std::shared_ptr<Command> ViewModel::getCreatePolyViewCommand()
+{
+	return createPolyViewCommand;
 }

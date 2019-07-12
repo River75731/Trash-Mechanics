@@ -25,15 +25,17 @@ public:
 class Model
 {
 private:
-	Poly poly_; //test
+	PhysicsSpace physicsSpace;
+	std::shared_ptr<Command> createPolyViewCommand;
 public:
-	Model() :poly_() {}
-	void createPoly(Poly poly) // receiver funtion of Model from ViewModel
-	{
-		poly_.setPoly(poly);
-	}
-	void test()
-	{
-		std::cout << "PointNum = " << poly_.getPointNum() << std::endl;
-	}
-};	
+	Model() {}
+	void createRigidBodyData(RigidBody rb);
+	//void createPoly(Poly poly); // receiver funtion of Model from ViewModel
+	void test(){}
+public:  // callback function body
+	void setCreatePolyViewCommand(std::shared_ptr<Command> command);
+
+private: // the funtion to send message to ViewModel
+	void onCreatePolyView(const Poly poly); // the real data(Poly)
+	void onCreatePolyViewTriggered();
+};

@@ -28,3 +28,12 @@ public:
 	PolyParameter(Poly poly, int id = 0) :ShapeParameter(id), poly_(poly) {}
 	Poly getPoly() const { return poly_; }
 };
+
+class RigidBodyParameter : public ShapeParameter
+{
+private:
+	RigidBody rb_;
+public:
+	RigidBodyParameter(RigidBody rb, int id = 0) :ShapeParameter(id), rb_(rb) {}
+	RigidBody getRigidBody() const { return rb_; }
+};

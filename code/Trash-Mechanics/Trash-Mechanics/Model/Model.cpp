@@ -56,3 +56,26 @@ Vec PhysicsSpace::getForceField() {
 std::vector<RigidBody> PhysicsSpace::getRigidBodys() {
 	return m_RigidBodySet;
 }
+
+void Model::createRigidBodyData(RigidBody rb)
+{
+	physicsSpace.addRigidBody(rb);
+	onCreatePolyViewTriggered();
+}
+
+
+void Model::setCreatePolyViewCommand(std::shared_ptr<Command> command)
+{
+	createPolyViewCommand = command;
+}
+
+void Model::onCreatePolyView(const Poly poly)
+{
+	createPolyViewCommand->pass();
+}
+
+void Model::onCreatePolyViewTriggered()
+{
+	Poly poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}); //test
+	onCreatePolyView(poly);
+}
