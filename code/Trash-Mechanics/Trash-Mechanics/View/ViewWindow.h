@@ -19,7 +19,8 @@ private:
 	static int m_DEFAULT_WINHEIGHT;
 	static std::string m_DEFAULT_WINNAME;
 	static Fl_Color m_DEFAULT_WINCOLOR;
-	static ViewWindow m_DEFAULT_WINDOW;
+	//static ViewWindow m_DEFAULT_WINDOW;
+	//static int m_WINDOWNUM;
 	std::vector<ViewShape*> m_shapeset;
 public:
 	ViewWindow(const ViewWindow &vw);
@@ -50,7 +51,7 @@ public:
 	static bool setWINNAME(const std::string &s);
 	static bool setWINCOLOR(const Fl_Color &c);
 	bool clearshapeset();
+	bool attach(ViewShape &vs);
 	void draw();
-	void attach(ViewShape &vs);
 	virtual ~ViewWindow();
 };

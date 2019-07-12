@@ -1,16 +1,17 @@
 #pragma once
 
-#include "../Common/Common.h"
+#include "GUI.h"
 
 class View
 {
 public:
-	View() {}
-	~View() {}
-	//void setCreatePolyCommand(std::shared_ptr<Command> command) { createPolyCommand = command; }
-	void createPolyView(int id, Poly poly){}
-
-private:
+ //BASIC COMMAND 
+	View() {};
+	virtual ~View() {};
+// WINDOW COMMAND 
+	//bool createViewWindow();
+	//bool deleteViewWindow();
 
 };
+
 

@@ -5,3 +5,4 @@
 #include "ViewPolygon.h"
 #include "ViewCircle.h"
 #include "ViewWindow.h"
+#include "ViewSystem.h"
