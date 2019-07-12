@@ -61,24 +61,36 @@ int main(int argc, char *argv[])
 	win.show();
 	win.resize(50, 100, 400, 400);*/
 
+	
 
 	ViewWindow window(400,100,800,500,"NNN Page",FL_WHITE);
-	ViewSegment line1(ViewPoint(100, 50), ViewPoint(300, 50), 1, 1, 5);
-	ViewCircle c1(ViewPoint(200, 100), 20, 2, 1, 3, FL_BLUE, FL_RED);
-	ViewPolygon p1({ ViewPoint(100,100),ViewPoint(100,200),ViewPoint(200,200) }, 3);
-	window.attach(line1);
-	window.attach(c1);
-	window.attach(p1);
+
+	const int n = 2;
+	std::vector<ViewPolygon>p;
+	PhysicsSpace world;
+	
+	world.addRigidBody(Poly(Vec(350, 270), std::vector<Vec>{Vec(200, 250), Vec(200, 300), Vec(400, 300), Vec(400, 250)}), 1000, 20000, Vec(0, 0), 0);
+	world.addRigidBody(Poly(Vec(250, 150), std::vector<Vec>{Vec(200, 100), Vec(250, 200), Vec(300, 100)}), 10, 10000, Vec(3, 10), 0.1);
+	
+	for (int i = 0; i < n; i++) {
+		world.getRigidBodys()[i].cmdPrint();
+		p.push_back(ViewPolygon(world.getRigidBodys()[i].getShape(), world.getRigidBodys()[i].getId()));
+	}
+	for (int i = 0; i < n; i++) {
+		window.attach(p[i]);
+	}
+
+
 	window.show();
 	window.setcolor(FL_YELLOW);
-	int x = 300, y = 50, dx = 1, dy = 1;
+
 	while (1)
 	{
-		x += dx;
-		y += dy;
-		if (y >= 500 || y <= 20) dy = -dy;
-		if (x >= 800 || x <= 20) dx = -dx;
-		c1.setCircle(ViewPoint(x,y));
+		world.goStep(1);
+		std::vector<RigidBody> drawvec=world.getRigidBodys();
+		for (int i = 0; i < n; i++) {
+			p[i].setPolygon(drawvec[i].getShape());
+		}
 		Fl::check();
 		Fl::redraw();
 	}

@@ -36,4 +36,4 @@ public:
 	{
 		std::cout << "PointNum = " << poly_.getPointNum() << std::endl;
 	}
-};
+};	

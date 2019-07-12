@@ -14,7 +14,8 @@ ViewPolygon::ViewPolygon(const Poly & p, const int &id, const bool &v, const int
 {
 	m_pointset.clear();
 	ViewPoint temp;
-	for (std::vector<Vec>::const_iterator i = p.getPoint().begin(); i != p.getPoint().end(); i++)
+	std::vector<Vec> tempvec = p.getPoint();
+	for (std::vector<Vec>::const_iterator i = tempvec.begin(); i != tempvec.end(); i++)
 	{
 		temp = *i;
 		m_pointset.push_back(temp);
@@ -113,7 +114,8 @@ bool ViewPolygon::setPolygon(const Poly & p)
 {
 	m_pointset.clear();
 	ViewPoint temp;
-	for (std::vector<Vec>::const_iterator i = p.getPoint().begin(); i != p.getPoint().end(); i++)
+	std::vector<Vec> tempvec = p.getPoint();
+	for (std::vector<Vec>::const_iterator i = tempvec.begin(); i != tempvec.end(); i++)
 	{
 		temp = *i;
 		m_pointset.push_back(temp);

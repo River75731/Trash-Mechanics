@@ -33,7 +33,7 @@ void PhysicsSpace::goStep(const int &n) {
 			i->applyForce(m_Force);
 			i->accelerate(m_StepSize);
 			i->move(m_StepSize);
-			i->rotate(0);
+			i->rotate(m_StepSize);
 		}
 		/* Collision */
 		for (std::vector<RigidBody>::iterator hsRB = m_RigidBodySet.begin(); hsRB != m_RigidBodySet.end(); hsRB++) {
