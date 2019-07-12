@@ -125,7 +125,7 @@
   <ItemGroup>
     <ClCompile Include="App\App.cpp" />
     <ClCompile Include="Common\CommandBase.cpp" />
-    <ClCompile Include="Common\CommonBased.cpp" />
+    <ClCompile Include="Common\CommonBase.cpp" />
     <ClCompile Include="Common\Parameter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model\Model.cpp" />
