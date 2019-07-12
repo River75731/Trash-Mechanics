@@ -5,15 +5,13 @@
 class View
 {
 public:
-	View() {}
-	~View() {}
 	//void setCreatePolyCommand(std::shared_ptr<Command> command) { createPolyCommand = command; }
-	void createPolyView(Poly poly, int id){}
+	void createPolyView(Poly poly, int id) { std::cout << "!"; }
+	View() {};
+	virtual ~View() {};
 
 private:
  //BASIC COMMAND 
-	View() {};
-	virtual ~View() {};
 // WINDOW COMMAND 
 	//bool createViewWindow();
 	//bool deleteViewWindow();

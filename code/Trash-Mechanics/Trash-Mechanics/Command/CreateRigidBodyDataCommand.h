@@ -1,4 +1,5 @@
 #pragma once
+
 #include "..\Common\Common.h"
 #include "..\ViewModel\ViewModel.h"
 

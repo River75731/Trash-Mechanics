@@ -28,9 +28,10 @@ public: // the function to be binded with setfuntion in view
 
 
 public: // the functions for ViewModel to control Model
-	//void execCreatePolyCommand(Poly poly);
+
 	void execCreateRigidBodyDataCommand(RigidBody rb);
 	void execCreatePolyViewCommand(Poly poly, int id);
+
 
 
 };

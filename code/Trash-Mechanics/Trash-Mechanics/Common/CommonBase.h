@@ -19,7 +19,7 @@ const double pi = 3.141592653589793;
 const double NearDist = 5.0;
 const double eps = 0.1;
 const double INF = (double)1.0e100;
-const double cooldownTurn = 5;
+const int cooldownTurn = 5;
 
 static bool inPoint = false;
 static bool inEdge = false;

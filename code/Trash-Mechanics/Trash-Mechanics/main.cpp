@@ -9,7 +9,7 @@
 //#include "View/MyFLTK.h"
 #include "Model/Model.h"
 #include "View/GUI.h"
-#include "ctime"
+#include "App/App.h"
 
 int main(int argc, char *argv[])
 {
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 	//getTriangleCenter(Vec(1, 1), Vec(1, 50), Vec(800, 50)).show();
 	//std::cout << getTriangleArea(Vec(1, 1), Vec(2, 2), Vec(2, 3)) << std::endl;
 	//system("pause");
-	
+	/*
 	ViewWindow window(400,100,800,500,"NNN Page",FL_BLACK);
 
 	
@@ -96,23 +96,27 @@ int main(int argc, char *argv[])
 
 	window.show();
 	window.setcolor(FL_YELLOW);
-//	clock_t startTime = clock();
-//	world.goStep(1000);
-//	clock_t endTime = clock();
-//	std::cout << "step per sec = " << (double)1000 / ((endTime - startTime) / CLOCKS_PER_SEC) << std::endl;
-	const int steppersec = 5;
+
 	while (1)
 	{
-		world.goStep(steppersec);
+		world.goStep(1);
 		std::vector<RigidBody> drawvec=world.getRigidBodys();
 		for (int i = 0; i < n; i++) {
 			p[i].setPolygon(drawvec[i].getShape());
 		}
 		Fl::check();
 		Fl::redraw();
-//		static int i;
-//		i+= steppersec;
-//		if (i % 100 == 0) std::cout << i << ' ';
+	}*/
+	{
+		std::shared_ptr<int> p1(new(int));
+		std::shared_ptr<int> p2(p1);
+
 	}
-		return Fl::run();
+
+	App app;
+	app.test();
+	std::cout << "success!";
+	system("PAUSE");
+	return 0;
+	//	return Fl::run();
 }

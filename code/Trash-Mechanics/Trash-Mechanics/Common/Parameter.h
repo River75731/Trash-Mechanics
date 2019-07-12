@@ -16,7 +16,7 @@ private:
 	int id_;
 
 public:
-	ShapeParameter(int id) : id_(id) {}
+	ShapeParameter(int id = 0) : id_(id) {}
 	int getId() const { return id_; }
 };
 
@@ -29,11 +29,12 @@ public:
 	Poly getPoly() const { return poly_; }
 };
 
+
 class RigidBodyParameter : public ShapeParameter
 {
 private:
 	RigidBody rb_;
 public:
-	RigidBodyParameter(RigidBody rb, int id = 0) :ShapeParameter(id), rb_(rb) {}
+	RigidBodyParameter(RigidBody rb) :ShapeParameter(), rb_(rb) {}
 	RigidBody getRigidBody() const { return rb_; }
 };
