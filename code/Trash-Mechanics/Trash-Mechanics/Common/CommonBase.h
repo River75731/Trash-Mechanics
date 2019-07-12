@@ -98,16 +98,23 @@ public:
 	virtual ~Segment() {}
 };
 
+static double VecToVecDist(const Vec &v1, const Vec &v2);
+static double VecToSegmentDist(const Vec &v, const Segment &s);
+static double VecAngle(const Vec &v, const Vec &v1, const Vec &v2);
+static double getTriangleArea(const Vec &v, const Vec &v1, const Vec &v2);
+static Vec getTriangleCenter(const Vec &v1, const Vec &v2, const Vec &v3);
+
 class Poly
 {
 private:
 	Vec m_CenterPoint;
 	std::vector<Vec> m_Point; /* All the points must be arranged in an anti-clockwise order*/
 	int m_PointNum;
+	void clacCenterPoint();
 	//string m_Image;
 public:
-	Poly(): m_CenterPoint() { m_PointNum = 0; }
-	Poly(const Vec &center, const std::vector<Vec> &P) : m_CenterPoint(center), m_Point(P), m_PointNum(P.size()) {}
+	Poly(): m_CenterPoint(0.0, 0.0), m_PointNum(0) {}
+	Poly(const std::vector<Vec> &P);
 	Poly(const Poly &poly);
 	Poly& operator =(const Poly &poly);
 	bool setPoly(const Poly &poly);
@@ -120,6 +127,7 @@ public:
 	bool inPoly_PolyVec(const Poly &pol) const;
 	Vec getInterPoint(const Poly &pol) const; //return the intersection point of this and pol polygons; if none, return originPoint
 	Segment getInterSegment(const Poly &pol) const; //return the intersection segment of this and pol polygons; if none, return emptySegment
+	//Vec getPolyCenter();
 	bool move(const Vec &v);
 	bool rotate(const double &angle, const Vec &center);
 	bool rotate(const double &angle); // center is the mass center
@@ -158,9 +166,8 @@ public:
 	int getId() const;
 };
 
-double VecToVecDist(const Vec &v1, const Vec &v2);
-double VecToSegmentDist(const Vec &v, const Segment &s);
-double VecAngle(const Vec &v, const Vec &v1, const Vec &v2);
+
+
 
 extern Vec originPoint;
 extern Vec gravity;

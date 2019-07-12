@@ -153,6 +153,31 @@ bool Vec::setXY(const double &x, const double &y)
 	return true;
 }
 
+Vec getTriangleCenter(const Vec &v1, const Vec &v2, const Vec &v3)
+{
+	return Vec((v1 + v2 + v3) / 3);
+}
+
+void Poly::clacCenterPoint()
+{
+	Vec v(*(m_Point.begin()));
+	m_CenterPoint.setXY(0, 0);
+	double totalArea = 0.0;
+	for (std::vector<Vec>::iterator i = (m_Point.begin() + 1); i != (m_Point.end() - 1); i++)
+	{
+		Vec v1(*i), v2(*(i + 1));
+		double area = getTriangleArea(v, v1, v2);
+		m_CenterPoint += getTriangleCenter(v, v1, v2) * area;
+		totalArea += area;
+	}
+	m_CenterPoint /= totalArea;
+}
+
+Poly::Poly(const std::vector<Vec>& P) : m_Point(P), m_PointNum(P.size())
+{
+	clacCenterPoint();
+}
+
 Poly::Poly(const Poly & poly)
 {
 	m_CenterPoint = poly.m_CenterPoint;
@@ -314,6 +339,11 @@ double VecAngle(const Vec &v, const Vec &v1, const Vec &v2)
 	long double x = (a * a + b * b - c * c) / (2 * a * b);
 	//std::cout << x << std::endl;
 	return acos(x);
+}
+
+double getTriangleArea(const Vec & v, const Vec & v1, const Vec & v2)
+{
+	return ((v1 - v) % (v2 - v)) * 0.5;
 }
 
 RigidBody::RigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity) {
