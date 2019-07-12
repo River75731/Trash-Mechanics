@@ -5,6 +5,8 @@ int ViewWindow::m_DEFAULT_WINWIDTH = DEFAULT_WINWIDTH;
 int ViewWindow::m_DEFAULT_WINHEIGHT = DEFAULT_WINHEIGHT;
 std::string ViewWindow::m_DEFAULT_WINNAME = DEFAULT_WINNAME;
 Fl_Color ViewWindow::m_DEFAULT_WINCOLOR = DEFAULT_WINCOLOR;
+//ViewWindow ViewWindow::m_DEFAULT_WINDOW ;
+//int ViewWindow::m_WINDOWNUM = 0;
 
 ViewWindow::ViewWindow(const ViewWindow & vw)
 	:Fl_Double_Window(vw.gettopleftX(), vw.gettopleftY(), vw.getwidth(), vw.getheight(), vw.getname())
@@ -14,6 +16,8 @@ ViewWindow::ViewWindow(const ViewWindow & vw)
 	clearshapeset();
 	for (std::vector<ViewShape*>::const_iterator i = vw.getshapeset().begin(); i != vw.getshapeset().end(); i++)
 		m_shapeset.push_back(*i);
+//	m_WINDOWNUM++;
+//	m_DEFAULT_WINDOW = *this;
 }
 
 ViewWindow::ViewWindow(const ViewPoint & tl, const int & w, const int & h, const std::string & n, const Fl_Color & c)
@@ -21,6 +25,8 @@ ViewWindow::ViewWindow(const ViewPoint & tl, const int & w, const int & h, const
 {
 	copy_label(n.c_str());
 	setcolor(c);
+//	m_WINDOWNUM++;
+//	m_DEFAULT_WINDOW = *this;
 }
 
 ViewWindow::ViewWindow(const Vec & tl, const int & w, const int & h, const std::string & n, const Fl_Color & c)
@@ -28,6 +34,8 @@ ViewWindow::ViewWindow(const Vec & tl, const int & w, const int & h, const std::
 {
 	copy_label(n.c_str());
 	setcolor(c);
+//	m_WINDOWNUM++;
+//	m_DEFAULT_WINDOW = *this;
 }
 
 ViewWindow::ViewWindow(const int & x, const int & y, const int &w, const int & h, const std::string & n, const Fl_Color & c)
@@ -35,6 +43,8 @@ ViewWindow::ViewWindow(const int & x, const int & y, const int &w, const int & h
 {
 	copy_label(n.c_str());
 	setcolor(c);
+//	m_WINDOWNUM++;
+//	m_DEFAULT_WINDOW = *this;
 }
 
 ViewWindow & ViewWindow::operator=(const ViewWindow & vw)
@@ -189,13 +199,16 @@ void ViewWindow::draw()
 		if ((*i)->getvisible()) (*i)->drawShape();
 }
 
-void ViewWindow::attach(ViewShape &vs)
+bool ViewWindow::attach(ViewShape &vs)
 {
 	m_shapeset.push_back(&vs);
+	return true;
 }
 
 ViewWindow::~ViewWindow()
 {
+//	m_WINDOWNUM--;
+	clearshapeset();
 	return;
 }
 

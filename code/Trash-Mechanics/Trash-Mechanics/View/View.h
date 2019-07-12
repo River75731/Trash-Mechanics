@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Common/Common.h"
+#include "GUI.h"
 
 class View
 {
@@ -11,6 +11,13 @@ public:
 	void createPolyView(Poly poly, int id){}
 
 private:
+ //BASIC COMMAND 
+	View() {};
+	virtual ~View() {};
+// WINDOW COMMAND 
+	//bool createViewWindow();
+	//bool deleteViewWindow();
 
 };
+
 

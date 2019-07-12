@@ -138,6 +138,7 @@
     <ClCompile Include="View\ViewPolygon.cpp" />
     <ClCompile Include="View\ViewSegment.cpp" />
     <ClCompile Include="View\ViewShape.cpp" />
+    <ClCompile Include="View\ViewSystem.cpp" />
     <ClCompile Include="View\ViewWindow.cpp" />
     <ClCompile Include="Windows\Windows.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="View\ViewPolygon.h" />
     <ClInclude Include="View\ViewSegment.h" />
     <ClInclude Include="View\ViewShape.h" />
+    <ClInclude Include="View\ViewSystem.h" />
     <ClInclude Include="View\ViewWindow.h" />
     <ClInclude Include="Windows\Windows.h" />
   </ItemGroup>
