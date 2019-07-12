@@ -32,7 +32,7 @@ void ViewModel::execCreateRigidBodyDataCommand(RigidBody rb)
 
 void ViewModel::execCreatePolyViewCommand(Poly poly, int id)
 {
-	view->createPolyView(poly, id);
+	//view->createPolyView(poly, id);
 }
 
 void ViewModel::execSimulateTimeFlyDataCommand(int turns)

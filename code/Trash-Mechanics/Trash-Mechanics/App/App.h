@@ -9,7 +9,7 @@ class App
 private:
 	std::shared_ptr<View> view;
 	std::shared_ptr<Model> model;
-	std::shared_ptr<ViewModel> viewmodel;
+	ViewModel* viewmodel;
 	std::shared_ptr<Windows> windows;
 public:
 	App();

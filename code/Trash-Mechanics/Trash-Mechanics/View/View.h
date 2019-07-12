@@ -20,13 +20,13 @@ public:
 /* WINDOW COMMAND */
 
 	bool createViewWindow(
-		const bool &v = ViewWindow::getWINVISIBLE(),
 		const Vec &topleft = ViewWindow::getTOPLEFT(),
 		const int &w = ViewWindow::getWINWIDTH(),
 		const int &h = ViewWindow::getWINHEIGHT(),
 		const std::string &name = ViewWindow::getWINNAME(),
-		const Fl_Color &c = ViewWindow::getWINCOLOR()
-	) const;
+		const Fl_Color &c = ViewWindow::getWINCOLOR(),
+		const bool &v = ViewWindow::getWINVISIBLE()
+	);
 /* 
 	This function requires parameters to create a new window.
 	If you don't have any parameter it will use the default setting.
@@ -40,22 +40,22 @@ public:
 	Window visibility: visible
 */
 
-	bool deleteViewWindow(const std::string &name) const;
+	bool deleteViewWindow(const std::string &name) ;
 /*
 	This function delete the window of specific name
 */
 
-	bool changeViewWindow(const std::string &name) const;
+	bool changeViewWindow(const std::string &name) ;
 /*
 	This function change the operating window to a specific window
 */
 
-	bool hideViewWindow() const;
+	bool hideViewWindow() ;
 /*
 	This function set the operating window invisible
 */
 
-	bool showViewWindow() const;
+	bool showViewWindow() ;
 /*
 	This function set the operating window visible
 */
@@ -98,12 +98,12 @@ public:
 */
 
 	bool createViewPolygon(
-		const Poly &p,
 		const int &id,
-		const bool &v = ViewShape::getVISIBLE(),
+		const Poly &p,
 		const int &ew = ViewShape::getLINEWIDTH(),
 		const Fl_Color &ec = ViewShape::getLINECOLOR(),
-		const Fl_Color &fc = ViewShape::getFILLCOLOR()
+		const Fl_Color &fc = ViewShape::getFILLCOLOR(),
+		const bool &v = ViewShape::getVISIBLE()
 	);
 /*
 	This function requires parameters , especially Poly & id to create a new polygon.
@@ -149,11 +149,11 @@ public:
 */
 
 	bool createViewSegment(
-		const Segment &p,
 		const int &id,
-		const bool &v = ViewShape::getVISIBLE(),
+		const Segment &p,
 		const int &lw = ViewShape::getLINEWIDTH(),
-		const Fl_Color &lc = ViewShape::getLINECOLOR()
+		const Fl_Color &lc = ViewShape::getLINECOLOR(),
+		const bool &v = ViewShape::getVISIBLE()
 	);
 /*
 	This function requires parameters , especially Segment & id to create a new polygon.
@@ -191,13 +191,13 @@ public:
 */
 
 	bool createViewCircle(
+		const int &id,
 		const Vec &center,
 		const double &r,
-		const int &id,
-		const bool &v = ViewShape::getVISIBLE(),
 		const int &ew = ViewShape::getLINEWIDTH(),
 		const Fl_Color &ec = ViewShape::getLINECOLOR(),
-		const Fl_Color &fc = ViewShape::getFILLCOLOR()
+		const Fl_Color &fc = ViewShape::getFILLCOLOR(),
+		const bool &v = ViewShape::getVISIBLE()
 	);
 /*
 	This function requires parameters , especially center & radius & id to create a new circle.

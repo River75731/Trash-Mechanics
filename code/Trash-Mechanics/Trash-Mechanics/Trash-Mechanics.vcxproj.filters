@@ -84,9 +84,6 @@
     <ClCompile Include="Common\CommonBase.cpp">
       <Filter>SourceFile\Common</Filter>
     </ClCompile>
-    <ClCompile Include="View\ViewSystem.cpp">
-      <Filter>SourceFile</Filter>
-    </ClCompile>
     <ClCompile Include="Command\CreatePolyViewCommand.cpp">
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
@@ -97,6 +94,9 @@
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
     <ClCompile Include="View\View.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\ViewSystem.cpp">
       <Filter>SourceFile\View</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,9 +152,6 @@
     <ClInclude Include="Common\CommonBase.h">
       <Filter>SourceFile\Common</Filter>
     </ClInclude>
-    <ClInclude Include="View\ViewSystem.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="Command\CreatePolyViewCommand.h">
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
@@ -163,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="Command\SimulateTimeFlyDataCommand.h">
       <Filter>SourceFile\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ViewSystem.h">
+      <Filter>SourceFile\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

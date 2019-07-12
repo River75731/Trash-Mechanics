@@ -9,7 +9,7 @@
 //#include "View/MyFLTK.h"
 #include "Model/Model.h"
 #include "View/GUI.h"
-#include "App/App.h"
+//#include "App/App.h"
 
 int main(int argc, char *argv[])
 {
@@ -68,8 +68,8 @@ int main(int argc, char *argv[])
 	//getTriangleCenter(Vec(1, 1), Vec(1, 50), Vec(800, 50)).show();
 	//std::cout << getTriangleArea(Vec(1, 1), Vec(2, 2), Vec(2, 3)) << std::endl;
 	//system("pause");
-	/*
-	ViewWindow window(400,100,800,500,"NNN Page",FL_BLACK);
+	
+	ViewWindow window(400, 100, 800, 500, 1, "NNN Page", FL_BLACK);
 
 	
 	std::vector<ViewPolygon>p;
@@ -106,17 +106,17 @@ int main(int argc, char *argv[])
 		}
 		Fl::check();
 		Fl::redraw();
-	}*/
+	}
 	{
 		std::shared_ptr<int> p1(new(int));
 		std::shared_ptr<int> p2(p1);
 
 	}
-
+	/*
 	App app;
 	app.test();
 	std::cout << "success!";
 	system("PAUSE");
-	return 0;
-	//	return Fl::run();
+	return 0;*/
+		return Fl::run();
 }

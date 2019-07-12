@@ -66,6 +66,18 @@ ViewWindow & ViewWindow::operator=(const ViewWindow & vw)
 	return *this;
 }
 
+bool ViewWindow::operator==(const ViewWindow & vw)
+{
+	if (gettopleftX() != vw.gettopleftX()) return false;
+	if (gettopleftY() != vw.gettopleftY()) return false;
+	if (getwidth() != vw.getwidth()) return false;
+	if (getheight() != vw.getheight()) return false;
+	if (strcmp(getname(), vw.getname())) return false;
+	if (getcolor() != vw.getcolor()) return false;
+	if (getwinvisible() != vw.getwinvisible()) return false;
+	return true;
+}
+
 std::vector<ViewShape*> ViewWindow::getshapeset() const
 {
 	return m_shapeset;
@@ -234,11 +246,22 @@ bool ViewWindow::attach(ViewShape &vs)
 	return true;
 }
 
-ViewShape* ViewWindow::getshape(const int & id) const
+std::vector<ViewShape*>::const_iterator ViewWindow::getshape(const int & id) const
 {
 	for (std::vector<ViewShape*>::const_iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++)
-		if ((*i)->getid() == id) return *i;
-	return nullptr;
+		if ((*i)->getid() == id) return i;
+	return m_shapeset.end();
+}
+
+std::vector<ViewShape*>::const_iterator ViewWindow::getnullshape()
+{
+	return m_shapeset.end();
+}
+
+bool ViewWindow::deleteshape(std::vector<ViewShape*>::const_iterator &temp)
+{
+	m_shapeset.erase(temp);
+	return true;
 }
 
 ViewWindow::~ViewWindow()

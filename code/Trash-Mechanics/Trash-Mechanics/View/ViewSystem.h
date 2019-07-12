@@ -8,7 +8,9 @@ private:
 public:
 	ViewSystem();
 	int getwindownum() const;
-	ViewWindow* getWindow(const std::string &name);
+	std::vector<ViewWindow>::iterator getWindow(const std::string &name);
+	std::vector<ViewWindow>::iterator getnullwindow();
+	bool deletewindow(std::vector<ViewWindow>::const_iterator &temp);
 	ViewWindow getWINDOW() const;
 	bool setWINDOW(const ViewWindow &vw);
 	bool attach(const ViewWindow &vw);

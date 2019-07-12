@@ -9,11 +9,22 @@ int ViewSystem::getwindownum() const
 	return m_windowset.size();
 }
 
-ViewWindow * ViewSystem::getWindow(const std::string & name)
+std::vector<ViewWindow>::iterator ViewSystem::getWindow(const std::string & name)
 {
 	for (std::vector<ViewWindow>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
-		if (strcmp(i->getname(), name.c_str()) == 0) return &(*i);
-	return nullptr;
+		if (strcmp(i->getname(), name.c_str()) == 0) return i;
+	return m_windowset.end();
+}
+
+std::vector<ViewWindow>::iterator ViewSystem::getnullwindow()
+{
+	return m_windowset.end();
+}
+
+bool ViewSystem::deletewindow(std::vector<ViewWindow>::const_iterator & temp)
+{
+	m_windowset.erase(temp);
+	return true;
 }
 
 ViewWindow ViewSystem::getWINDOW() const
@@ -36,7 +47,11 @@ bool ViewSystem::attach(const ViewWindow & vw)
 void ViewSystem::draw()
 {
 	for (std::vector<ViewWindow>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
-		if(i->getwinvisible()) i->draw();
+	{
+		i->draw();
+		if (!(i->getwinvisible())) i->hide();
+		else i->show();
+	}
 }
 
 ViewSystem::~ViewSystem()

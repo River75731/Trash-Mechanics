@@ -31,6 +31,7 @@ public:
 	ViewWindow(const Vec &tl, const int &w = m_DEFAULT_WINWIDTH, const int &h = m_DEFAULT_WINHEIGHT, const bool &v=m_DEFAULT_WINVISIBLE, const std::string &n = m_DEFAULT_WINNAME, const Fl_Color &c = m_DEFAULT_WINCOLOR);
 	ViewWindow(const int &x = m_DEFAULT_TOPLEFT.getintX(), const int &y = m_DEFAULT_TOPLEFT.getintY(), const int &w = m_DEFAULT_WINWIDTH, const int &h = m_DEFAULT_WINHEIGHT, const bool &v = m_DEFAULT_WINVISIBLE, const std::string &n = m_DEFAULT_WINNAME, const Fl_Color &c = m_DEFAULT_WINCOLOR);
 	ViewWindow& operator = (const ViewWindow &vw);
+	bool operator == (const ViewWindow &vw);
 	
 	std::vector<ViewShape*> getshapeset() const;
 	int gettopleftX() const;
@@ -62,7 +63,9 @@ public:
 	
 	bool clearshapeset();
 	bool attach(ViewShape &vs);
-	ViewShape* getshape(const int &id) const; //return nullptr if not exist
+	std::vector<ViewShape*>::const_iterator getshape(const int &id) const; //return nullptr if not exist
+	std::vector<ViewShape*>::const_iterator getnullshape();
+	bool deleteshape(std::vector<ViewShape*>::const_iterator &temp);
 	void draw();
 	virtual ~ViewWindow();
 };
