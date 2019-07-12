@@ -1,2 +1,9 @@
+#include "View.h"
 
-#include "../View/View.h"
+View::View()
+{
+}
+
+View::~View()
+{
+}

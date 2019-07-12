@@ -132,6 +132,7 @@
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="demo.cpp" />
     <ClCompile Include="ViewModel\ViewModel.cpp" />
+    <ClCompile Include="View\View.cpp" />
     <ClCompile Include="View\ViewCircle.cpp" />
     <ClCompile Include="View\ViewPoint.cpp" />
     <ClCompile Include="View\ViewPolygon.cpp" />

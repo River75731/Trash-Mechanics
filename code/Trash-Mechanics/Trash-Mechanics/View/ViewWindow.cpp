@@ -5,12 +5,15 @@ int ViewWindow::m_DEFAULT_WINWIDTH = DEFAULT_WINWIDTH;
 int ViewWindow::m_DEFAULT_WINHEIGHT = DEFAULT_WINHEIGHT;
 std::string ViewWindow::m_DEFAULT_WINNAME = DEFAULT_WINNAME;
 Fl_Color ViewWindow::m_DEFAULT_WINCOLOR = DEFAULT_WINCOLOR;
+bool ViewWindow::m_DEFAULT_WINVISIBLE = DEFAULT_WINVISIBLE;
+
 //ViewWindow ViewWindow::m_DEFAULT_WINDOW ;
 //int ViewWindow::m_WINDOWNUM = 0;
 
 ViewWindow::ViewWindow(const ViewWindow & vw)
 	:Fl_Double_Window(vw.gettopleftX(), vw.gettopleftY(), vw.getwidth(), vw.getheight(), vw.getname())
 {	
+	setwinvisible(vw.getwinvisible());
 	setcolor(vw.getcolor());
 	copy_label(vw.getname());
 	clearshapeset();
@@ -20,29 +23,32 @@ ViewWindow::ViewWindow(const ViewWindow & vw)
 //	m_DEFAULT_WINDOW = *this;
 }
 
-ViewWindow::ViewWindow(const ViewPoint & tl, const int & w, const int & h, const std::string & n, const Fl_Color & c)
+ViewWindow::ViewWindow(const ViewPoint & tl, const int & w, const int & h, const bool &v, const std::string & n, const Fl_Color & c)
 	: Fl_Double_Window(tl.getintX(), tl.getintY(), w, h, n.c_str())
 {
 	copy_label(n.c_str());
 	setcolor(c);
+	setwinvisible(v);
 //	m_WINDOWNUM++;
 //	m_DEFAULT_WINDOW = *this;
 }
 
-ViewWindow::ViewWindow(const Vec & tl, const int & w, const int & h, const std::string & n, const Fl_Color & c)
+ViewWindow::ViewWindow(const Vec & tl, const int & w, const int & h,  const bool &v, const std::string & n, const Fl_Color & c)
 	: Fl_Double_Window(int(tl.getX()), int(tl.getY()), w, h, n.c_str())
 {
 	copy_label(n.c_str());
 	setcolor(c);
+	setwinvisible(v);
 //	m_WINDOWNUM++;
 //	m_DEFAULT_WINDOW = *this;
 }
 
-ViewWindow::ViewWindow(const int & x, const int & y, const int &w, const int & h, const std::string & n, const Fl_Color & c)
+ViewWindow::ViewWindow(const int & x, const int & y, const int &w, const int & h, const bool &v, const std::string & n, const Fl_Color & c)
 	: Fl_Double_Window(x, y, w, h, n.c_str())
 {
 	copy_label(n.c_str());
 	setcolor(c);
+	setwinvisible(v);
 //	m_WINDOWNUM++;
 //	m_DEFAULT_WINDOW = *this;
 }
@@ -53,6 +59,7 @@ ViewWindow & ViewWindow::operator=(const ViewWindow & vw)
 	setsize(vw.gettopleftX(), vw.gettopleftY(), vw.getwidth(), vw.getheight());
 	setname(vw.getname());
 	setcolor(vw.getcolor());
+	setwinvisible(vw.getwinvisible());
 	clearshapeset();
 	for (std::vector<ViewShape*>::const_iterator i = vw.getshapeset().begin(); i != vw.getshapeset().end(); i++)
 		m_shapeset.push_back(*i);
@@ -94,6 +101,11 @@ Fl_Color ViewWindow::getcolor() const
 	return color();
 }
 
+bool ViewWindow::getwinvisible() const
+{
+	return m_winvisible;
+}
+
 ViewPoint ViewWindow::getTOPLEFT() 
 {
 	return m_DEFAULT_TOPLEFT;
@@ -117,6 +129,11 @@ std::string ViewWindow::getWINNAME()
 Fl_Color ViewWindow::getWINCOLOR() 
 {
 	return m_DEFAULT_WINCOLOR;
+}
+
+bool ViewWindow::getWINVISIBLE()
+{
+	return m_DEFAULT_WINVISIBLE;
 }
 
 bool ViewWindow::setshapeset(const std::vector<ViewShape*>& ss)
@@ -155,6 +172,12 @@ bool ViewWindow::setcolor(const Fl_Color & c)
 	return true;
 }
 
+bool ViewWindow::setwinvisible(const bool & v)
+{
+	m_winvisible = v;
+	return true;
+}
+
 bool ViewWindow::setTOPLEFT(const int & x, const int & y)
 {
 	m_DEFAULT_TOPLEFT = ViewPoint(x, y);
@@ -185,6 +208,12 @@ bool ViewWindow::setWINCOLOR(const Fl_Color & c)
 	return true;
 }
 
+bool ViewWindow::setWINVISIBLE(const bool & v)
+{
+	m_DEFAULT_WINVISIBLE = v;
+	return true;
+}
+
 bool ViewWindow::clearshapeset()
 {
 	for (std::vector<ViewShape*>::iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++) free(*i);
@@ -203,6 +232,13 @@ bool ViewWindow::attach(ViewShape &vs)
 {
 	m_shapeset.push_back(&vs);
 	return true;
+}
+
+ViewShape* ViewWindow::getshape(const int & id) const
+{
+	for (std::vector<ViewShape*>::const_iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++)
+		if ((*i)->getid() == id) return *i;
+	return nullptr;
 }
 
 ViewWindow::~ViewWindow()

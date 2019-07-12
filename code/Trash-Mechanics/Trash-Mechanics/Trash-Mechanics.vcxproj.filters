@@ -90,6 +90,9 @@
     <ClCompile Include="View\ViewSystem.cpp">
       <Filter>SourceFile\View</Filter>
     </ClCompile>
+    <ClCompile Include="View\View.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h">
