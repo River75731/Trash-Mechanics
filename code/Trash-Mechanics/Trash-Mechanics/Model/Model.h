@@ -30,6 +30,7 @@ private:
 public:
 	Model() {}
 	void createRigidBodyData(RigidBody rb);
+	void simulateTimeFlyData(int turns);
 	void test() {}
 
 public:  // callback function body

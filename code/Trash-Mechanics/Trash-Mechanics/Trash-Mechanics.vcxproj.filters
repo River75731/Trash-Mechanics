@@ -93,6 +93,9 @@
     <ClCompile Include="Command\CreateRigidBodyDataCommand.cpp">
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
+    <ClCompile Include="Command\SimulateTimeFlyDataCommand.cpp">
+      <Filter>SourceFile\Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h">
@@ -153,6 +156,9 @@
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
     <ClInclude Include="Command\CreateRigidBodyDataCommand.h">
+      <Filter>SourceFile\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\SimulateTimeFlyDataCommand.h">
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
   </ItemGroup>

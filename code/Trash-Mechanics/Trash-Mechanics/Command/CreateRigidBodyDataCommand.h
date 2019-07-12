@@ -10,7 +10,6 @@ private:
 
 public:
 	CreateRigidBodyDataCommand(std::shared_ptr<ViewModel> vm) :viewmodel(vm) {} // bind to viewmodel
-
 	~CreateRigidBodyDataCommand() {}
 	void pass();
 };

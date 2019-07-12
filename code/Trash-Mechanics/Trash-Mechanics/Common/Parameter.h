@@ -10,11 +10,19 @@ public:
 	Parameter(){}
 };
 
+class IntParameter : public Parameter
+{
+private:
+	int val_;
+public:
+	IntParameter(int val) : val_(val) {}
+	int getInt() const { return val_; }
+};
+
 class ShapeParameter : public Parameter
 {
 private:
 	int id_;
-
 public:
 	ShapeParameter(int id = 0) : id_(id) {}
 	int getId() const { return id_; }

@@ -65,6 +65,11 @@ void Model::createRigidBodyData(RigidBody rb)
 	onCreatePolyViewTriggered();
 }
 
+void Model::simulateTimeFlyData(int turns)
+{
+	physicsSpace.goStep(turns);
+}
+
 
 void Model::setCreatePolyViewCommand(std::shared_ptr<Command> command)
 {
