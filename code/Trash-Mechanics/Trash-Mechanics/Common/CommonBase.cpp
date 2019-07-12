@@ -396,7 +396,7 @@ bool RigidBody::collide(RigidBody &Tag) {
 		if (m_IdLastCollision == Tag.m_Id) m_IdLastCollision = NULL;
 		return false;
 	}
-	if (m_IdLastCollision == Tag.m_Id) return false;
+	//if (m_IdLastCollision == Tag.m_Id) return false;
 	m_IdLastCollision = Tag.m_Id;
 	/* Tag insert into this */
 	double cax = Tag.getShape().getCenterPoint().getX();
@@ -438,39 +438,17 @@ bool RigidBody::collide(RigidBody &Tag) {
 	printf("B(before collision): m=%.2lf i=%.2lf v=(%.2lf,%.2lf) w=%.2lf\n", mb, ib, vbx, vby, wb);
 	printf("f=(%.2lf,%.2lf)\n", fx, fy);
 #endif
-	double deltat = fabs((2 * (-(fx*vax) - fy * vay + fx * vbx + fy * vby + cay * fx*wa - cax * fy*wa + fy * ox*wa - fx * oy*wa - cby * fx*wb + cbx * fy*wb - fy * ox*wb + fx * oy*wb)) /
-		((Power(cay, 2)*Power(fx, 2)) / ia - (2 * cax*cay*fx*fy) / ia + (Power(cax, 2)*Power(fy, 2)) / ia + (Power(cby, 2)*Power(fx, 2)) / ib - (2 * cbx*cby*fx*fy) / ib +
-		(Power(cbx, 2)*Power(fy, 2)) / ib + Power(fx, 2) / ma + Power(fy, 2) / ma + Power(fx, 2) / mb + Power(fy, 2) / mb + (2 * cay*fx*fy*ox) / ia - (2 * cax*Power(fy, 2)*ox) / ia +
-			(2 * cby*fx*fy*ox) / ib - (2 * cbx*Power(fy, 2)*ox) / ib + (Power(fy, 2)*Power(ox, 2)) / ia + (Power(fy, 2)*Power(ox, 2)) / ib - (2 * cay*Power(fx, 2)*oy) / ia + (2 * cax*fx*fy*oy) / ia -
-			(2 * cby*Power(fx, 2)*oy) / ib + (2 * cbx*fx*fy*oy) / ib - (2 * fx*fy*ox*oy) / ia - (2 * fx*fy*ox*oy) / ib + (Power(fx, 2)*Power(oy, 2)) / ia + (Power(fx, 2)*Power(oy, 2)) / ib));
-	/* ------ Assuming perfect elastic collision only ------ */
-	/*double deltat_sln1 = (ia*ib*ma*mb*(-(fx*vax) - fy * vay + fx * vbx + fy * vby + cay * fx*wa - cax * fy*wa + fy * ox*wa - fx * oy*wa - cby * fx*wb +
-		cbx * fy*wb - fy * ox*wb + fx * oy*wb + Sqrt(((-1 + k)*
-		(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
-			Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
-			2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy)))*
-			(ma*(Power(vax, 2) + Power(vay, 2)) + mb * (Power(vbx, 2) + Power(vby, 2)) + ia * Power(wa, 2) +
-				ib * Power(wb, 2))) / (ia*ib*ma*mb) +
-			Power(fy*(vay - vby + cax * wa - ox * wa - cbx * wb + ox * wb) +
-				fx * (vax - vbx - cay * wa + oy * wa + cby * wb - oy * wb), 2)))) /
-				(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
-					Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
-					2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy)));
-	double deltat_sln2 = -((ia*ib*ma*mb*(fx*vax + fy * vay - fx * vbx - fy * vby - cay * fx*wa + cax * fy*wa - fy * ox*wa + fx * oy*wa + cby * fx*wb - cbx * fy*wb + fy * ox*wb - fx * oy*wb +
-		Sqrt(((-1 + k)*(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
-			Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
-			2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy)))*
-			(ma*(Power(vax, 2) + Power(vay, 2)) + mb * (Power(vbx, 2) + Power(vby, 2)) + ia * Power(wa, 2) + ib * Power(wb, 2))) / (ia*ib*ma*mb) +
-			Power(fy*(vay - vby + cax * wa - ox * wa - cbx * wb + ox * wb) + fx * (vax - vbx - cay * wa + oy * wa + cby * wb - oy * wb), 2)))) /
-			(Power(fy, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cax - ox, 2) + ia * ma*mb*Power(cbx - ox, 2)) +
-				Power(fx, 2)*(ia*ib*(ma + mb) + ib * ma*mb*Power(cay - oy, 2) + ia * ma*mb*Power(cby - oy, 2)) -
-				2 * fx*fy*ma*mb*(cax*ib*(cay - oy) + cbx * ia*(cby - oy) + ox * (-(cby*ia) - cay * ib + (ia + ib)*oy))));*/
+	double deltat = (2 * (-(fx*vax) - fy * vay + fx * vbx + fy * vby - cay * fx*wa + cax * fy*wa - fy * ox*wa + fx * oy*wa + cby * fx*wb - cbx * fy*wb + fy * ox*wb - fx * oy*wb)) /
+		((Power(cay, 2)*Power(fx, 2)) / ia - (2 * cax*cay*fx*fy) / ia + (Power(cax, 2)*Power(fy, 2)) / ia + (Power(cby, 2)*Power(fx, 2)) / ib - (2 * cbx*cby*fx*fy) / ib + (Power(cbx, 2)*Power(fy, 2)) / ib +
+			Power(fx, 2) / ma + Power(fy, 2) / ma + Power(fx, 2) / mb + Power(fy, 2) / mb + (2 * cay*fx*fy*ox) / ia - (2 * cax*Power(fy, 2)*ox) / ia + (2 * cby*fx*fy*ox) / ib - (2 * cbx*Power(fy, 2)*ox) / ib +
+			(Power(fy, 2)*Power(ox, 2)) / ia + (Power(fy, 2)*Power(ox, 2)) / ib - (2 * cay*Power(fx, 2)*oy) / ia + (2 * cax*fx*fy*oy) / ia - (2 * cby*Power(fx, 2)*oy) / ib + (2 * cbx*fx*fy*oy) / ib - (2 * fx*fy*ox*oy) / ia -
+			(2 * fx*fy*ox*oy) / ib + (Power(fx, 2)*Power(oy, 2)) / ia + (Power(fx, 2)*Power(oy, 2)) / ib);
 	vax += fx / ma * deltat;
 	vay += fy / ma * deltat;
-	wa += ((cax - ox)*fy - (cay - oy)*fx) / ia * deltat;
+	wa += (-(cax - ox)*fy + (cay - oy)*fx) / ia * deltat;
 	vbx -= fx / mb * deltat;
 	vby -= fy / mb * deltat;
-	wb += ((cbx - ox)*fy - (cby - oy)*fx) / ib * deltat;
+	wb -= (-(cbx - ox)*fy + (cby - oy)*fx) / ib * deltat;
 	Tag.m_Velocity = Vec(vax, vay);
 	Tag.m_AngularVelocity = wa;
 	m_Velocity = Vec(vbx, vby);

@@ -2,7 +2,7 @@
 #include "../Common/Common.h"
 
 const int RB_MAXN = 100;
-const double DEFAULT_STEPSIZE = 0.01;
+const double DEFAULT_STEPSIZE = 0.1;
 
 class PhysicsSpace {
 private:
