@@ -221,12 +221,17 @@ bool Poly::inPoly_PolyVec(const Poly &pol) const
 Vec Poly::getInterPoint(const Poly & pol) const
 {
 	std::vector<Vec> myvec = pol.getPoint();
+	Vec ret = originPoint;
+	int interpointnum = 0;
 	for (std::vector<Vec>::const_iterator i = myvec.begin(); i != myvec.end(); i++)
 	{
-		if (this->inPoly_Vec(*i))
-			return *i;
+		if (this->inPoly_Vec(*i)) {
+			ret+= *i;
+			interpointnum++;
+		}
+			
 	}
-	return originPoint;
+	return ret / interpointnum;
 }
 
 Segment Poly::getInterSegment(const Poly & pol) const
@@ -323,6 +328,7 @@ RigidBody::RigidBody(const Poly &InputShape, const double &InputMass, const doub
 	m_Velocity = InputVelocity;
 	m_AngularVelocity = InputAngularVelocity;
 	m_IdLastCollision = NULL;
+	m_CoolDown = NULL;
 	m_Id = ++IdCount;
 }
 
@@ -334,6 +340,7 @@ RigidBody::RigidBody(const RigidBody & RB) {
 	m_AngularVelocity = RB.m_AngularVelocity;
 	m_IdLastCollision = RB.m_IdLastCollision;
 	m_Mass = RB.m_Mass;
+	m_CoolDown = RB.m_CoolDown;
 	m_Id = RB.m_Id;
 }
 
@@ -345,6 +352,7 @@ RigidBody & RigidBody::operator=(const RigidBody & RB) {
 	m_AngularVelocity = RB.m_AngularVelocity;
 	m_IdLastCollision = RB.m_IdLastCollision;
 	m_Mass = RB.m_Mass;
+	m_CoolDown = RB.m_CoolDown;
 	m_Id = RB.m_Id;
 	return *this;
 }
@@ -377,6 +385,8 @@ double RigidBody::w() const {
 }
 
 void RigidBody::move(const double &dt) {
+	if (m_CoolDown) m_CoolDown--;
+	if (!m_CoolDown) m_IdLastCollision = NULL;
 	/* dx=v*dt */
 	m_Shape.move(m_Velocity*dt);
 }
@@ -393,11 +403,14 @@ void RigidBody::rotate(const double &dt) {
 
 bool RigidBody::collide(RigidBody &Tag) {
 	if (m_Shape.inPoly_PolyVec(Tag.m_Shape) == false) {	
-		if (m_IdLastCollision == Tag.m_Id) m_IdLastCollision = NULL;
+		if (Tag.m_IdLastCollision == m_Id) Tag.m_IdLastCollision = NULL;
 		return false;
 	}
-	//if (m_IdLastCollision == Tag.m_Id) return false;
+	if (Tag.m_IdLastCollision == m_Id) return false;
 	m_IdLastCollision = Tag.m_Id;
+	m_CoolDown = cooldownTurn;
+	Tag.m_IdLastCollision = m_Id;
+	Tag.m_CoolDown = cooldownTurn;
 	/* Tag insert into this */
 	double cax = Tag.getShape().getCenterPoint().getX();
 	double cay = Tag.getShape().getCenterPoint().getY();
@@ -431,7 +444,7 @@ bool RigidBody::collide(RigidBody &Tag) {
 		fy = -dir.getX()*fx / dir.getY();
 	}
 	if (Vec(ox - cax, oy - cay) ^ Vec(fx, fy)) { fx *= -1; fy *= -1; }
-	double k = 0.99;
+	double k = 0.9;
 
 #if DEBUG_COMMON==1 
 	printf("A(before collision): m=%.2lf i=%.2lf v=(%.2lf,%.2lf) w=%.2lf\n", ma, ia, vax, vay, wa);
@@ -443,6 +456,33 @@ bool RigidBody::collide(RigidBody &Tag) {
 			Power(fx, 2) / ma + Power(fy, 2) / ma + Power(fx, 2) / mb + Power(fy, 2) / mb + (2 * cay*fx*fy*ox) / ia - (2 * cax*Power(fy, 2)*ox) / ia + (2 * cby*fx*fy*ox) / ib - (2 * cbx*Power(fy, 2)*ox) / ib +
 			(Power(fy, 2)*Power(ox, 2)) / ia + (Power(fy, 2)*Power(ox, 2)) / ib - (2 * cay*Power(fx, 2)*oy) / ia + (2 * cax*fx*fy*oy) / ia - (2 * cby*Power(fx, 2)*oy) / ib + (2 * cbx*fx*fy*oy) / ib - (2 * fx*fy*ox*oy) / ia -
 			(2 * fx*fy*ox*oy) / ib + (Power(fx, 2)*Power(oy, 2)) / ia + (Power(fx, 2)*Power(oy, 2)) / ib);
+	double sln1 = (2 * fx*vax + 2 * fy*vay - 2 * fx*vbx - 2 * fy*vby + 2 * cay*fx*wa - 2 * cax*fy*wa + 2 * fy*ox*wa - 2 * fx*oy*wa - 2 * cby*fx*wb + 2 * cbx*fy*wb - 2 * fy*ox*wb + 2 * fx*oy*wb -
+		Sqrt(Power(-2 * fx*vax - 2 * fy*vay + 2 * fx*vbx + 2 * fy*vby - 2 * cay*fx*wa + 2 * cax*fy*wa - 2 * fy*ox*wa + 2 * fx*oy*wa + 2 * cby*fx*wb - 2 * cbx*fy*wb + 2 * fy*ox*wb - 2 * fx*oy*wb, 2) -
+			4 * (-((Power(cay, 2)*Power(fx, 2)) / ia) + (2 * cax*cay*fx*fy) / ia - (Power(cax, 2)*Power(fy, 2)) / ia - (Power(cby, 2)*Power(fx, 2)) / ib + (2 * cbx*cby*fx*fy) / ib - (Power(cbx, 2)*Power(fy, 2)) / ib -
+				Power(fx, 2) / ma - Power(fy, 2) / ma - Power(fx, 2) / mb - Power(fy, 2) / mb - (2 * cay*fx*fy*ox) / ia + (2 * cax*Power(fy, 2)*ox) / ia - (2 * cby*fx*fy*ox) / ib + (2 * cbx*Power(fy, 2)*ox) / ib -
+				(Power(fy, 2)*Power(ox, 2)) / ia - (Power(fy, 2)*Power(ox, 2)) / ib + (2 * cay*Power(fx, 2)*oy) / ia - (2 * cax*fx*fy*oy) / ia + (2 * cby*Power(fx, 2)*oy) / ib - (2 * cbx*fx*fy*oy) / ib + (2 * fx*fy*ox*oy) / ia +
+				(2 * fx*fy*ox*oy) / ib - (Power(fx, 2)*Power(oy, 2)) / ia - (Power(fx, 2)*Power(oy, 2)) / ib)*
+				(-(ma*Power(vax, 2)) + k * ma*Power(vax, 2) - ma * Power(vay, 2) + k * ma*Power(vay, 2) - mb * Power(vbx, 2) + k * mb*Power(vbx, 2) - mb * Power(vby, 2) + k * mb*Power(vby, 2) - ia * Power(wa, 2) +
+					ia * k*Power(wa, 2) - ib * Power(wb, 2) + ib * k*Power(wb, 2)))) /
+					(2.*(-((Power(cay, 2)*Power(fx, 2)) / ia) + (2 * cax*cay*fx*fy) / ia - (Power(cax, 2)*Power(fy, 2)) / ia - (Power(cby, 2)*Power(fx, 2)) / ib + (2 * cbx*cby*fx*fy) / ib - (Power(cbx, 2)*Power(fy, 2)) / ib -
+						Power(fx, 2) / ma - Power(fy, 2) / ma - Power(fx, 2) / mb - Power(fy, 2) / mb - (2 * cay*fx*fy*ox) / ia + (2 * cax*Power(fy, 2)*ox) / ia - (2 * cby*fx*fy*ox) / ib + (2 * cbx*Power(fy, 2)*ox) / ib -
+						(Power(fy, 2)*Power(ox, 2)) / ia - (Power(fy, 2)*Power(ox, 2)) / ib + (2 * cay*Power(fx, 2)*oy) / ia - (2 * cax*fx*fy*oy) / ia + (2 * cby*Power(fx, 2)*oy) / ib - (2 * cbx*fx*fy*oy) / ib + (2 * fx*fy*ox*oy) / ia +
+						(2 * fx*fy*ox*oy) / ib - (Power(fx, 2)*Power(oy, 2)) / ia - (Power(fx, 2)*Power(oy, 2)) / ib));
+	double sln2 = (2 * fx*vax + 2 * fy*vay - 2 * fx*vbx - 2 * fy*vby + 2 * cay*fx*wa - 2 * cax*fy*wa + 2 * fy*ox*wa - 2 * fx*oy*wa - 2 * cby*fx*wb + 2 * cbx*fy*wb - 2 * fy*ox*wb + 2 * fx*oy*wb +
+		Sqrt(Power(-2 * fx*vax - 2 * fy*vay + 2 * fx*vbx + 2 * fy*vby - 2 * cay*fx*wa + 2 * cax*fy*wa - 2 * fy*ox*wa + 2 * fx*oy*wa + 2 * cby*fx*wb - 2 * cbx*fy*wb + 2 * fy*ox*wb - 2 * fx*oy*wb, 2) -
+			4 * (-((Power(cay, 2)*Power(fx, 2)) / ia) + (2 * cax*cay*fx*fy) / ia - (Power(cax, 2)*Power(fy, 2)) / ia - (Power(cby, 2)*Power(fx, 2)) / ib + (2 * cbx*cby*fx*fy) / ib - (Power(cbx, 2)*Power(fy, 2)) / ib -
+				Power(fx, 2) / ma - Power(fy, 2) / ma - Power(fx, 2) / mb - Power(fy, 2) / mb - (2 * cay*fx*fy*ox) / ia + (2 * cax*Power(fy, 2)*ox) / ia - (2 * cby*fx*fy*ox) / ib + (2 * cbx*Power(fy, 2)*ox) / ib -
+				(Power(fy, 2)*Power(ox, 2)) / ia - (Power(fy, 2)*Power(ox, 2)) / ib + (2 * cay*Power(fx, 2)*oy) / ia - (2 * cax*fx*fy*oy) / ia + (2 * cby*Power(fx, 2)*oy) / ib - (2 * cbx*fx*fy*oy) / ib + (2 * fx*fy*ox*oy) / ia +
+				(2 * fx*fy*ox*oy) / ib - (Power(fx, 2)*Power(oy, 2)) / ia - (Power(fx, 2)*Power(oy, 2)) / ib)*
+				(-(ma*Power(vax, 2)) + k * ma*Power(vax, 2) - ma * Power(vay, 2) + k * ma*Power(vay, 2) - mb * Power(vbx, 2) + k * mb*Power(vbx, 2) - mb * Power(vby, 2) + k * mb*Power(vby, 2) - ia * Power(wa, 2) +
+					ia * k*Power(wa, 2) - ib * Power(wb, 2) + ib * k*Power(wb, 2)))) /
+					(2.*(-((Power(cay, 2)*Power(fx, 2)) / ia) + (2 * cax*cay*fx*fy) / ia - (Power(cax, 2)*Power(fy, 2)) / ia - (Power(cby, 2)*Power(fx, 2)) / ib + (2 * cbx*cby*fx*fy) / ib - (Power(cbx, 2)*Power(fy, 2)) / ib -
+						Power(fx, 2) / ma - Power(fy, 2) / ma - Power(fx, 2) / mb - Power(fy, 2) / mb - (2 * cay*fx*fy*ox) / ia + (2 * cax*Power(fy, 2)*ox) / ia - (2 * cby*fx*fy*ox) / ib + (2 * cbx*Power(fy, 2)*ox) / ib -
+						(Power(fy, 2)*Power(ox, 2)) / ia - (Power(fy, 2)*Power(ox, 2)) / ib + (2 * cay*Power(fx, 2)*oy) / ia - (2 * cax*fx*fy*oy) / ia + (2 * cby*Power(fx, 2)*oy) / ib - (2 * cbx*fx*fy*oy) / ib + (2 * fx*fy*ox*oy) / ia +
+						(2 * fx*fy*ox*oy) / ib - (Power(fx, 2)*Power(oy, 2)) / ia - (Power(fx, 2)*Power(oy, 2)) / ib));
+//	printf("sln1:%lf  sln2:%lf\n", sln1, sln2);
+//	if (sln1 > 0) deltat = sln1;
+//		else if(sln2 > 0) deltat = sln2;
 	vax += fx / ma * deltat;
 	vay += fy / ma * deltat;
 	wa += (-(cax - ox)*fy + (cay - oy)*fx) / ia * deltat;

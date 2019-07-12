@@ -19,6 +19,7 @@ const double pi = 3.141592653589793;
 const double NearDist = 5.0;
 const double eps = 0.01;
 const double INF = (double)1.0e100;
+const double cooldownTurn = 5;
 
 static bool inPoint = false;
 static bool inEdge = false;
@@ -138,6 +139,7 @@ private:
 	static int IdCount;
 	int m_Id;
 	int m_IdLastCollision;
+	int m_CoolDown;
 public:
 	RigidBody(const Poly &InputShape, const double &InputMass, const double &InputInertiaConstant, const Vec &InputVelocity, const double &InputAngularVelocity);
 	RigidBody(const RigidBody &RB);
