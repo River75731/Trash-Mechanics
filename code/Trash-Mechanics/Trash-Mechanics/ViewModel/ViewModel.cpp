@@ -26,6 +26,7 @@ void ViewModel::execCreatePolyCommand(Poly poly)
 {
 	model->createPoly(poly);
 }
+
 std::shared_ptr<Command> ViewModel:: getCreatePolyCommand()
 {
 	return createPolyCommand;

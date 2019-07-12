@@ -25,6 +25,6 @@ class PolyParameter : public ShapeParameter
 private:
 	Poly poly_;
 public:
-	PolyParameter(int id, Poly poly) :ShapeParameter(id), poly_(poly) {}
+	PolyParameter(Poly poly, int id = 0) :ShapeParameter(id), poly_(poly) {}
 	Poly getPoly() const { return poly_; }
 };

@@ -17,6 +17,6 @@ void Windows::onCreatePolyData(const Poly & poly)
 
 void Windows::onCreatePolyTriggered()
 {
-	Poly poly(Vec(50, 50), std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}); //test
+	Poly poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}); //test
 	onCreatePolyData(poly);
 }

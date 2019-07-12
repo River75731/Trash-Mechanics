@@ -62,7 +62,12 @@ int main(int argc, char *argv[])
 	win.resize(50, 100, 400, 400);*/
 
 	
-
+	Poly pp(std::vector<Vec>{Vec(1, 1), Vec(2, 1), Vec(2, 2), Vec(1, 2)});
+	pp.getCenterPoint().show();
+	//getTriangleCenter(Vec(1, 1), Vec(1, 50), Vec(800, 50)).show();
+	//std::cout << getTriangleArea(Vec(1, 1), Vec(2, 2), Vec(2, 3)) << std::endl;
+	system("pause");
+	/*
 	ViewWindow window(400,100,800,500,"NNN Page",FL_WHITE);
 
 	
@@ -99,5 +104,5 @@ int main(int argc, char *argv[])
 		Fl::check();
 		Fl::redraw();
 	}
-		return Fl::run();
+		return Fl::run();*/
 }
