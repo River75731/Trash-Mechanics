@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 
 	window.show();
 	window.setcolor(FL_YELLOW);
-
+	//window.copy_label("wow");
 	while (1)
 	{
 		world.goStep(1);

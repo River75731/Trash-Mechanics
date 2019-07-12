@@ -10,6 +10,7 @@ ViewWindow::ViewWindow(const ViewWindow & vw)
 	:Fl_Double_Window(vw.gettopleftX(), vw.gettopleftY(), vw.getwidth(), vw.getheight(), vw.getname())
 {	
 	setcolor(vw.getcolor());
+	copy_label(vw.getname());
 	clearshapeset();
 	for (std::vector<ViewShape*>::const_iterator i = vw.getshapeset().begin(); i != vw.getshapeset().end(); i++)
 		m_shapeset.push_back(*i);
@@ -18,23 +19,27 @@ ViewWindow::ViewWindow(const ViewWindow & vw)
 ViewWindow::ViewWindow(const ViewPoint & tl, const int & w, const int & h, const std::string & n, const Fl_Color & c)
 	: Fl_Double_Window(tl.getintX(), tl.getintY(), w, h, n.c_str())
 {
+	copy_label(n.c_str());
 	setcolor(c);
 }
 
 ViewWindow::ViewWindow(const Vec & tl, const int & w, const int & h, const std::string & n, const Fl_Color & c)
 	: Fl_Double_Window(int(tl.getX()), int(tl.getY()), w, h, n.c_str())
 {
+	copy_label(n.c_str());
 	setcolor(c);
 }
 
 ViewWindow::ViewWindow(const int & x, const int & y, const int &w, const int & h, const std::string & n, const Fl_Color & c)
 	: Fl_Double_Window(x, y, w, h, n.c_str())
 {
+	copy_label(n.c_str());
 	setcolor(c);
 }
 
 ViewWindow & ViewWindow::operator=(const ViewWindow & vw)
 {
+	copy_label(vw.getname());
 	setsize(vw.gettopleftX(), vw.gettopleftY(), vw.getwidth(), vw.getheight());
 	setname(vw.getname());
 	setcolor(vw.getcolor());
