@@ -10,21 +10,21 @@ private:
 	Fl_Color m_edgecolor, m_fillcolor;
 public:
 	ViewPolygon(const ViewPolygon &ps);
-	ViewPolygon(const Poly &p, const int &id, const bool &v = DEFAULT_VISIBLE, const int &ew = DEFAULT_LINEWIDTH, const Fl_Color &ec = DEFAULT_LINECOLOR, const Fl_Color &fc = DEFAULT_FILLCOLOR);
-	ViewPolygon(const std::vector<ViewPoint> &ps, const int &id, const bool &v = DEFAULT_VISIBLE, const int &ew = DEFAULT_LINEWIDTH, const Fl_Color &ec = DEFAULT_LINECOLOR, const Fl_Color &fc = DEFAULT_FILLCOLOR);
+	ViewPolygon(const Poly &p, const int &id, const bool &v = getVISIBLE(), const int &ew = getLINEWIDTH(), const Fl_Color &ec = getLINECOLOR(), const Fl_Color &fc = getFILLCOLOR());
+	ViewPolygon(const std::vector<ViewPoint> &ps, const int &id, const bool &v = getVISIBLE(), const int &ew = getLINEWIDTH(), const Fl_Color &ec = getLINECOLOR(), const Fl_Color &fc = getFILLCOLOR());
 	ViewPolygon& operator =(const ViewPolygon &vp);
 	std::vector<ViewPoint> getpointset() const;
 	int getedgewidth() const;
 	Fl_Color getedgecolor() const;
 	Fl_Color getfillcolor() const;
 	bool setpointset(const std::vector<ViewPoint> &ps);
-	bool setedgewidth(const int &ew = DEFAULT_LINEWIDTH);
-	bool setedgecolor(const Fl_Color &ec = DEFAULT_LINECOLOR);
-	bool setfillcolor(const Fl_Color &fc = DEFAULT_FILLCOLOR);
-	bool setPolygon(const std::vector<ViewPoint> &ps, const int &id, const bool &v = DEFAULT_VISIBLE, const int &ew = DEFAULT_LINEWIDTH, const Fl_Color &ec = DEFAULT_LINECOLOR, const Fl_Color &fc = DEFAULT_FILLCOLOR);
+	bool setedgewidth(const int &ew = getLINEWIDTH());
+	bool setedgecolor(const Fl_Color &ec = getLINECOLOR());
+	bool setfillcolor(const Fl_Color &fc = getFILLCOLOR());
+	bool setPolygon(const std::vector<ViewPoint> &ps, const int &id, const bool &v = getVISIBLE(), const int &ew = getLINEWIDTH(), const Fl_Color &ec = getLINECOLOR(), const Fl_Color &fc = getFILLCOLOR());
 	bool setPolygon(const Poly &p, const int &id, const bool &v, const int &ew, const Fl_Color &ec, const Fl_Color &fc);
 	bool setPolygon(const Poly &p);
 	bool setPolygon(const std::vector<ViewPoint> &ps);
-	void draw();
+	void drawShape();
 	virtual ~ViewPolygon();
 };

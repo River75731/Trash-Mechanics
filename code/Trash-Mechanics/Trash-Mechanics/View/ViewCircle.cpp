@@ -116,7 +116,7 @@ bool ViewCircle::setCircle(const Vec & p)
 	return true;
 }
 
-void ViewCircle::draw()
+void ViewCircle::drawShape()
 {
 	fl_color(m_fillcolor);
 	fl_pie(m_center.getintX() - m_radius, m_center.getintY() - m_radius, 2 * m_radius, 2 * m_radius, 0, 360);

@@ -17,7 +17,7 @@
 
 const double pi = 3.141592653589793;
 const double NearDist = 5.0;
-const double eps = 0.01;
+const double eps = 0.1;
 const double INF = (double)1.0e100;
 
 static bool inPoint = false;

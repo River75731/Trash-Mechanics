@@ -396,7 +396,7 @@ bool RigidBody::collide(RigidBody &Tag) {
 		if (m_IdLastCollision == Tag.m_Id) m_IdLastCollision = NULL;
 		return false;
 	}
-	//if (m_IdLastCollision == Tag.m_Id) return false;
+	if (m_IdLastCollision == Tag.m_Id) return false;
 	m_IdLastCollision = Tag.m_Id;
 	/* Tag insert into this */
 	double cax = Tag.getShape().getCenterPoint().getX();

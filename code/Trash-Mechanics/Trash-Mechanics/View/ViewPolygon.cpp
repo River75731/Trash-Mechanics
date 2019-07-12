@@ -129,7 +129,7 @@ bool ViewPolygon::setPolygon(const std::vector<ViewPoint>& ps)
 	return true;
 }
 
-void ViewPolygon::draw()
+void ViewPolygon::drawShape()
 {
 	fl_color(m_fillcolor);
 	fl_begin_polygon();

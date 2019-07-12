@@ -111,7 +111,7 @@ bool ViewSegment::setSegment(const Vec & p1, const Vec & p2)
 	return true;
 }
 
-void ViewSegment::draw()
+void ViewSegment::drawShape()
 {
 	fl_color(m_linecolor);
 	fl_line_style(FL_SOLID, m_linewidth);
