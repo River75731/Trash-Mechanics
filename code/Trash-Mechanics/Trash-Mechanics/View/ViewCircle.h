@@ -24,6 +24,6 @@ public:
 	bool setCircle(const Vec &p, const int &r, const int &id, const bool &v, const int &ew, const Fl_Color &ec, const Fl_Color &fc);
 	bool setCircle(const Vec &p, const int &r);
 	bool setCircle(const Vec &p);
-	void draw();
+	void drawShape();
 	virtual ~ViewCircle();
 };
