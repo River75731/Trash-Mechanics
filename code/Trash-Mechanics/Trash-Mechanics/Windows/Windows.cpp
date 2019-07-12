@@ -1,5 +1,5 @@
 #include "Windows.h"
-
+#include "../Command/CommandList.h"
 void Windows::test()
 {
 	onCreatePolyTriggered(); // assume a trigger
@@ -8,8 +8,8 @@ void Windows::test()
 void Windows::onCreatePolyData(const Poly & poly)
 {
 
-	createPolyCommand->set_parameters( // create command parameter from data, then set command parameter
-		std::static_pointer_cast<Parameter, PolyParameter>(std::shared_ptr<PolyParameter>(new PolyParameter(poly))));
+//	createPolyCommand->set_parameters( // create command parameter from data, then set command parameter
+	//	std::static_pointer_cast<Parameter, PolyParameter>(std::shared_ptr<PolyParameter>(new PolyParameter(poly))));
 
 	createPolyCommand->pass(); //pass to ViewModel
 
