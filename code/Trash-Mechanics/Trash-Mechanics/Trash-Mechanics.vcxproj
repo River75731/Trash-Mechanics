@@ -124,7 +124,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\App.cpp" />
-    <ClCompile Include="Command\CreatePolyCommand.cpp" />
+    <ClCompile Include="Command\CreatePolyViewCommand.cpp" />
+    <ClCompile Include="Command\CreateRigidBodyDataCommand.cpp" />
+    <ClCompile Include="Command\SimulateTimeFlyDataCommand.cpp" />
     <ClCompile Include="Common\CommandBase.cpp" />
     <ClCompile Include="Common\CommonBase.cpp" />
     <ClCompile Include="Common\Parameter.cpp" />
@@ -145,7 +147,9 @@
   <ItemGroup>
     <ClInclude Include="App\App.h" />
     <ClInclude Include="Command\CommandList.h" />
-    <ClInclude Include="Command\CreatePolyCommand.h" />
+    <ClInclude Include="Command\CreatePolyViewCommand.h" />
+    <ClInclude Include="Command\CreateRigidBodyDataCommand.h" />
+    <ClInclude Include="Command\SimulateTimeFlyDataCommand.h" />
     <ClInclude Include="Common\CommandBase.h" />
     <ClInclude Include="Common\CommonBase.h" />
     <ClInclude Include="Common\Common.h" />

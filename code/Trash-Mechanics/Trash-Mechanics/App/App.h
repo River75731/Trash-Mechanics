@@ -15,5 +15,5 @@ public:
 	App();
 	void StartWorld();
 	void test();
-
+	~App() {}
 };

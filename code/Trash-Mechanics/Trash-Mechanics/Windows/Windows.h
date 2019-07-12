@@ -5,16 +5,20 @@
 
 class Windows
 {
-private:
-	std::shared_ptr<Command> createPolyCommand;
+
 public:
-	void setCreatePolyCommand(std::shared_ptr<Command> command) { createPolyCommand = command; }
+	Windows() {}
+
+private:
+	std::shared_ptr<Command> createRigidBodyDataCommand;
+public:
+	void setCreateRigidBodyDataCommand(std::shared_ptr<Command> command);	
 	void test();
 
 private: // the funtion to send message to ViewModel
-	void onCreatePolyData(const Poly &poly); // the real data(Poly)
+	void onCreateRigidBodyData(const RigidBody &rb); // the real data(Poly)
 
 private:  // callback function body
-	void onCreatePolyTriggered();
+	void onCreateRigidBodyTriggered();
 
 };

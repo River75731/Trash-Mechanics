@@ -5,8 +5,9 @@ App::App():view(new View), model(new Model), viewmodel(new ViewModel), windows(n
 	viewmodel->bind(model);
 	viewmodel->bind(view);
 	viewmodel->bind(windows);
-	windows->setCreatePolyCommand(viewmodel->getCreatePolyCommand()); // bind the view & viewmodel command
-	//std::cout << "!";
+
+	windows->setCreateRigidBodyDataCommand(viewmodel->getCreateRigidBodyDataCommand()); // bind the view & viewmodel command
+	model->setCreatePolyViewCommand(viewmodel->getCreatePolyViewCommand()); // bind the view & viewmodel command
 }
 
 void App::StartWorld()
@@ -17,6 +18,6 @@ void App::StartWorld()
 void App::test()
 {
 	windows->test();
-	model->test();
+	//model->test();
 }
 
