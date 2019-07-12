@@ -4,7 +4,7 @@
 #include <FL/Fl_Shared_Image.H>
 #include <iostream>
 #include <vector>
-#include "Common/Common-Base.h"
+#include "Common/CommonBase.h"
 //#include "Others/View-Polygon.h"
 //#include "View/MyFLTK.h"
 #include "Model/Model.h"
