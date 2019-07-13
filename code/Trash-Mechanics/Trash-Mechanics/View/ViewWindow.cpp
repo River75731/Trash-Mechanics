@@ -17,7 +17,9 @@ ViewWindow::ViewWindow(const ViewWindow & vw)
 	setcolor(vw.getcolor());
 	copy_label(vw.getname());
 	clearshapeset();
-	for (std::vector<ViewShape*>::const_iterator i = vw.getshapeset().begin(); i != vw.getshapeset().end(); i++)
+	std::vector<ViewShape*> temp = vw.getshapeset();
+	if (temp.empty()) return;
+	for (std::vector<ViewShape*>::const_iterator i = temp.begin(); i != temp.end(); i++)
 		m_shapeset.push_back(*i);
 //	m_WINDOWNUM++;
 //	m_DEFAULT_WINDOW = *this;
@@ -34,7 +36,7 @@ ViewWindow::ViewWindow(const ViewPoint & tl, const int & w, const int & h, const
 }
 
 ViewWindow::ViewWindow(const Vec & tl, const int & w, const int & h,  const bool &v, const std::string & n, const Fl_Color & c)
-	: Fl_Double_Window(int(tl.getX()), int(tl.getY()), w, h, n.c_str())
+	: Fl_Double_Window(int(tl.getX()), int(tl.getY()), w, h, n.c_str()), m_shapeset()
 {
 	copy_label(n.c_str());
 	setcolor(c);
@@ -61,7 +63,9 @@ ViewWindow & ViewWindow::operator=(const ViewWindow & vw)
 	setcolor(vw.getcolor());
 	setwinvisible(vw.getwinvisible());
 	clearshapeset();
-	for (std::vector<ViewShape*>::const_iterator i = vw.getshapeset().begin(); i != vw.getshapeset().end(); i++)
+	std::vector<ViewShape*> temp = vw.getshapeset();
+	if (temp.empty()) return *this;
+	for (std::vector<ViewShape*>::const_iterator i = temp.begin(); i != temp.end(); i++)
 		m_shapeset.push_back(*i);
 	return *this;
 }

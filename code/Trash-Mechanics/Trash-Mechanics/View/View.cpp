@@ -14,6 +14,7 @@ bool View::createViewWindow(const Vec & topleft, const int & w, const int & h, c
 	temp.show();
 	if (!v) temp.hide();
 	m_system.attach(temp);
+	std::cout << "attached" << std::endl;
 	m_system.setWINDOW(temp);
 	return true;
 }

@@ -17,6 +17,7 @@ void App::StartWorld()
 
 void App::test()
 {
+	view->createViewWindow();
 	windows->test();
 	//model->test();
 }
