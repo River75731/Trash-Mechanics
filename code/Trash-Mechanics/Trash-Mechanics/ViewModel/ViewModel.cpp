@@ -18,23 +18,47 @@ void ViewModel::bind(std::shared_ptr<Windows> windows)
 
 ViewModel::ViewModel()
 {
-	createRigidBodyDataCommand = std::static_pointer_cast<Command, CreateRigidBodyDataCommand>
-		(std::shared_ptr<CreateRigidBodyDataCommand>(new CreateRigidBodyDataCommand(std::shared_ptr<ViewModel>(this))));
+	updateRigidBodyDataCommand = std::static_pointer_cast<Command, UpdateRigidBodyDataCommand>
+		(std::shared_ptr<UpdateRigidBodyDataCommand>(new UpdateRigidBodyDataCommand(std::shared_ptr<ViewModel>(this))));
 	simulateTimeFlyDataCommand = std::static_pointer_cast<Command, SimulateTimeFlyDataCommand>
 		(std::shared_ptr<SimulateTimeFlyDataCommand>(new SimulateTimeFlyDataCommand(std::shared_ptr<ViewModel>(this))));
-	createPolyViewCommand = std::static_pointer_cast<Command, CreatePolyViewCommand>
-		(std::shared_ptr<CreatePolyViewCommand>(new CreatePolyViewCommand(std::shared_ptr<ViewModel>(this))));
-	
+	updatePolyViewCommand = std::static_pointer_cast<Command, UpdatePolyViewCommand>
+		(std::shared_ptr<UpdatePolyViewCommand>(new UpdatePolyViewCommand(std::shared_ptr<ViewModel>(this))));
+	addForceFieldDataCommand = std::static_pointer_cast<Command, AddForceFieldDataCommand>
+		(std::shared_ptr<AddForceFieldDataCommand>(new AddForceFieldDataCommand(std::shared_ptr<ViewModel>(this))));
+
 }
 
-void ViewModel::execCreateRigidBodyDataCommand(RigidBody rb)
+void ViewModel::execUpdateRigidBodyDataCommand(const RigidBody &rb, const int &id, const int &actionMode)
 {
-	model->createRigidBodyData(rb);
+	switch (actionMode)
+	{
+	case createMode:
+		model->createRigidBodyData(rb);
+		break;
+	case deleteMode:
+		model->deleteRigidBodyData(id);		
+		break;
+	case adjustMode:
+		model->adjustRigidBodyData(rb, id);
+		break;
+	}
 }
 
-void ViewModel::execCreatePolyViewCommand(Poly poly, int id)
+void ViewModel::execUpdatePolyViewCommand(Poly poly, int id, int actionMode)
 {
-	view->createViewPolygon(id, poly);
+	switch (actionMode)
+	{
+	case createMode:
+		view->createViewPolygon(id, poly);
+		break;
+	case deleteMode:
+	//	view->deleteViewPolygon(id);
+		break;
+	case adjustMode:
+	//	view->changeViewPolygon(id, poly);
+		break;
+	}
 }
 
 void ViewModel::execSimulateTimeFlyDataCommand(int turns)
@@ -42,18 +66,28 @@ void ViewModel::execSimulateTimeFlyDataCommand(int turns)
 	model->simulateTimeFlyData(turns);
 }
 
-
-std::shared_ptr<Command> ViewModel::getCreateRigidBodyDataCommand()
+void ViewModel::execAddForceFieldDataCommand(Vec v)
 {
-	return createRigidBodyDataCommand;
+	model->addForceFieldData(v);
 }
 
-std::shared_ptr<Command> ViewModel::getCreatePolyViewCommand()
+
+std::shared_ptr<Command> ViewModel::getUpdateRigidBodyDataCommand()
 {
-	return createPolyViewCommand;
+	return updateRigidBodyDataCommand;
+}
+
+std::shared_ptr<Command> ViewModel::getUpdatePolyViewCommand()
+{
+	return updatePolyViewCommand;
 }
 
 std::shared_ptr<Command> ViewModel::getSimulateTimeFlyDataCommand()
 {
 	return simulateTimeFlyDataCommand;
+}
+
+std::shared_ptr<Command> ViewModel::getAddForceFieldDataCommand()
+{
+	return addForceFieldDataCommand;
 }

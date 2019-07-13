@@ -53,40 +53,76 @@ Vec PhysicsSpace::getForceField() {
 	return m_Force;
 }
 
-std::vector<RigidBody> PhysicsSpace::getRigidBodys() {
+std::vector<RigidBody> PhysicsSpace::getRigidBodys() const{
 	return m_RigidBodySet;
 }
 
 
 
-void Model::createRigidBodyData(RigidBody rb)
+void Model::createRigidBodyData(const RigidBody rb)
 {
 	physicsSpace.addRigidBody(rb);
-	onCreatePolyView(rb.getShape(), 1);
+	onCreatePolyView(rb.getShape(), rb.getId());
 }
 
-void Model::simulateTimeFlyData(int turns)
+void Model::adjustRigidBodyData(const RigidBody rb, const int & id)
+{
+	physicsSpace.deleteRigidBody(id);
+	physicsSpace.addRigidBody(rb);
+	onAdjustPolyView(rb.getShape(), id);
+}
+
+void Model::deleteRigidBodyData(const int & id)
+{
+	physicsSpace.deleteRigidBody(id);
+	onDeletePolyView(id);
+}
+
+void Model::simulateTimeFlyData(const int &turns)
 {
 	physicsSpace.goStep(turns);
+	std::vector<RigidBody> RigidBodySet = physicsSpace.getRigidBodys();
+	for (std::vector<RigidBody>::iterator i = RigidBodySet.begin(); i != RigidBodySet.end(); i++) 
+	{
+		onAdjustPolyView(i->getShape(), i->getId());
+	}
+}
+
+void Model::addForceFieldData(const Vec & v)
+{
+	physicsSpace.addForceField(v);
+	onAddForceFieldView(v);
 }
 
 
-void Model::setCreatePolyViewCommand(std::shared_ptr<Command> command)
+void Model::setUpdatePolyViewCommand(std::shared_ptr<Command> command)
 {
-	createPolyViewCommand = command;
+	updatePolyViewCommand = command;
 }
 
 void Model::onCreatePolyView(const Poly &poly, const int &id)
 {
-	createPolyViewCommand->set_parameters( // create command parameter from data, then set command parameter
-		std::static_pointer_cast<Parameter, PolyParameter>(std::shared_ptr<PolyParameter>(new PolyParameter(poly, id))));
-	createPolyViewCommand->pass();
+	updatePolyViewCommand->set_parameters( std::static_pointer_cast<Parameter, PolyParameter>
+		(std::shared_ptr<PolyParameter>(new PolyParameter(id, createMode, poly))));
+	updatePolyViewCommand->pass();
 }
 
-void Model::onCreatePolyViewTriggered()
+void Model::onAdjustPolyView(const Poly &poly, const int &id)
 {
+	updatePolyViewCommand->set_parameters(std::static_pointer_cast<Parameter, PolyParameter>
+		(std::shared_ptr<PolyParameter>(new PolyParameter(id, adjustMode, poly))));
+	updatePolyViewCommand->pass();
+}
 
-	//Poly poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}); //test
-//	onCreatePolyView(poly, 1);
+void Model::onDeletePolyView(const int &id)
+{
+	updatePolyViewCommand->set_parameters(std::static_pointer_cast<Parameter, PolyParameter>
+		(std::shared_ptr<PolyParameter>(new PolyParameter(id, deleteMode))));
+	updatePolyViewCommand->pass();
+}
 
+void Model::onAddForceFieldView(const Vec & v)
+{
+	//TBD
+	//Does it need to update view?
 }
