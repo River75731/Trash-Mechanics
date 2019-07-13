@@ -1,6 +1,8 @@
 #pragma once
 #include "ViewShape.h"
 
+#define MAX_RADIUS (Fl::h()/2)
+
 class ViewCircle : public ViewShape {
 private:
 	ViewPoint m_center;

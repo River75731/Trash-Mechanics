@@ -88,6 +88,10 @@ int main(int argc, char *argv[])
 	//view.m_system.getWINDOW()->show();
 	view.createViewWindow("MIRACLE!!!",Vec(900,500));
 	view.createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
+	view.createViewPolygon(3, Poly(std::vector<Vec>{Vec(100, 200), Vec(200, 200), Vec(200, 100)}));
+	view.deleteViewPolygon(1);
+	view.deleteViewWindow("Page 1");
+	view.changeViewPolygon(3, FL_GREEN, 1);
 	view.refresh();
 	/*
 	

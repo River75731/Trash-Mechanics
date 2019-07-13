@@ -259,6 +259,7 @@ bool ViewWindow::deleteshape(ViewShape* &vs)
 		{
 			delete *i;
 			m_shapeset.erase(i);
+			return true;
 		}
 	}
 	return false;

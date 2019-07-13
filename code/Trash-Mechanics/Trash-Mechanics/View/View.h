@@ -186,6 +186,11 @@ public:
 	This function delete specific segment
 */
 
+	bool changeViewSegment(const int &id, const Segment &s);
+/*
+	This function change the location of specific segment
+*/
+
 	bool changeViewSegment(const int &id, const int &lw);
 /*
 	This function change the linewidth of specific segment
