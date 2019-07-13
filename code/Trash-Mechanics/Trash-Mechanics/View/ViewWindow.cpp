@@ -156,6 +156,7 @@ bool ViewWindow::setshapeset(const std::vector<ViewShape*>& ss)
 {
 	clearshapeset();
 	ViewShape* temp;
+	if (ss.empty()) return true;
 	for (std::vector<ViewShape*>::const_iterator i = ss.begin(); i != ss.end(); i++)
 	{
 		temp = *i;
@@ -240,6 +241,7 @@ bool ViewWindow::clearshapeset()
 void ViewWindow::draw()
 {
 	Fl_Double_Window::draw();
+	if (m_shapeset.empty()) return;
 	for (std::vector<ViewShape*>::iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++)
 		if ((*i)->getvisible()) (*i)->drawShape();
 }
@@ -252,12 +254,13 @@ bool ViewWindow::attach(ViewShape &vs)
 
 std::vector<ViewShape*>::const_iterator ViewWindow::getshape(const int & id) const
 {
+	if (m_shapeset.empty()) return getnullshape();
 	for (std::vector<ViewShape*>::const_iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++)
 		if ((*i)->getid() == id) return i;
 	return m_shapeset.end();
 }
 
-std::vector<ViewShape*>::const_iterator ViewWindow::getnullshape()
+std::vector<ViewShape*>::const_iterator ViewWindow::getnullshape() const
 {
 	return m_shapeset.end();
 }

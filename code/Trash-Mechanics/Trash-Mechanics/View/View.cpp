@@ -14,14 +14,32 @@ bool View::createViewWindow(const Vec & topleft, const int & w, const int & h, c
 	temp.show();
 	if (!v) temp.hide();
 	m_system.attach(temp);
-	std::cout << "attached" << std::endl;
-	m_system.setWINDOW(temp);
+	std::cout << "Successfully build window: " << std::endl;
+	std::cout << "[Window ID : " << m_system.getwindownum() << "]" << std::endl;
+	printf("Window topleft : (%d,%d)\n", (int)topleft.getX(), (int)topleft.getY());
+	printf("Window width : %d\n", w);
+	printf("Window height : %d\n", h);
+	printf("Window name : %s\n", name.c_str());
+	printf("Window visibility : %d\n", v);
+	m_system.setWINDOW(m_system.getWindow(name.c_str()));
+	std::cout << "Successfully set " << name << " as operating window." << std::endl;
+
+
+//test
+
+	createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
+	ViewPolygon poly1(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}), 1);
+	m_system.getWINDOW()->attach(poly1);
+	system("pause");
+
+//test end
+
 	return true;
 }
 
 bool View::deleteViewWindow(const std::string & name)
 {
-	std::vector<ViewWindow>::iterator temp = m_system.getWindow(name);
+	std::vector<ViewWindow>::iterator temp = m_system.getWindow(name.c_str());
 	if (temp == m_system.getnullwindow())
 	{
 		std::cout << "Cannot find window '" << name << "' ." << std::endl;
@@ -29,11 +47,16 @@ bool View::deleteViewWindow(const std::string & name)
 	}
 	else
 	{
-		if (*temp == m_system.getWINDOW())
-		{
-			m_system.setWINDOW(*(m_system.getnullwindow() - 1));
+		bool status = false;
+		if (m_system.getWINDOW() != nullptr)
+		{ 
+			if (m_system.getWINDOW() == &(*temp))
+			{
+				if (m_system.getwindownum() > 1) status = true;
+			}
 		}
 		m_system.deletewindow(temp);
+		m_system.setWINDOW(m_system.getnullwindow() - 1);
 		return true;
 	}
 }
@@ -46,6 +69,6 @@ bool View::createViewPolygon(const int & id, const Poly & p, const int & ew, con
 		return false;
 	}
 	ViewPolygon temp(p, id, v, ew, ec, fc);
-	m_system.getWINDOW().attach(temp);
+	m_system.getWINDOW()->attach(temp);
 	return true;
 }

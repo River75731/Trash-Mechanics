@@ -62,7 +62,7 @@ std::vector<RigidBody> PhysicsSpace::getRigidBodys() {
 void Model::createRigidBodyData(RigidBody rb)
 {
 	physicsSpace.addRigidBody(rb);
-	onCreatePolyViewTriggered();
+	onCreatePolyView(rb.getShape(), 1);
 }
 
 void Model::simulateTimeFlyData(int turns)
@@ -85,7 +85,8 @@ void Model::onCreatePolyView(const Poly &poly, const int &id)
 
 void Model::onCreatePolyViewTriggered()
 {
-	Poly poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}); //test
-	onCreatePolyView(poly, 1);
+
+	//Poly poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}); //test
+//	onCreatePolyView(poly, 1);
 
 }

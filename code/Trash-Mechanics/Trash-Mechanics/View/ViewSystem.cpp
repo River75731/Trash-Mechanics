@@ -2,6 +2,7 @@
 
 ViewSystem::ViewSystem()
 {
+	m_DEFAULT_WINDOW = nullptr;
 }
 
 int ViewSystem::getwindownum() const
@@ -9,32 +10,34 @@ int ViewSystem::getwindownum() const
 	return m_windowset.size();
 }
 
-std::vector<ViewWindow>::iterator ViewSystem::getWindow(const std::string & name)
+std::vector<ViewWindow>::iterator ViewSystem::getWindow(const char*  name) 
 {
+	if (m_windowset.empty()) return m_windowset.end();
 	for (std::vector<ViewWindow>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
-		if (strcmp(i->getname(), name.c_str()) == 0) return i;
+		if (strcmp(i->getname(), name) == 0) return i;
 	return m_windowset.end();
 }
 
-std::vector<ViewWindow>::iterator ViewSystem::getnullwindow()
+std::vector<ViewWindow>::iterator ViewSystem::getnullwindow() 
 {
 	return m_windowset.end();
 }
 
-bool ViewSystem::deletewindow(std::vector<ViewWindow>::const_iterator & temp)
+bool ViewSystem::deletewindow(std::vector<ViewWindow>::iterator & temp)
 {
 	m_windowset.erase(temp);
 	return true;
 }
 
-ViewWindow ViewSystem::getWINDOW() const
+ViewWindow* ViewSystem::getWINDOW() const
 {
 	return m_DEFAULT_WINDOW;
 }
 
-bool ViewSystem::setWINDOW(const ViewWindow & vw)
+bool ViewSystem::setWINDOW(std::vector<ViewWindow>::iterator  vw, const bool &v)
 {
-	m_DEFAULT_WINDOW = vw;
+	if(v) m_DEFAULT_WINDOW = &(*vw);
+	else m_DEFAULT_WINDOW = nullptr;
 	return true;
 }
 
@@ -46,6 +49,7 @@ bool ViewSystem::attach(const ViewWindow & vw)
 
 void ViewSystem::draw()
 {
+	if (m_windowset.empty()) return;
 	for (std::vector<ViewWindow>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
 	{
 		i->draw();
@@ -56,5 +60,6 @@ void ViewSystem::draw()
 
 ViewSystem::~ViewSystem()
 {
+	//free(m_DEFAULT_WINDOW);
 	return;
 }

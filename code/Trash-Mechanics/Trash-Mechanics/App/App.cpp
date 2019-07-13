@@ -20,6 +20,8 @@ void App::test()
 {
 	view->createViewWindow();
 	windows->test();
+
+	//while (1) {}
 	//model->test();
 }
 

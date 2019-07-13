@@ -64,7 +64,7 @@ public:
 	bool clearshapeset();
 	bool attach(ViewShape &vs);
 	std::vector<ViewShape*>::const_iterator getshape(const int &id) const; //return nullptr if not exist
-	std::vector<ViewShape*>::const_iterator getnullshape();
+	std::vector<ViewShape*>::const_iterator getnullshape() const;
 	bool deleteshape(std::vector<ViewShape*>::const_iterator &temp);
 	void draw();
 	virtual ~ViewWindow();

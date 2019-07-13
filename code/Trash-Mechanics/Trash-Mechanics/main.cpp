@@ -8,7 +8,7 @@
 //#include "Others/View-Polygon.h"
 //#include "View/MyFLTK.h"
 #include "Model/Model.h"
-#include "View/GUI.h"
+#include "View/View.h"
 #include "App/App.h"
 
 int main(int argc, char *argv[])
@@ -109,14 +109,33 @@ int main(int argc, char *argv[])
 	}
 	{
 		std::shared_ptr<int> p1(new(int));
-		std::shared_ptr<int> p2(p1);
+		std::shared_ptr<in/t> p2(p1);
 
 	}*/
 	
+	/*
 	App app;
 	app.test();
 	std::cout << "success!\n";
 	system("PAUSE");
-	return 0;
+	*/
+	
+	/*View view;
+	view.createViewWindow();*/
+
+	ViewSystem sys;
+
+	sys.m_windowset.push_back(ViewWindow(ViewWindow::getTOPLEFT(), ViewWindow::getWINWIDTH(), ViewWindow::getWINHEIGHT(), ViewWindow::getWINVISIBLE(), ViewWindow::getWINNAME(), ViewWindow::getWINCOLOR()));
+	if (!ViewWindow::getWINVISIBLE()) sys.m_windowset.begin()->hide();
+	//sys.attach(temp);
+	//temp.hide();
+	sys.setWINDOW(sys.getWindow(sys.m_windowset.begin()->getname()));
+	ViewPolygon poly1(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}), 1);
+	sys.getWINDOW()->attach(poly1);
+	//sys.getWINDOW()->hide();
+	//std::cout << "attached" << std::endl; 
+	//m_system.setWINDOW(temp);
+	system("PAUSE");
+
 	return Fl::run();
 }
