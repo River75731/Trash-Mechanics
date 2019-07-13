@@ -3,17 +3,16 @@
 
 class ViewSystem {
 private:
-	std::vector<ViewWindow> m_windowset;
+	std::vector<ViewWindow*> m_windowset;
 	ViewWindow* m_DEFAULT_WINDOW;
 public:
 	ViewSystem();
 	int getwindownum() const;
-	std::vector<ViewWindow>::iterator getWindow(const char* name) ;
-	std::vector<ViewWindow>::iterator getnullwindow() ;
-	bool deletewindow(std::vector<ViewWindow>::iterator &temp);
+	ViewWindow* getWindow(const char* name) ;
+	bool deletewindow(const ViewWindow* &temp);
 	ViewWindow* getWINDOW() const;
-	bool setWINDOW(std::vector<ViewWindow>::iterator vw, const bool &v = true);
-	bool attach(const ViewWindow &vw);
+	bool setWINDOW(ViewWindow* vw);
+	bool attach(ViewWindow* vw);
 	void draw();
 	void simpledraw();
 	virtual ~ViewSystem();

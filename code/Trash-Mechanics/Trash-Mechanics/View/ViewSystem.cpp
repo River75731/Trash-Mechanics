@@ -2,9 +2,7 @@
 
 ViewSystem::ViewSystem()
 {
-	m_DEFAULT_WINDOW = new ViewWindow();
-	m_DEFAULT_WINDOW->show();
-	m_DEFAULT_WINDOW->hide();
+	m_DEFAULT_WINDOW = nullptr;
 }
 
 int ViewSystem::getwindownum() const
@@ -12,23 +10,26 @@ int ViewSystem::getwindownum() const
 	return m_windowset.size();
 }
 
-std::vector<ViewWindow>::iterator ViewSystem::getWindow(const char*  name) 
+ViewWindow* ViewSystem::getWindow(const char* name) 
 {
-	if (m_windowset.empty()) return m_windowset.end();
-	for (std::vector<ViewWindow>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
-		if (strcmp(i->getname(), name) == 0) return i;
-	return m_windowset.end();
+	if (m_windowset.empty()) return nullptr;
+	for (std::vector<ViewWindow*>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
+		if (strcmp((*i)->getname(), name) == 0) return *i;
+	return nullptr;
 }
 
-std::vector<ViewWindow>::iterator ViewSystem::getnullwindow() 
+bool ViewSystem::deletewindow(const ViewWindow* &temp)
 {
-	return m_windowset.end();
-}
-
-bool ViewSystem::deletewindow(std::vector<ViewWindow>::iterator & temp)
-{
-	m_windowset.erase(temp);
-	return true;
+	for (std::vector<ViewWindow*>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
+	{
+		if (*i == temp)
+		{
+			delete *i;
+			m_windowset.erase(i);
+			return true;
+		}
+	}
+	return false;
 }
 
 ViewWindow* ViewSystem::getWINDOW() const
@@ -36,14 +37,13 @@ ViewWindow* ViewSystem::getWINDOW() const
 	return m_DEFAULT_WINDOW;
 }
 
-bool ViewSystem::setWINDOW(std::vector<ViewWindow>::iterator  vw, const bool &v)
+bool ViewSystem::setWINDOW(ViewWindow* vw)
 {
-	if(v) m_DEFAULT_WINDOW = &(*vw);
-	else m_DEFAULT_WINDOW = nullptr;
+	m_DEFAULT_WINDOW = vw;
 	return true;
 }
 
-bool ViewSystem::attach(const ViewWindow & vw)
+bool ViewSystem::attach(ViewWindow* vw)
 {
 	m_windowset.push_back(vw);
 	return true;
@@ -52,11 +52,11 @@ bool ViewSystem::attach(const ViewWindow & vw)
 void ViewSystem::draw()
 {
 	if (m_windowset.empty()) return;
-	for (std::vector<ViewWindow>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
+	for (std::vector<ViewWindow*>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
 	{
-		i->draw();
-		if (!(i->getwinvisible())) i->hide();
-		else i->show();
+		(*i)->draw();
+		if (!((*i)->getwinvisible())) (*i)->hide();
+		else (*i)->show();
 	}
 }
 
@@ -67,6 +67,6 @@ void ViewSystem::simpledraw()
 
 ViewSystem::~ViewSystem()
 {
-	//free(m_DEFAULT_WINDOW);
+	if(m_DEFAULT_WINDOW) delete m_DEFAULT_WINDOW;
 	return;
 }

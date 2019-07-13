@@ -6,10 +6,10 @@ class View
 {
 private:
 
-public:
 
 	ViewSystem m_system;
 
+public:
 
 /* BASIC COMMAND */
 	View();
