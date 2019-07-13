@@ -15,5 +15,6 @@ public:
 	bool setWINDOW(std::vector<ViewWindow>::iterator vw, const bool &v = true);
 	bool attach(const ViewWindow &vw);
 	void draw();
+	void simpledraw();
 	virtual ~ViewSystem();
 };

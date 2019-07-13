@@ -12,44 +12,7 @@
 #include "App/App.h"
 
 int main(int argc, char *argv[])
-{
-/*	int w = Fl::w() / 2, h = Fl::h() / 2;
-	MyWindow window(MyPoint(w/2,h/2),w,h,"TEST",FL_WHITE);
-	MySegment line1(MyPoint(100, 50), MyPoint(300 , 50), 5, FL_BLUE);
-	window.add(line1);
-	MyPolygon r(5, FL_GREEN, FL_RED);
-	r.add(MyPoint(100, 100));
-	r.add(MyPoint(100, 200));
-	r.add(MyPoint(200, 200));
-	fl_register_images();
-	Fl_Box        box(0, 0, 1, 1);
-	Fl_PNG_Image  png(".//Images//1.png");
-	box.image(png);
-	Fl_Box box2(100, 100, 101, 101);
-	window.show();
-	box2.image(png);
-	window.show();
-	window.add(r);
-	MyCircle c1(MyPoint(w, 0), 20, 5, FL_BLUE, FL_RED);
-	window.add(c1);
-	int x = 300, y = 50, dx = 1, dy = 1;
-	int x2 = 400, y2 = 40, dx2 = 3, dy2 = 2;
-	while (1)
-	{
-		x2 += dx2;
-		y2 += dy2;
-		x += dx;
-		y += dy;
-		box.resize(x2, y2, 1, 1);
-		c1.redirect(MyPoint(x, y), 20);
-		if (y2 >= 500||y2<=20) dy2 = -dy2;
-		if (x2 >= 800 || x2 <= 20) dx2 = -dx2;
-		if (y >= 500 || y <= 20) dy = -dy;
-		if (x >= 700 || x <= 20) dx = -dx;
-		Fl::check();
-		Fl::redraw();
-	}
-	
+{	
 	//window.color(FL_RED);
 	/*Fl_Window     win(720, 486);
 	fl_register_images();
@@ -120,13 +83,24 @@ int main(int argc, char *argv[])
 	system("PAUSE");
 	*/
 	
-	/*View view;
-	view.createViewWindow();*/
+	View view;
+	view.createViewWindow();
+	view.m_system.getWINDOW()->show();
 
-	ViewSystem sys;
+	view.createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
+
+	/*
 	
+	ViewSystem sys;
 	ViewPolygon poly1(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}), 1);
 	sys.getWINDOW()->attach(poly1);
-
+	sys.simpledraw();
+	sys.getWINDOW()->show();
+	*/
+	/*
+	View view;
+	view.createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
+	system("pause");
+	std::cout << "YEAH" << std::endl;*/
 	return Fl::run();
 }

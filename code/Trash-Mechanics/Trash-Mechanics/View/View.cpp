@@ -23,17 +23,6 @@ bool View::createViewWindow(const Vec & topleft, const int & w, const int & h, c
 	printf("Window visibility : %d\n", v);
 	m_system.setWINDOW(m_system.getWindow(name.c_str()));
 	std::cout << "Successfully set " << name << " as operating window." << std::endl;
-
-
-//test
-
-	createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
-	ViewPolygon poly1(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}), 1);
-	m_system.getWINDOW()->attach(poly1);
-	system("pause");
-
-//test end
-
 	return true;
 }
 
@@ -63,12 +52,13 @@ bool View::deleteViewWindow(const std::string & name)
 
 bool View::createViewPolygon(const int & id, const Poly & p, const int & ew, const Fl_Color & ec, const Fl_Color & fc, const bool & v)
 {
-	if (m_system.getwindownum() == 0) //DEFAULT=empty
+	/*if (m_system.getwindownum() == 0) //DEFAULT=empty
 	{
 		std::cout << "ERROR: No window ." << std::endl;
 		return false;
-	}
-	ViewPolygon temp(p, id, v, ew, ec, fc);
-	m_system.getWINDOW()->attach(temp);
+	}*/
+	ViewPolygon* temp = new ViewPolygon(p, id, v, ew, ec, fc);
+	m_system.getWINDOW()->attach(*temp);
+	m_system.getWINDOW()->redraw();
 	return true;
 }

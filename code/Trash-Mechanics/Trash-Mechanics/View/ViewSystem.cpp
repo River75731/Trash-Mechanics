@@ -4,6 +4,7 @@ ViewSystem::ViewSystem()
 {
 	m_DEFAULT_WINDOW = new ViewWindow();
 	m_DEFAULT_WINDOW->show();
+	m_DEFAULT_WINDOW->hide();
 }
 
 int ViewSystem::getwindownum() const
@@ -57,6 +58,11 @@ void ViewSystem::draw()
 		if (!(i->getwinvisible())) i->hide();
 		else i->show();
 	}
+}
+
+void ViewSystem::simpledraw()
+{
+	getWINDOW()->draw();
 }
 
 ViewSystem::~ViewSystem()
