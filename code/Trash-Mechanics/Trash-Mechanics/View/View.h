@@ -6,7 +6,6 @@ class View
 {
 private:
 
-
 	ViewSystem m_system;
 
 public:
@@ -15,15 +14,16 @@ public:
 	View();
 	virtual ~View();
 
+	void refresh();
 
 
 /* WINDOW COMMAND */
 
 	bool createViewWindow(
+		const std::string &name,
 		const Vec &topleft = ViewWindow::getTOPLEFT(),
 		const int &w = ViewWindow::getWINWIDTH(),
 		const int &h = ViewWindow::getWINHEIGHT(),
-		const std::string &name = ViewWindow::getWINNAME(),
 		const Fl_Color &c = ViewWindow::getWINCOLOR(),
 		const bool &v = ViewWindow::getWINVISIBLE()
 	);
@@ -35,7 +35,6 @@ public:
 	Window's topleft corner: ViewPoint(Fl::w()/4,Fl::h()/4)
 	Window width: Fl::w()/2
 	Window height: Fl::h()/2
-	Window name: New Page
 	Window background color: FL_WHITE
 	Window visibility: visible
 */
@@ -48,6 +47,23 @@ public:
 	bool changeViewWindow(const std::string &name) ;
 /*
 	This function change the operating window to a specific window
+*/
+
+	bool changeViewWindow(const Vec &v);
+/*
+	This function change the topleft corner of the operating window
+*/
+
+	bool changeViewWindow(const int &d, const bool &status);
+/*
+	This function change the width or height of the operating window
+	status = 0 : change width
+	status = 1 : change height
+*/
+
+	bool changeViewWindow(const Fl_Color &c);
+/*
+	This function change the background color of the operating window
 */
 
 	bool hideViewWindow() ;

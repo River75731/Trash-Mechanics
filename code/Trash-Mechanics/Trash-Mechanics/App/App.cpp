@@ -18,7 +18,7 @@ void App::StartWorld()
 
 void App::test()
 {
-	view->createViewWindow();
+	view->createViewWindow("New Page");
 	windows->test();
 
 	//while (1) {}

@@ -7,9 +7,6 @@ std::string ViewWindow::m_DEFAULT_WINNAME = DEFAULT_WINNAME;
 Fl_Color ViewWindow::m_DEFAULT_WINCOLOR = DEFAULT_WINCOLOR;
 bool ViewWindow::m_DEFAULT_WINVISIBLE = DEFAULT_WINVISIBLE;
 
-//ViewWindow ViewWindow::m_DEFAULT_WINDOW ;
-//int ViewWindow::m_WINDOWNUM = 0;
-
 ViewWindow::ViewWindow(const ViewWindow & vw)
 	:Fl_Double_Window(vw.gettopleftX(), vw.gettopleftY(), vw.getwidth(), vw.getheight(), vw.getname())
 {	
@@ -21,8 +18,6 @@ ViewWindow::ViewWindow(const ViewWindow & vw)
 	if (temp.empty()) return;
 	for (std::vector<ViewShape*>::const_iterator i = temp.begin(); i != temp.end(); i++)
 		m_shapeset.push_back(*i);
-//	m_WINDOWNUM++;
-//	m_DEFAULT_WINDOW = *this;
 }
 
 ViewWindow::ViewWindow(const ViewPoint & tl, const int & w, const int & h, const bool &v, const std::string & n, const Fl_Color & c)
@@ -31,8 +26,6 @@ ViewWindow::ViewWindow(const ViewPoint & tl, const int & w, const int & h, const
 	copy_label(n.c_str());
 	setcolor(c);
 	setwinvisible(v);
-//	m_WINDOWNUM++;
-//	m_DEFAULT_WINDOW = *this;
 }
 
 ViewWindow::ViewWindow(const Vec & tl, const int & w, const int & h,  const bool &v, const std::string & n, const Fl_Color & c)
@@ -41,8 +34,6 @@ ViewWindow::ViewWindow(const Vec & tl, const int & w, const int & h,  const bool
 	copy_label(n.c_str());
 	setcolor(c);
 	setwinvisible(v);
-//	m_WINDOWNUM++;
-//	m_DEFAULT_WINDOW = *this;
 }
 
 ViewWindow::ViewWindow(const int & x, const int & y, const int &w, const int & h, const bool &v, const std::string & n, const Fl_Color & c)
@@ -51,8 +42,6 @@ ViewWindow::ViewWindow(const int & x, const int & y, const int &w, const int & h
 	copy_label(n.c_str());
 	setcolor(c);
 	setwinvisible(v);
-//	m_WINDOWNUM++;
-//	m_DEFAULT_WINDOW = *this;
 }
 
 ViewWindow & ViewWindow::operator=(const ViewWindow & vw)
@@ -247,34 +236,36 @@ void ViewWindow::draw()
 		if ((*i)->getvisible()) (*i)->drawShape();
 }
 
-bool ViewWindow::attach(ViewShape &vs)
+bool ViewWindow::attach(ViewShape *vs)
 {
-	m_shapeset.push_back(&vs);
+	m_shapeset.push_back(vs);
 	return true;
 }
 
-std::vector<ViewShape*>::const_iterator ViewWindow::getshape(const int & id) const
+ViewShape* ViewWindow::getviewshape(const int & id) 
 {
-	if (m_shapeset.empty()) return getnullshape();
+	if (m_shapeset.empty()) return nullptr;
 	for (std::vector<ViewShape*>::const_iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++)
-		if ((*i)->getid() == id) return i;
-	return m_shapeset.end();
+		if ((*i)->getid() == id) return *i;
+	return nullptr;
 }
 
-std::vector<ViewShape*>::const_iterator ViewWindow::getnullshape() const
-{
-	return m_shapeset.end();
-}
 
-bool ViewWindow::deleteshape(std::vector<ViewShape*>::const_iterator &temp)
+bool ViewWindow::deleteshape(ViewShape* &vs)
 {
-	m_shapeset.erase(temp);
-	return true;
+	for (std::vector<ViewShape*>::const_iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++)
+	{
+		if (*i == vs)
+		{
+			delete *i;
+			m_shapeset.erase(i);
+		}
+	}
+	return false;
 }
 
 ViewWindow::~ViewWindow()
 {
-//	m_WINDOWNUM--;
 	clearshapeset();
 	return;
 }

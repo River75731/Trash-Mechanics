@@ -18,7 +18,7 @@ ViewWindow* ViewSystem::getWindow(const char* name)
 	return nullptr;
 }
 
-bool ViewSystem::deletewindow(const ViewWindow* &temp)
+bool ViewSystem::deletewindow(ViewWindow* &temp)
 {
 	for (std::vector<ViewWindow*>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
 	{
@@ -26,6 +26,8 @@ bool ViewSystem::deletewindow(const ViewWindow* &temp)
 		{
 			delete *i;
 			m_windowset.erase(i);
+			if (!m_windowset.empty()) m_DEFAULT_WINDOW = nullptr;
+			else m_DEFAULT_WINDOW = *(m_windowset.end() - 1);
 			return true;
 		}
 	}
@@ -49,7 +51,7 @@ bool ViewSystem::attach(ViewWindow* vw)
 	return true;
 }
 
-void ViewSystem::draw()
+void ViewSystem::drawSystem()
 {
 	if (m_windowset.empty()) return;
 	for (std::vector<ViewWindow*>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
@@ -60,13 +62,9 @@ void ViewSystem::draw()
 	}
 }
 
-void ViewSystem::simpledraw()
-{
-	getWINDOW()->draw();
-}
-
 ViewSystem::~ViewSystem()
 {
 	if(m_DEFAULT_WINDOW) delete m_DEFAULT_WINDOW;
+	// now we don't free the winsowset
 	return;
 }

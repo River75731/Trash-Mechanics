@@ -62,10 +62,9 @@ public:
 	static bool setWINVISIBLE(const bool &v);
 	
 	bool clearshapeset();
-	bool attach(ViewShape &vs);
-	std::vector<ViewShape*>::const_iterator getshape(const int &id) const; //return nullptr if not exist
-	std::vector<ViewShape*>::const_iterator getnullshape() const;
-	bool deleteshape(std::vector<ViewShape*>::const_iterator &temp);
+	bool attach(ViewShape *vs);
+	ViewShape* getviewshape(const int &id); //return nullptr if not exist
+	bool deleteshape(ViewShape* &vs);
 	void draw();
 	virtual ~ViewWindow();
 };

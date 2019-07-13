@@ -9,11 +9,10 @@ public:
 	ViewSystem();
 	int getwindownum() const;
 	ViewWindow* getWindow(const char* name) ;
-	bool deletewindow(const ViewWindow* &temp);
+	bool deletewindow(ViewWindow* &temp); 
 	ViewWindow* getWINDOW() const;
 	bool setWINDOW(ViewWindow* vw);
 	bool attach(ViewWindow* vw);
-	void draw();
-	void simpledraw();
+	void drawSystem();
 	virtual ~ViewSystem();
 };
