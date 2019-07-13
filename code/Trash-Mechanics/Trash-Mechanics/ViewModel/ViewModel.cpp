@@ -20,9 +20,11 @@ ViewModel::ViewModel()
 {
 	createRigidBodyDataCommand = std::static_pointer_cast<Command, CreateRigidBodyDataCommand>
 		(std::shared_ptr<CreateRigidBodyDataCommand>(new CreateRigidBodyDataCommand(std::shared_ptr<ViewModel>(this))));
+	simulateTimeFlyDataCommand = std::static_pointer_cast<Command, SimulateTimeFlyDataCommand>
+		(std::shared_ptr<SimulateTimeFlyDataCommand>(new SimulateTimeFlyDataCommand(std::shared_ptr<ViewModel>(this))));
 	createPolyViewCommand = std::static_pointer_cast<Command, CreatePolyViewCommand>
 		(std::shared_ptr<CreatePolyViewCommand>(new CreatePolyViewCommand(std::shared_ptr<ViewModel>(this))));
-
+	
 }
 
 void ViewModel::execCreateRigidBodyDataCommand(RigidBody rb)

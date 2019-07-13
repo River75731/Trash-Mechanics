@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	
 	App app;
 	app.test();
-	std::cout << "success!";
+	std::cout << "success!\n";
 	system("PAUSE");
 	return 0;
 	return Fl::run();
