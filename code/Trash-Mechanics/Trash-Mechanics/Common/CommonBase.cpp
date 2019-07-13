@@ -4,6 +4,10 @@ Vec originPoint(0, 0);
 Vec gravity(0, 9.8);
 Segment emptySegment(originPoint, originPoint);
 int RigidBody::IdCount = 0;
+int RigidBody::getIdCount()
+{
+	return IdCount;
+}
 
 Vec::Vec()
 {

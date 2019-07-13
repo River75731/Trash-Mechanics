@@ -20,12 +20,22 @@ void App::StartWorld()
 void App::test()
 {
 	//View view;
-	//view->createViewWindow();
+	view->createViewWindow();
 	//view->m_system.getWINDOW()->show();
 	//view->createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
-	windows->test();
-	model->test();
-	getchar();
+	windows->onUpdateRigidBodyData(createMode,
+		RigidBody(Poly(std::vector<Vec>{Vec(1, 400), Vec(1, 450), Vec(800, 450), Vec(800, 400)}), INF, Vec(0, 0), 0));
+	windows->onUpdateRigidBodyData(createMode,
+		RigidBody(Poly(std::vector<Vec>{Vec(200, 600), Vec(200, 800), Vec(900, 900), Vec(900, 800)}), INF, Vec(0, 0), 0));
+//	windows->onUpdateRigidBodyData(adjustMode,
+//		RigidBody(Poly(std::vector<Vec>{Vec(1, 1000), Vec(1, 450), Vec(800, 450), Vec(800, 400)}), INF, Vec(0, 0), 0)
+//		,1);
+//	windows->onUpdateRigidBodyData(deleteMode, 1);
+
+
+	//windows->onUpdateRigidBodyData(adjustMode, RigidBody(), 1);
+	//windows->onUpdateRigidBodyData(deleteMode, 1);
+	//getchar();
 	//Fl::check();
 	//Fl::redraw();	//windows->test();
 	//getchar();

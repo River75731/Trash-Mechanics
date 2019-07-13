@@ -19,9 +19,10 @@ public:
 	void setAddForceFieldDataCommand(std::shared_ptr<Command> command);
 	void test();
 
-private: // the funtion to send message to ViewModel
-	void onUpdateRigidBodyData(const RigidBody &rb); // the real data(Poly)
-	void onSimulateTimeFlyData(const int &turns = 1);
+public: // the funtion to send message to ViewModel
+	void onUpdateRigidBodyData(const int & actionMode, const RigidBody &rb, const int &id = 0); // create & adjust
+	void onUpdateRigidBodyData(const int & actionMode, const int &id); // delete
+	void onSimulateTimeFlyData(const int & turns = 1);
 	void onAddForceFieldData(const Vec &v = Vec(0, -9.8));
 
 private:  // callback function body

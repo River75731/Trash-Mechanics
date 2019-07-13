@@ -160,6 +160,7 @@ private:
 	void clacInertiaConstant();
 
 public:
+	RigidBody() {}
 	RigidBody(const Poly &InputShape, const double &InputMass, const Vec &InputVelocity, const double &InputAngularVelocity);
 	RigidBody(const RigidBody &RB);
 	RigidBody& operator = (const RigidBody &RB);
@@ -177,6 +178,7 @@ public:
 	Poly getShape() const;
 	void cmdPrint() const;
 	int getId() const;
+	static int getIdCount();
 };
 
 

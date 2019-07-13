@@ -20,17 +20,25 @@ void Windows::test()
 {
 //	onUpdateRigidBodyTriggered(); // assume a trigger
 //	onSimulateTimeFlyTriggered();
-	onAddForceFieldData();
+
 }
 
 
 
-void Windows::onUpdateRigidBodyData(const RigidBody &rb)
+void Windows::onUpdateRigidBodyData(const int & actionMode, const RigidBody &rb, const int &id)
 {
 	updateRigidBodyDataCommand->set_parameters( std::static_pointer_cast<Parameter, RigidBodyParameter>
-		(std::shared_ptr<RigidBodyParameter>(new RigidBodyParameter(rb))));
+		(std::shared_ptr<RigidBodyParameter>(new RigidBodyParameter(id, actionMode, rb))));
 	updateRigidBodyDataCommand->pass();
 }
+
+void Windows::onUpdateRigidBodyData(const int & actionMode, const int &id)
+{
+	updateRigidBodyDataCommand->set_parameters(std::static_pointer_cast<Parameter, RigidBodyParameter>
+		(std::shared_ptr<RigidBodyParameter>(new RigidBodyParameter(id, actionMode, RigidBody()))));
+	updateRigidBodyDataCommand->pass();
+}
+
 
 void Windows::onSimulateTimeFlyData(const int & turns)
 {
@@ -48,8 +56,8 @@ void Windows::onAddForceFieldData(const Vec &v)
 
 void Windows::onUpdateRigidBodyTriggered()
 {
-	RigidBody rb(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}), 10.0, Vec(1.0, 1.0), 0.0); //test
-	onUpdateRigidBodyData(rb);
+//	RigidBody rb(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}), 10.0, Vec(1.0, 1.0), 0.0); //test
+	//onUpdateRigidBodyData(rb);
 }
 
 void Windows::onSimulateTimeFlyTriggered()

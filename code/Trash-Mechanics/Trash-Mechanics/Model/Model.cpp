@@ -62,7 +62,7 @@ std::vector<RigidBody> PhysicsSpace::getRigidBodys() const{
 void Model::createRigidBodyData(const RigidBody rb)
 {
 	physicsSpace.addRigidBody(rb);
-	onCreatePolyView(rb.getShape(), rb.getId());
+	onCreatePolyView(rb.getShape(), rb.getIdCount());
 }
 
 void Model::adjustRigidBodyData(const RigidBody rb, const int & id)

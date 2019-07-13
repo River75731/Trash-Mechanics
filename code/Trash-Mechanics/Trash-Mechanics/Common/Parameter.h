@@ -45,7 +45,7 @@ class PolyParameter : public ShapeParameter
 private:
 	Poly poly_;
 public:
-	PolyParameter(int id = 0, int actionMode = createMode, Poly poly = Poly()) :ShapeParameter(createMode, id), poly_(poly) {}
+	PolyParameter(int id = 0, int actionMode = createMode, Poly poly = Poly()) :ShapeParameter(actionMode, id), poly_(poly) {}
 	Poly getPoly() const { return poly_; }
 };
 
@@ -55,6 +55,6 @@ class RigidBodyParameter : public ShapeParameter
 private:
 	RigidBody rb_;
 public:
-	RigidBodyParameter(RigidBody rb) :ShapeParameter(), rb_(rb) {}
+	RigidBodyParameter(int id = 0, int actionMode = createMode, RigidBody rb = RigidBody()) :ShapeParameter(actionMode, id), rb_(rb) {}
 	RigidBody getRigidBody() const { return rb_; }
 };
