@@ -26,6 +26,13 @@ static bool inEdge = false;
 
 typedef enum
 {
+	createMode = 0,
+	adjustMode,
+	deleteMode
+} actionModeEnum;
+
+typedef enum
+{
 	PractiseMode = 0,
 	RealityMode
 } ModeType;

@@ -18,7 +18,7 @@ public:
 	void goStep(const int &n);
 	void addForceField(const Vec &InputForce);
 	Vec getForceField();
-	std::vector<RigidBody> getRigidBodys();
+	std::vector<RigidBody> getRigidBodys() const;
 };
 
 
@@ -29,15 +29,19 @@ private:
 
 public:
 	Model() {}
-	void createRigidBodyData(RigidBody rb);
+	void createRigidBodyData(const RigidBody rb);
+	void adjustRigidBodyData(const RigidBody rb, const int &id);
+	void deleteRigidBodyData(const int &id);
 	void simulateTimeFlyData(int turns);
 	void test() {}
 
 public:  // callback function body
-	void setCreatePolyViewCommand(std::shared_ptr<Command> command);
+	void setUpdatePolyViewCommand(std::shared_ptr<Command> command);
 
 private: // the funtion to send message to ViewModel
-	std::shared_ptr<Command> createPolyViewCommand;
-	void onCreatePolyView(const Poly &poly, const int &id); // the real data(Poly)
-	void onCreatePolyViewTriggered();
+	std::shared_ptr<Command> updatePolyViewCommand;
+	void onCreatePolyView(const Poly &poly, const int &id);
+	void onAdjustPolyView(const Poly &poly, const int &id); 
+	void onDeletePolyView(const int &id);
+	//void onUpdatePolyViewTriggered();
 };

@@ -84,12 +84,6 @@
     <ClCompile Include="Common\CommonBase.cpp">
       <Filter>SourceFile\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Command\CreatePolyViewCommand.cpp">
-      <Filter>SourceFile\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Command\CreateRigidBodyDataCommand.cpp">
-      <Filter>SourceFile\Command</Filter>
-    </ClCompile>
     <ClCompile Include="Command\SimulateTimeFlyDataCommand.cpp">
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
@@ -98,6 +92,12 @@
     </ClCompile>
     <ClCompile Include="View\ViewSystem.cpp">
       <Filter>SourceFile\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\UpdatePolyViewCommand.cpp">
+      <Filter>SourceFile\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\UpdateRigidBodyDataCommand.cpp">
+      <Filter>SourceFile\Command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,17 +152,17 @@
     <ClInclude Include="Common\CommonBase.h">
       <Filter>SourceFile\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Command\CreatePolyViewCommand.h">
-      <Filter>SourceFile\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Command\CreateRigidBodyDataCommand.h">
-      <Filter>SourceFile\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Command\SimulateTimeFlyDataCommand.h">
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
     <ClInclude Include="View\ViewSystem.h">
       <Filter>SourceFile\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\UpdatePolyViewCommand.h">
+      <Filter>SourceFile\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\UpdateRigidBodyDataCommand.h">
+      <Filter>SourceFile\Command</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

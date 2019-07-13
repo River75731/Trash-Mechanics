@@ -1,9 +1,9 @@
 #include "Windows.h"
 #include "../Command/CommandList.h"
 
-void Windows::setCreateRigidBodyDataCommand(std::shared_ptr<Command> command)
+void Windows::setUpdateRigidBodyDataCommand(std::shared_ptr<Command> command)
 {
-	createRigidBodyDataCommand = command;
+	UpdateRigidBodyDataCommand = command;
 }
 
 void Windows::setSimulateTimeFlyDataCommand(std::shared_ptr<Command> command)
@@ -13,17 +13,17 @@ void Windows::setSimulateTimeFlyDataCommand(std::shared_ptr<Command> command)
 
 void Windows::test()
 {
-	onCreateRigidBodyTriggered(); // assume a trigger
+	onUpdateRigidBodyTriggered(); // assume a trigger
 	onSimulateTimeFlyTriggered();
 }
 
 
 
-void Windows::onCreateRigidBodyData(const RigidBody &rb)
+void Windows::onUpdateRigidBodyData(const RigidBody &rb)
 {
-	createRigidBodyDataCommand->set_parameters( // create command parameter from data, then set command parameter
+	UpdateRigidBodyDataCommand->set_parameters( // create command parameter from data, then set command parameter
 		std::static_pointer_cast<Parameter, RigidBodyParameter>(std::shared_ptr<RigidBodyParameter>(new RigidBodyParameter(rb))));
-	createRigidBodyDataCommand->pass();
+	UpdateRigidBodyDataCommand->pass();
 }
 
 void Windows::onSimulateTimeFlyData(const int & turns)
@@ -33,10 +33,10 @@ void Windows::onSimulateTimeFlyData(const int & turns)
 	simulateTimeFlyDataCommand->pass();
 }
 
-void Windows::onCreateRigidBodyTriggered()
+void Windows::onUpdateRigidBodyTriggered()
 {
 	RigidBody rb(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}), 10.0, Vec(1.0, 1.0), 0.0); //test
-	onCreateRigidBodyData(rb);
+	onUpdateRigidBodyData(rb);
 }
 
 void Windows::onSimulateTimeFlyTriggered()
