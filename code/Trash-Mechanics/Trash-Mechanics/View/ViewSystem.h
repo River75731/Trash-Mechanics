@@ -3,9 +3,9 @@
 
 class ViewSystem {
 private:
-public:
 	std::vector<ViewWindow> m_windowset;
 	ViewWindow* m_DEFAULT_WINDOW;
+public:
 	ViewSystem();
 	int getwindownum() const;
 	std::vector<ViewWindow>::iterator getWindow(const char* name) ;

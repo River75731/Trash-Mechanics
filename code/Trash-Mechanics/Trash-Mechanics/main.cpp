@@ -124,18 +124,9 @@ int main(int argc, char *argv[])
 	view.createViewWindow();*/
 
 	ViewSystem sys;
-
-	sys.m_windowset.push_back(ViewWindow(ViewWindow::getTOPLEFT(), ViewWindow::getWINWIDTH(), ViewWindow::getWINHEIGHT(), ViewWindow::getWINVISIBLE(), ViewWindow::getWINNAME(), ViewWindow::getWINCOLOR()));
-	if (!ViewWindow::getWINVISIBLE()) sys.m_windowset.begin()->hide();
-	//sys.attach(temp);
-	//temp.hide();
-	sys.setWINDOW(sys.getWindow(sys.m_windowset.begin()->getname()));
+	
 	ViewPolygon poly1(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}), 1);
 	sys.getWINDOW()->attach(poly1);
-	//sys.getWINDOW()->hide();
-	//std::cout << "attached" << std::endl; 
-	//m_system.setWINDOW(temp);
-	system("PAUSE");
 
 	return Fl::run();
 }

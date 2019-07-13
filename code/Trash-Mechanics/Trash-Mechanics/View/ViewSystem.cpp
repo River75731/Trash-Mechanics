@@ -2,7 +2,8 @@
 
 ViewSystem::ViewSystem()
 {
-	m_DEFAULT_WINDOW = nullptr;
+	m_DEFAULT_WINDOW = new ViewWindow();
+	m_DEFAULT_WINDOW->show();
 }
 
 int ViewSystem::getwindownum() const
