@@ -11,7 +11,7 @@ protected:
 public:
 	Command() {}
 	Command(std::shared_ptr<Parameter> param) : param_(param) {}
-	void set_parameters(std::shared_ptr<Parameter> param) { printf("set param IN\n"); param_ = param; printf("set param OUT\n");
+	void set_parameters(std::shared_ptr<Parameter> param) { param_ = param;
 	}
 
 	//    Parameters& get_params_handle();

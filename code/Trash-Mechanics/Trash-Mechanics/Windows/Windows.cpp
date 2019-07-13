@@ -28,12 +28,10 @@ void Windows::onCreateRigidBodyData(const RigidBody &rb)
 
 void Windows::onSimulateTimeFlyData(const int & turns)
 {
-	printf("onSimulateTimeFlyData1\n");
 	simulateTimeFlyDataCommand->set_parameters( // create command parameter from data, then set command parameter
-		std::static_pointer_cast<Parameter, IntParameter>(std::shared_ptr<IntParameter>(new IntParameter(turns))));	printf("onSimulateTimeFlyData2\n");
-	simulateTimeFlyDataCommand->pass();	printf("onSimulateTimeFlyData3\n");
+		std::static_pointer_cast<Parameter, IntParameter>(std::shared_ptr<IntParameter>(new IntParameter(turns))));
+	simulateTimeFlyDataCommand->pass();
 }
-
 
 void Windows::onCreateRigidBodyTriggered()
 {

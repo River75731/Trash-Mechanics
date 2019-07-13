@@ -7,7 +7,7 @@ App::App():view(new View), model(new Model), viewmodel(new ViewModel), windows(n
 	viewmodel->bind(windows);
 
 	windows->setCreateRigidBodyDataCommand(viewmodel->getCreateRigidBodyDataCommand()); // bind the view & viewmodel command
-	windows->setCreateRigidBodyDataCommand(viewmodel->getSimulateTimeFlyDataCommand());
+	windows->setSimulateTimeFlyDataCommand(viewmodel->getSimulateTimeFlyDataCommand());
 	model->setCreatePolyViewCommand(viewmodel->getCreatePolyViewCommand()); // bind the view & viewmodel command
 }
 
