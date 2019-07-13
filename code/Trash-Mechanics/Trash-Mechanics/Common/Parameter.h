@@ -19,6 +19,16 @@ public:
 	int getInt() const { return val_; }
 };
 
+class VecParameter : public Parameter
+{
+private:
+	Vec v_;
+public:
+	VecParameter(Vec v) : v_(v) {}
+	Vec getVec() const { return v_; }
+};
+
+
 class ShapeParameter : public Parameter
 {
 private:

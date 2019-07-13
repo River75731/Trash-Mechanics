@@ -20,11 +20,13 @@ private:
 	std::shared_ptr<Command> updateRigidBodyDataCommand;
 	std::shared_ptr<Command> updatePolyViewCommand;
 	std::shared_ptr<Command> simulateTimeFlyDataCommand;
+	std::shared_ptr<Command> addForceFieldDataCommand;
 
 public: // the function to be binded with setfuntion in view
 	std::shared_ptr<Command> getUpdateRigidBodyDataCommand();
 	std::shared_ptr<Command> getUpdatePolyViewCommand();
 	std::shared_ptr<Command> getSimulateTimeFlyDataCommand();
+	std::shared_ptr<Command> getAddForceFieldDataCommand();
 
 
 public: // the functions for ViewModel to control Model
@@ -32,4 +34,5 @@ public: // the functions for ViewModel to control Model
 	void execUpdateRigidBodyDataCommand(const RigidBody &rb, const int &id, const int &actionMode);
 	void execUpdatePolyViewCommand(Poly poly, int id, int actionMode);
 	void execSimulateTimeFlyDataCommand(int turns);
+	void execAddForceFieldDataCommand(Vec v);
 };

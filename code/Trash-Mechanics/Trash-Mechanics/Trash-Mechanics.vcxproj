@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\App.cpp" />
+    <ClCompile Include="Command\AddForceFieldDataCommand.cpp" />
     <ClCompile Include="Command\UpdatePolyViewCommand.cpp" />
     <ClCompile Include="Command\UpdateRigidBodyDataCommand.cpp" />
     <ClCompile Include="Command\SimulateTimeFlyDataCommand.cpp" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h" />
+    <ClInclude Include="Command\AddForceFieldDataCommand.h" />
     <ClInclude Include="Command\CommandList.h" />
     <ClInclude Include="Command\UpdatePolyViewCommand.h" />
     <ClInclude Include="Command\UpdateRigidBodyDataCommand.h" />

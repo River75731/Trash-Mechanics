@@ -83,11 +83,13 @@ int main(int argc, char *argv[])
 	system("PAUSE");
 	*/
 	
-	View view;
-	view.createViewWindow();
-	//view.m_system.getWINDOW()->show();
-	view.createViewWindow(Vec(900,500),700,600,"MIRACLE!!!");
-	view.createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
+	//View view;
+	//view.createViewWindow();
+	////view.m_system.getWINDOW()->show();
+	//view.createViewWindow(Vec(900,500),700,600,"MIRACLE!!!");
+	//view.createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
+	App app;
+	app.test();
 
 	/*
 	

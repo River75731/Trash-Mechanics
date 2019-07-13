@@ -3,3 +3,4 @@
 #include "../Command/UpdateRigidBodyDataCommand.h"
 #include "../Command/UpdatePolyViewCommand.h"
 #include "../Command/SimulateTimeFlyDataCommand.h"
+#include "../Command/AddForceFieldDataCommand.h"

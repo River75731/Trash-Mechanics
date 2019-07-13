@@ -78,9 +78,20 @@ void Model::deleteRigidBodyData(const int & id)
 	onDeletePolyView(id);
 }
 
-void Model::simulateTimeFlyData(int turns)
+void Model::simulateTimeFlyData(const int &turns)
 {
 	physicsSpace.goStep(turns);
+	std::vector<RigidBody> RigidBodySet = physicsSpace.getRigidBodys();
+	for (std::vector<RigidBody>::iterator i = RigidBodySet.begin(); i != RigidBodySet.end(); i++) 
+	{
+		onAdjustPolyView(i->getShape(), i->getId());
+	}
+}
+
+void Model::addForceFieldData(const Vec & v)
+{
+	physicsSpace.addForceField(v);
+	onAddForceFieldView(v);
 }
 
 
@@ -108,4 +119,10 @@ void Model::onDeletePolyView(const int &id)
 	updatePolyViewCommand->set_parameters(std::static_pointer_cast<Parameter, PolyParameter>
 		(std::shared_ptr<PolyParameter>(new PolyParameter(id, deleteMode))));
 	updatePolyViewCommand->pass();
+}
+
+void Model::onAddForceFieldView(const Vec & v)
+{
+	//TBD
+	//Does it need to update view?
 }
