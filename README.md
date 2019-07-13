@@ -1,22 +1,6 @@
 # Trash-Mechanics
 A simple game in which you need to classify your garbages and throw them into correct dustbins, coded with C++ and FLTK library.
 
-# To-do List
-
-- ## RigidBody::Collide
-
-- ## ShowPolyWithPNG
-
-- ### View layer
-
-- ### Model layer
-
-- #### ViewModel layer
-
-- #### App layer
-
-- ...
-
 # Tool Specification
 Coding System : Visual Studio (Windows 10 SDK Ver 10.0.17134.0) 
 
