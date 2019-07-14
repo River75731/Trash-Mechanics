@@ -50,6 +50,16 @@ void PhysicsSpace::addForceField(const Vec & InputForce) {
 	m_Force += InputForce;
 }
 
+void PhysicsSpace::clearNonINFRigidBody()
+{
+	for (std::vector<RigidBody>::iterator i = m_RigidBodySet.begin(); i != m_RigidBodySet.end(); ) {
+		if (i->m() < 0.5 * INF)
+			i = m_RigidBodySet.erase(i);
+		else
+			i++;
+	}
+}
+
 Vec PhysicsSpace::getForceField() {
 	return m_Force;
 }
@@ -87,8 +97,6 @@ void Model::simulateTimeFlyData(const int &turns)
 	{
 		if (i->m() < 0.5 * INF)
 			onAdjustPolyView(i->getShape(), i->getId());
-		//else
-		//	std::cout << "SDSDAWD";
 	}
 	onRefreshView();
 }
@@ -97,6 +105,17 @@ void Model::addForceFieldData(const Vec & v)
 {
 	physicsSpace.addForceField(v);
 	onAddForceFieldView(v);
+}
+
+void Model::clearUserRigidBody()
+{
+	std::vector<RigidBody> rbs = physicsSpace.getRigidBodys();
+	for (std::vector<RigidBody>::iterator i = rbs.begin(); i != rbs.end(); i++) {
+		if (i->m() < 0.5 * INF)
+			onDeletePolyView(i->getId());
+	}
+	physicsSpace.clearNonINFRigidBody();
+	onRefreshView();
 }
 
 

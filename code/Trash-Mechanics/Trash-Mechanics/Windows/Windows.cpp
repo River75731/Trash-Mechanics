@@ -18,6 +18,11 @@ void Windows::setAddForceFieldDataCommand(std::shared_ptr<Command> command)
 	addForceFieldDataCommand = command;
 }
 
+void Windows::setClearUserRigidBodyCommand(std::shared_ptr<Command> command)
+{
+	clearUserRigidBodyCommand = command;
+}
+
 void Windows::test()
 {
 //	onUpdateRigidBodyTriggered(); // assume a trigger
@@ -54,6 +59,10 @@ void Windows::onAddForceFieldData(const Vec &v)
 	addForceFieldDataCommand->set_parameters( std::static_pointer_cast<Parameter, VecParameter>
 		(std::shared_ptr<VecParameter>(new VecParameter(v))));
 	addForceFieldDataCommand->pass();
+}
+void Windows::onClearUserRigidBodyCommand()
+{
+	clearUserRigidBodyCommand->pass();
 }
 /*
 void Windows::onCreateRigidBodyTriggered(Fl_Widget* sender, void*)

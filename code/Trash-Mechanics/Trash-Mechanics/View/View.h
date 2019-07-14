@@ -8,9 +8,10 @@ private:
 
 	ViewSystem m_system;
 	static std::shared_ptr<Windows> windows;
-	//static std::shared_ptr<View> viewPtr;
+	static std::shared_ptr<View> viewPtr;
 public:
 	static std::shared_ptr<Windows>getWindowsPtr() { return windows; }
+	static std::shared_ptr<View>getViewPtr() { return viewPtr; }
 	static Fl_Input *mass_Input;
 	static Fl_Input *velocityX_Input;
 	static Fl_Input *velocityY_Input;
@@ -24,6 +25,7 @@ public:
 	View();
 
 	virtual ~View();
+	void bind(std::shared_ptr<View> tempview);
 	void bind(std::shared_ptr<Windows> tempwindows);
 
 	ViewSystem & getsystem();
@@ -296,4 +298,6 @@ public:
 void onCreateRigidBodyTriggered(Fl_Widget* sender, void*);
 void onSimulateTimeFlyTriggered(Fl_Widget* sender, void*);
 void onApplyForceTriggered(Fl_Widget* sender, void*);
+void onClearTriggered(Fl_Widget* sender, void*);
 void simulate(void *sender);
+void changecolor();

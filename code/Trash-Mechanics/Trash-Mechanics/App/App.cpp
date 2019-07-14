@@ -1,5 +1,5 @@
 #include "App.h"
-
+#include <time.h>
 
 App::App():view(new View), model(new Model), viewmodel(new ViewModel), windows(new Windows)
 {
@@ -7,16 +7,20 @@ App::App():view(new View), model(new Model), viewmodel(new ViewModel), windows(n
 	viewmodel->bind(view);
 	viewmodel->bind(windows);
 	view->bind(windows);
+	view->bind(view);
 
 	windows->setUpdateRigidBodyDataCommand(viewmodel->getUpdateRigidBodyDataCommand()); // bind the view & viewmodel command
 	windows->setSimulateTimeFlyDataCommand(viewmodel->getSimulateTimeFlyDataCommand());
 	windows->setAddForceFieldDataCommand(viewmodel->getAddForceFieldDataCommand());
+	windows->setClearUserRigidBodyCommand(viewmodel->getClearUserRigidBodyCommand());
+
 	model->setUpdatePolyViewCommand(viewmodel->getUpdatePolyViewCommand()); // bind the view & viewmodel command
 	model->setRefreshViewCommand(viewmodel->getRefreshViewCommand());
 }
 
 void App::startWorld()
 {
+	srand(time(0));
 	view->createViewWindow("Mini Mechanics");
 	int w = view->getsystem().getWINDOW()->getwidth();
 	int h = view->getsystem().getWINDOW()->getheight();

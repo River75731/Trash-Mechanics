@@ -125,7 +125,7 @@
   <ItemGroup>
     <ClCompile Include="App\App.cpp" />
     <ClCompile Include="Command\AddForceFieldDataCommand.cpp" />
-    <ClCompile Include="Command\AdjustViewDefaultSettingCommand.cpp" />
+    <ClCompile Include="Command\ClearUserRigidBodyCommand.cpp" />
     <ClCompile Include="Command\RefreshViewCommand.cpp" />
     <ClCompile Include="Command\UpdatePolyViewCommand.cpp" />
     <ClCompile Include="Command\UpdateRigidBodyDataCommand.cpp" />
@@ -150,7 +150,7 @@
   <ItemGroup>
     <ClInclude Include="App\App.h" />
     <ClInclude Include="Command\AddForceFieldDataCommand.h" />
-    <ClInclude Include="Command\AdjustViewDefaultSettingCommand.h" />
+    <ClInclude Include="Command\ClearUserRigidBodyCommand.h" />
     <ClInclude Include="Command\CommandList.h" />
     <ClInclude Include="Command\RefreshViewCommand.h" />
     <ClInclude Include="Command\UpdatePolyViewCommand.h" />

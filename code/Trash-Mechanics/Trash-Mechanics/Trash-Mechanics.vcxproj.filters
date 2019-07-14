@@ -102,10 +102,10 @@
     <ClCompile Include="Command\AddForceFieldDataCommand.cpp">
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
-    <ClCompile Include="Command\AdjustViewDefaultSettingCommand.cpp">
+    <ClCompile Include="Command\RefreshViewCommand.cpp">
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
-    <ClCompile Include="Command\RefreshViewCommand.cpp">
+    <ClCompile Include="Command\ClearUserRigidBodyCommand.cpp">
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
   </ItemGroup>
@@ -176,10 +176,10 @@
     <ClInclude Include="Command\AddForceFieldDataCommand.h">
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Command\AdjustViewDefaultSettingCommand.h">
+    <ClInclude Include="Command\RefreshViewCommand.h">
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Command\RefreshViewCommand.h">
+    <ClInclude Include="Command\ClearUserRigidBodyCommand.h">
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
   </ItemGroup>

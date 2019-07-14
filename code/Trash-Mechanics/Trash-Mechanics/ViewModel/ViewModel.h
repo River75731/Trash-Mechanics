@@ -22,6 +22,7 @@ private:
 	std::shared_ptr<Command> simulateTimeFlyDataCommand;
 	std::shared_ptr<Command> addForceFieldDataCommand;
 	std::shared_ptr<Command> refreshViewCommand;
+	std::shared_ptr<Command> clearUserRigidBodyCommand;
 
 public: // the function to be binded with setfuntion in view
 	std::shared_ptr<Command> getUpdateRigidBodyDataCommand();
@@ -29,6 +30,7 @@ public: // the function to be binded with setfuntion in view
 	std::shared_ptr<Command> getSimulateTimeFlyDataCommand();
 	std::shared_ptr<Command> getAddForceFieldDataCommand();
 	std::shared_ptr<Command> getRefreshViewCommand();
+	std::shared_ptr<Command> getClearUserRigidBodyCommand();
 
 public: // the functions for ViewModel to control Model
 
@@ -37,4 +39,5 @@ public: // the functions for ViewModel to control Model
 	void execSimulateTimeFlyDataCommand(int turns);
 	void execAddForceFieldDataCommand(Vec v);
 	void execRefreshViewCommand();
+	void execClearUserRigidBodyCommand();
 };

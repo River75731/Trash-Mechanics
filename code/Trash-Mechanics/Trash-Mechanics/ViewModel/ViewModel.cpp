@@ -28,6 +28,8 @@ ViewModel::ViewModel()
 		(std::shared_ptr<AddForceFieldDataCommand>(new AddForceFieldDataCommand(std::shared_ptr<ViewModel>(this))));
 	refreshViewCommand = std::static_pointer_cast<Command, RefreshViewCommand>
 		(std::shared_ptr<RefreshViewCommand>(new RefreshViewCommand(std::shared_ptr<ViewModel>(this))));
+	clearUserRigidBodyCommand = std::static_pointer_cast<Command, ClearUserRigidBodyCommand>
+		(std::shared_ptr<ClearUserRigidBodyCommand>(new ClearUserRigidBodyCommand(std::shared_ptr<ViewModel>(this))));
 }
 
 void ViewModel::execUpdateRigidBodyDataCommand(const RigidBody &rb, const int &id, const int &actionMode)
@@ -77,6 +79,11 @@ void ViewModel::execRefreshViewCommand()
 	view->refresh();
 }
 
+void ViewModel::execClearUserRigidBodyCommand()
+{
+	model->clearUserRigidBody();
+}
+
 
 std::shared_ptr<Command> ViewModel::getUpdateRigidBodyDataCommand()
 {
@@ -101,4 +108,9 @@ std::shared_ptr<Command> ViewModel::getAddForceFieldDataCommand()
 std::shared_ptr<Command> ViewModel::getRefreshViewCommand()
 {
 	return refreshViewCommand;
+}
+
+std::shared_ptr<Command> ViewModel::getClearUserRigidBodyCommand()
+{
+	return clearUserRigidBodyCommand;
 }

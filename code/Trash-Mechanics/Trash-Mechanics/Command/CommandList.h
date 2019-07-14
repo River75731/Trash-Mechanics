@@ -5,3 +5,4 @@
 #include "../Command/SimulateTimeFlyDataCommand.h"
 #include "../Command/AddForceFieldDataCommand.h"
 #include "../Command/RefreshViewCommand.h"
+#include "../Command/ClearUserRigidBodyCommand.h"

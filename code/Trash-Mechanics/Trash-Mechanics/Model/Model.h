@@ -17,6 +17,7 @@ public:
 	void setStepSize(const double &dt);
 	void goStep(const int &n);
 	void addForceField(const Vec &InputForce);
+	void clearNonINFRigidBody();
 	Vec getForceField();
 	std::vector<RigidBody> getRigidBodys() const;
 };
@@ -41,6 +42,7 @@ public:
 	void deleteRigidBodyData(const int &id);
 	void simulateTimeFlyData(const int &turns);
 	void addForceFieldData(const Vec &v);
+	void clearUserRigidBody();
 	void test() { physicsSpace.getForceField().show(); }
 
 private: // the funtion to send message to ViewModel
