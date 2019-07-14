@@ -10,6 +10,9 @@ Fl_Input *View::forceY_Input = nullptr;
 Fl_Multiline_Input *View::vertices_Input = nullptr;
 Fl_Button *View::createRB_Button = nullptr;
 Fl_Input *View::angvelocity_Input = nullptr;
+Fl_Multiline_Output *View::CMD_Output = nullptr;
+double View::fx = 0;
+double View::fy = 0;
 bool View::simulating = false;
 
 View::View()
@@ -72,16 +75,22 @@ bool View::createViewWindow(const std::string & name, const Vec & topleft, const
 	forceY_Input = new Fl_Input(w - MarginX, MarginY + 11 * InputHeight + 1 * ButtonHeight + 7 * gap, Width, InputHeight, "FY(m/s^2)=");
 	forceY_Input->value("9.8");
 	forceY_Input->labelcolor(fl_rgb_color(200, 200, 200));
-	
+
 	Fl_Button *applyforce_Button = new Fl_Button(w - MarginX, MarginY + 12 * InputHeight + 1 * ButtonHeight + 8 * gap, Width, ButtonHeight, "Apply\nForce");
 	applyforce_Button->callback(onApplyForceTriggered);
 	applyforce_Button->color(fl_rgb_color(100, 200, 100));
 
-	Fl_Button *simulate_Button = new Fl_Button(w - MarginX, MarginY + 25 * InputHeight, Width, ButtonHeight, "Simulate");
+	CMD_Output = new Fl_Multiline_Output(w - MarginX, MarginY + 12 * InputHeight + 2 * ButtonHeight + 9 * gap, Width, 4 * InputHeight, "CMD Says:");
+	CMD_Output->labelcolor(fl_rgb_color(200, 200, 200));
+	CMD_Output->color(fl_rgb_color(50, 20, 20));
+	CMD_Output->textcolor(fl_rgb_color(250, 250, 250));
+	CMD_Output->value("$ Link Start");
+
+	Fl_Button *simulate_Button = new Fl_Button(w - MarginX, MarginY + 30 * InputHeight, Width, ButtonHeight, "Simulate");
 	simulate_Button->callback(onSimulateTimeFlyTriggered);
 	simulate_Button->color(fl_rgb_color(250, 250, 100));
 
-	Fl_Button *clear_Button = new Fl_Button(w - MarginX, MarginY + 25 * InputHeight + 1* ButtonHeight + 1 * gap, Width, ButtonHeight, "Clear");
+	Fl_Button *clear_Button = new Fl_Button(w - MarginX, MarginY + 30 * InputHeight + 1* ButtonHeight + 1 * gap, Width, ButtonHeight, "Clear");
 	clear_Button->callback(onClearTriggered);
 	clear_Button->color(fl_rgb_color(250, 100, 100));
 	Fl::add_timeout(0.1, simulate, temp);
@@ -968,57 +977,57 @@ void onCreateRigidBodyTriggered(Fl_Widget* sender, void*) {
 	const char * vertices_Input_str = View::vertices_Input->value();
 	const char * str = View::mass_Input->value();
 	if(strlen(mass_Input_str) == 0) {
-		View::createRB_Button->label("INVALID\nINPUT");
+		View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT\nEmpty argument");
 		return;
 	}
 	for (unsigned int i = 0; i < strlen(mass_Input_str); i++) {
 		if (!(mass_Input_str[i] >= '0' && mass_Input_str[i] <= '9')) {
-			View::createRB_Button->label("INVALID\nINPUT");
+			View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT");
 			return;
 		}
 	}
 
 	if (strlen(velocityX_Input_str) == 0) {
-		View::createRB_Button->label("INVALID\nINPUT");
+		View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT\nEmpty argument");
 		return;
 	}
 	if (!(velocityX_Input_str[0] >= '0' && velocityX_Input_str[0] <= '9' || velocityX_Input_str[0] == '-')) {
-		View::createRB_Button->label("INVALID\nINPUT");
+		View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT");
 		return;
 	}
 	for (unsigned int i = 1; i < strlen(velocityX_Input_str); i++) {
 		if (!(velocityX_Input_str[i] >= '0' && velocityX_Input_str[i] <= '9')) {
-			View::createRB_Button->label("INVALID\nINPUT");
+			View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT");
 			return;
 		}
 	}
 
 	if (strlen(velocityY_Input_str) == 0) {
-		View::createRB_Button->label("INVALID\nINPUT");
+		View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT\nEmpty argument");
 		return;
 	}
 	if (!(velocityY_Input_str[0] >= '0' && velocityY_Input_str[0] <= '9' || velocityY_Input_str[0] == '-')) {
-		View::createRB_Button->label("INVALID\nINPUT");
+		View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT\nIllegal char");
 		return;
 	}
 	for (unsigned int i = 1; i < strlen(velocityY_Input_str); i++) {
 		if (!(velocityY_Input_str[i] >= '0' && velocityY_Input_str[i] <= '9')) {
-			View::createRB_Button->label("INVALID\nINPUT");
+			View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT\nIllegal char");
 			return;
 		}
 	}
 
 	if (strlen(angvelocity_Input_str) == 0) {
-		View::createRB_Button->label("INVALID\nINPUT");
+		View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT\nEmpty argument");
 		return;
 	}
 	if (!(angvelocity_Input_str[0] >= '0' && angvelocity_Input_str[0] <= '9' || angvelocity_Input_str[0] == '-')) {
-		View::createRB_Button->label("INVALID\nINPUT");
+		View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT\nIllegal char");
 		return;
 	}
 	for (unsigned int i = 1; i < strlen(angvelocity_Input_str); i++) {
 		if (!(angvelocity_Input_str[i] >= '0' && angvelocity_Input_str[i] <= '9')) {
-			View::createRB_Button->label("INVALID\nINPUT");
+			View::CMD_Output->value("> ERROR\n@ Creating RB:\nINVALID INPUT\nIllegal char");
 			return;
 		}
 	}
@@ -1035,7 +1044,6 @@ void onCreateRigidBodyTriggered(Fl_Widget* sender, void*) {
 					prenum = curnum;
 				}
 				else {
-					printf("(%lf,%lf)\n", prenum, curnum);
 					vertices.push_back(Vec(prenum, curnum));
 					prenum = 0;
 				}
@@ -1050,7 +1058,7 @@ void onCreateRigidBodyTriggered(Fl_Widget* sender, void*) {
 		Vec(atoi(velocityX_Input_str), atoi(velocityY_Input_str)),
 		atoi(angvelocity_Input_str) / 180.0*pi
 	);
-	View::createRB_Button->label("Create\nSuccessfully");
+	View::CMD_Output->value("> SUCCESS\n@Creating RB\n");
 	(View::getWindowsPtr())->onUpdateRigidBodyData(createMode, rb);
 }
 
@@ -1058,10 +1066,12 @@ void onSimulateTimeFlyTriggered(Fl_Widget* sender, void*) {
 	
 	Fl_Button * but = (Fl_Button*)sender;
 	if (strcmp((but->label()), "Simulate") == 0) {
+		View::CMD_Output->value("> SUCCESS\n@ Simulating\nStarted");
 		View::simulating = true;
 		but->label("Stop");
 	}
 	else {
+		View::CMD_Output->value("> SUCCESS\n@ Simulating\nStopped");
 		View::simulating = false;
 		but->label("Simulate");
 	}
@@ -1093,13 +1103,20 @@ void onApplyForceTriggered(Fl_Widget* sender, void*) {
 	Fl_Button * but = (Fl_Button*)sender;
 	const char * fx_Input_str = View::forceX_Input->value();
 	const char * fy_Input_str = View::forceY_Input->value();
-	double fx = atof(fx_Input_str);
-	double fy = atof(fy_Input_str);
-
-	(View::getWindowsPtr())->onAddForceFieldData(Vec(fx, fy));
+	double dfx = atof(fx_Input_str);
+	double dfy = atof(fy_Input_str);
+	View::fx += dfx; View::fy += dfy;
+	char pos[32];
+	sprintf_s(pos, "(%.3f,%.3f)", View::fx, View::fy);
+	std::string str = "> SUCCESS\n@ Adding force\nCurrent force field:\n";
+	str += pos;
+	View::CMD_Output->value(str.c_str());
+	(View::getWindowsPtr())->onAddForceFieldData(Vec(dfx, dfy));
 }
 
 void onClearTriggered(Fl_Widget* sender, void*) {
+	View::fx = 0; View::fy = 0;
+	View::CMD_Output->value("> SUCCESS\n@ Clearing RBs\nRBs deleted\nForce field cleaned");
 	(View::getWindowsPtr())->onClearUserRigidBodyCommand();
 }
 

@@ -18,9 +18,12 @@ public:
 	static Fl_Input *angvelocity_Input;
 	static Fl_Input *forceX_Input;
 	static Fl_Input *forceY_Input;
+	static Fl_Multiline_Output *CMD_Output;
 	static Fl_Multiline_Input *vertices_Input;
 	static Fl_Button *createRB_Button;
 	static bool simulating;
+	static double fx;
+	static double fy;
 /* BASIC COMMAND */
 	View();
 
