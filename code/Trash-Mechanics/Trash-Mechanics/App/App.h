@@ -3,6 +3,7 @@
 #include "../View/View.h"
 #include "../ViewModel/ViewModel.h"
 #include "../Windows/Windows.h"
+#include "../View/GUI.h"
 
 class App
 {
@@ -13,7 +14,6 @@ private:
 	std::shared_ptr<Windows> windows;
 public:
 	App();
-	void StartWorld();
-	void test();
+	void startWorld();
 	~App() {}
 };

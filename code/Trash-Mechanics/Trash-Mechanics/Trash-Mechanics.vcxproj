@@ -126,6 +126,7 @@
     <ClCompile Include="App\App.cpp" />
     <ClCompile Include="Command\AddForceFieldDataCommand.cpp" />
     <ClCompile Include="Command\AdjustViewDefaultSettingCommand.cpp" />
+    <ClCompile Include="Command\RefreshViewCommand.cpp" />
     <ClCompile Include="Command\UpdatePolyViewCommand.cpp" />
     <ClCompile Include="Command\UpdateRigidBodyDataCommand.cpp" />
     <ClCompile Include="Command\SimulateTimeFlyDataCommand.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Command\AddForceFieldDataCommand.h" />
     <ClInclude Include="Command\AdjustViewDefaultSettingCommand.h" />
     <ClInclude Include="Command\CommandList.h" />
+    <ClInclude Include="Command\RefreshViewCommand.h" />
     <ClInclude Include="Command\UpdatePolyViewCommand.h" />
     <ClInclude Include="Command\UpdateRigidBodyDataCommand.h" />
     <ClInclude Include="Command\SimulateTimeFlyDataCommand.h" />

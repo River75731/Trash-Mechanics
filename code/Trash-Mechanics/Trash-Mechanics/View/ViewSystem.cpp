@@ -53,13 +53,22 @@ bool ViewSystem::attach(ViewWindow* vw)
 
 void ViewSystem::drawSystem()
 {
-	if (m_windowset.empty()) return;
+	if (m_windowset.empty())
+	{
+		Fl::check(); Fl::redraw();
+		return;
+	}
+
 	for (std::vector<ViewWindow*>::iterator i = m_windowset.begin(); i != m_windowset.end(); i++)
 	{
 		(*i)->draw();
+
 		if (!((*i)->getwinvisible())) (*i)->hide();
 		else (*i)->show();
 	}
+
+	Fl::check(); 
+	Fl::redraw();
 }
 
 ViewSystem::~ViewSystem()

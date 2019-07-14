@@ -23,10 +23,10 @@ public: // the funtion to send message to ViewModel
 	void onUpdateRigidBodyData(const int & actionMode, const RigidBody &rb, const int &id = 0); // create & adjust
 	void onUpdateRigidBodyData(const int & actionMode, const int &id); // delete
 	void onSimulateTimeFlyData(const int & turns = 1);
-	void onAddForceFieldData(const Vec &v = Vec(0, -9.8));
+	void onAddForceFieldData(const Vec &v);
 
-private:  // callback function body
-	void onUpdateRigidBodyTriggered();
+public:  // callback function body
+	/*void onCreateRigidBodyTriggered(Fl_Widget* sender, void*);
 	void onSimulateTimeFlyTriggered();
-	void onAddForceFieldTriggered();
+	void onAddForceFieldTriggered();*/
 };

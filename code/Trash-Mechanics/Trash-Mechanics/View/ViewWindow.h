@@ -6,9 +6,9 @@
 #include <vector>
 #include <string>
 
-#define DEFAULT_TOPLEFT ViewPoint(Fl::w()/4,Fl::h()/4)
-#define DEFAULT_WINWIDTH (Fl::w()/2)
-#define DEFAULT_WINHEIGHT (Fl::h()/2)
+#define DEFAULT_TOPLEFT ViewPoint(Fl::w()/8,Fl::h()/8)
+#define DEFAULT_WINWIDTH (Fl::w()*3/4)
+#define DEFAULT_WINHEIGHT (Fl::h()*3/4)
 #define DEFAULT_WINNAME "New Page"
 #define DEFAULT_WINCOLOR FL_WHITE
 #define DEFAULT_WINVISIBLE true

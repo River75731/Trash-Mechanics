@@ -463,6 +463,7 @@ double RigidBody::w() const {
 }
 
 void RigidBody::move(const double &dt) {
+	if (m_Mass > 0.5 * INF) return;
 	if (m_CoolDown) m_CoolDown--;
 	if (!m_CoolDown) m_IdLastCollision = NULL;
 	/* dx=v*dt */
@@ -480,6 +481,9 @@ void RigidBody::rotate(const double &dt) {
 }
 
 bool RigidBody::collide(RigidBody &Tag) {
+	if (m_Mass >= 0.5*INF && Tag.m_Mass >= 0.5*INF) {
+		return false;
+	}
 	if (m_Shape.inPoly_PolyVec(Tag.m_Shape) == false) {	
 		if (Tag.m_IdLastCollision == m_Id) Tag.m_IdLastCollision = NULL;
 		return false;
@@ -511,14 +515,14 @@ bool RigidBody::collide(RigidBody &Tag) {
 	Vec dir = getShape().getInterSegment(Tag.getShape()).getV2() - getShape().getInterSegment(Tag.getShape()).getV1();
 	if (fabs(dir.getY()) < 0.01) {
 		fx = 0;
-		fy = K_Resilence * ma;
+		fy = K_Resilence ;
 	}
 	else if (fabs(dir.getX()) < 0.01) {
-		fx = K_Resilence * ma;
+		fx = K_Resilence ;
 		fy = 0;
 	}
 	else {
-		fx = K_Resilence * ma;
+		fx = K_Resilence ;
 		fy = -dir.getX()*fx / dir.getY();
 	}
 	if (Vec(ox - cax, oy - cay) ^ Vec(fx, fy)) { fx *= -1; fy *= -1; }

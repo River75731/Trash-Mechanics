@@ -28,6 +28,12 @@ private:
 	PhysicsSpace physicsSpace;
 
 	std::shared_ptr<Command> updatePolyViewCommand;
+	std::shared_ptr<Command> refreshViewCommand;
+
+public:  // callback function body
+	void setUpdatePolyViewCommand(std::shared_ptr<Command> command);
+	void setRefreshViewCommand(std::shared_ptr<Command> command);
+
 public:
 	Model() {}
 	void createRigidBodyData(const RigidBody rb);
@@ -37,13 +43,11 @@ public:
 	void addForceFieldData(const Vec &v);
 	void test() { physicsSpace.getForceField().show(); }
 
-public:  // callback function body
-	void setUpdatePolyViewCommand(std::shared_ptr<Command> command);
-
 private: // the funtion to send message to ViewModel
 	void onCreatePolyView(const Poly &poly, const int &id);
 	void onAdjustPolyView(const Poly &poly, const int &id); 
 	void onDeletePolyView(const int &id);
 	void onAddForceFieldView(const Vec &v);
+	void onRefreshView();
 	//void onUpdatePolyViewTriggered();
 };

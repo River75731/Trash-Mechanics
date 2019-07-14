@@ -29,8 +29,9 @@ void PhysicsSpace::setStepSize(const double &dt) {
 
 void PhysicsSpace::goStep(const int &n) {
 	for (int i = 0; i < n; i++) {
-		for (std::vector<RigidBody>::iterator i = m_RigidBodySet.begin(); i != m_RigidBodySet.end(); i++) {
-			i->applyForce(m_Force);
+		for (std::vector<RigidBody>::iterator i = m_RigidBodySet.begin(); i != m_RigidBodySet.end(); i++) {			
+			if (i->m() < 0.5*INF)
+				i->applyForce(m_Force * i->m());
 			i->accelerate(m_StepSize);
 			i->move(m_StepSize);
 			i->rotate(m_StepSize);
@@ -84,8 +85,12 @@ void Model::simulateTimeFlyData(const int &turns)
 	std::vector<RigidBody> RigidBodySet = physicsSpace.getRigidBodys();
 	for (std::vector<RigidBody>::iterator i = RigidBodySet.begin(); i != RigidBodySet.end(); i++) 
 	{
-		onAdjustPolyView(i->getShape(), i->getId());
+		if (i->m() < 0.5 * INF)
+			onAdjustPolyView(i->getShape(), i->getId());
+		//else
+		//	std::cout << "SDSDAWD";
 	}
+	onRefreshView();
 }
 
 void Model::addForceFieldData(const Vec & v)
@@ -98,6 +103,11 @@ void Model::addForceFieldData(const Vec & v)
 void Model::setUpdatePolyViewCommand(std::shared_ptr<Command> command)
 {
 	updatePolyViewCommand = command;
+}
+
+void Model::setRefreshViewCommand(std::shared_ptr<Command> command)
+{
+	refreshViewCommand = command;
 }
 
 void Model::onCreatePolyView(const Poly &poly, const int &id)
@@ -119,6 +129,11 @@ void Model::onDeletePolyView(const int &id)
 	updatePolyViewCommand->set_parameters(std::static_pointer_cast<Parameter, PolyParameter>
 		(std::shared_ptr<PolyParameter>(new PolyParameter(id, deleteMode))));
 	updatePolyViewCommand->pass();
+}
+
+void Model::onRefreshView()
+{
+	refreshViewCommand->pass();
 }
 
 void Model::onAddForceFieldView(const Vec & v)

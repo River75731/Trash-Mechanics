@@ -12,12 +12,12 @@
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 #define Power pow
 #define Sqrt sqrt
-#define K_Resilence 1
+#define K_Resilence 100000
 #define DEBUG_COMMON 0
 
 const double pi = 3.141592653589793;
-const double NearDist = 5.0;
-const double eps = 0.1;
+const double NearDist = 2.0;
+const double eps = 0.01;
 const double INF = (double)1.0e100;
 const int cooldownTurn = 5;
 

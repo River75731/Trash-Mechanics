@@ -1,6 +1,8 @@
 #include "Windows.h"
 #include "../Command/CommandList.h"
 
+std::shared_ptr<Windows> windowsPtr;
+
 void Windows::setUpdateRigidBodyDataCommand(std::shared_ptr<Command> command)
 {
 	updateRigidBodyDataCommand = command;
@@ -53,11 +55,13 @@ void Windows::onAddForceFieldData(const Vec &v)
 		(std::shared_ptr<VecParameter>(new VecParameter(v))));
 	addForceFieldDataCommand->pass();
 }
-
-void Windows::onUpdateRigidBodyTriggered()
+/*
+void Windows::onCreateRigidBodyTriggered(Fl_Widget* sender, void*)
 {
-//	RigidBody rb(Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(100, 10)}), 10.0, Vec(1.0, 1.0), 0.0); //test
-	//onUpdateRigidBodyData(rb);
+	printf("Hi!");
+	getchar();
+	RigidBody rb;
+	onUpdateRigidBodyData(createMode, rb);
 }
 
 void Windows::onSimulateTimeFlyTriggered()
@@ -69,4 +73,4 @@ void Windows::onSimulateTimeFlyTriggered()
 void Windows::onAddForceFieldTriggered()
 {
 	onAddForceFieldData();
-}
+}*/

@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 	view.changeViewPolygon(3, FL_GREEN, 1);
 	view.refresh();*/
 	App app;
-	app.test();
+	app.startWorld();
 	/*
 	
 	ViewSystem sys;

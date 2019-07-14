@@ -7,13 +7,26 @@ class View
 private:
 
 	ViewSystem m_system;
-
+	static std::shared_ptr<Windows> windows;
+	//static std::shared_ptr<View> viewPtr;
 public:
-
+	static std::shared_ptr<Windows>getWindowsPtr() { return windows; }
+	static Fl_Input *mass_Input;
+	static Fl_Input *velocityX_Input;
+	static Fl_Input *velocityY_Input;
+	static Fl_Input *angvelocity_Input;
+	static Fl_Input *forceX_Input;
+	static Fl_Input *forceY_Input;
+	static Fl_Multiline_Input *vertices_Input;
+	static Fl_Button *createRB_Button;
+	static bool simulating;
 /* BASIC COMMAND */
 	View();
-	virtual ~View();
 
+	virtual ~View();
+	void bind(std::shared_ptr<Windows> tempwindows);
+
+	ViewSystem & getsystem();
 	void refresh();
 
 
@@ -278,7 +291,9 @@ public:
 	This function reset the default visibility
 */
 
-
 };
 
-
+void onCreateRigidBodyTriggered(Fl_Widget* sender, void*);
+void onSimulateTimeFlyTriggered(Fl_Widget* sender, void*);
+void onApplyForceTriggered(Fl_Widget* sender, void*);
+void simulate(void *sender);

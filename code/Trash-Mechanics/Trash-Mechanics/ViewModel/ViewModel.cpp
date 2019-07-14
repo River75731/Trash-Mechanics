@@ -26,7 +26,8 @@ ViewModel::ViewModel()
 		(std::shared_ptr<UpdatePolyViewCommand>(new UpdatePolyViewCommand(std::shared_ptr<ViewModel>(this))));
 	addForceFieldDataCommand = std::static_pointer_cast<Command, AddForceFieldDataCommand>
 		(std::shared_ptr<AddForceFieldDataCommand>(new AddForceFieldDataCommand(std::shared_ptr<ViewModel>(this))));
-
+	refreshViewCommand = std::static_pointer_cast<Command, RefreshViewCommand>
+		(std::shared_ptr<RefreshViewCommand>(new RefreshViewCommand(std::shared_ptr<ViewModel>(this))));
 }
 
 void ViewModel::execUpdateRigidBodyDataCommand(const RigidBody &rb, const int &id, const int &actionMode)
@@ -71,6 +72,11 @@ void ViewModel::execAddForceFieldDataCommand(Vec v)
 	model->addForceFieldData(v);
 }
 
+void ViewModel::execRefreshViewCommand()
+{
+	view->refresh();
+}
+
 
 std::shared_ptr<Command> ViewModel::getUpdateRigidBodyDataCommand()
 {
@@ -90,4 +96,9 @@ std::shared_ptr<Command> ViewModel::getSimulateTimeFlyDataCommand()
 std::shared_ptr<Command> ViewModel::getAddForceFieldDataCommand()
 {
 	return addForceFieldDataCommand;
+}
+
+std::shared_ptr<Command> ViewModel::getRefreshViewCommand()
+{
+	return refreshViewCommand;
 }

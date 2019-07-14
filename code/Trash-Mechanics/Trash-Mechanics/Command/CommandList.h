@@ -4,3 +4,4 @@
 #include "../Command/UpdatePolyViewCommand.h"
 #include "../Command/SimulateTimeFlyDataCommand.h"
 #include "../Command/AddForceFieldDataCommand.h"
+#include "../Command/RefreshViewCommand.h"
