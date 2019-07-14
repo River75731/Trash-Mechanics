@@ -53,10 +53,10 @@ void ViewModel::execUpdatePolyViewCommand(Poly poly, int id, int actionMode)
 		view->createViewPolygon(id, poly);
 		break;
 	case deleteMode:
-	//	view->deleteViewPolygon(id);
+		view->deleteViewPolygon(id);
 		break;
 	case adjustMode:
-	//	view->changeViewPolygon(id, poly);
+		view->changeViewPolygon(id, poly);
 		break;
 	}
 }

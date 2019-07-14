@@ -45,7 +45,7 @@ class PolyParameter : public ShapeParameter
 private:
 	Poly poly_;
 public:
-	PolyParameter(int id = 0, int actionMode = createMode, Poly poly = Poly()) :ShapeParameter(actionMode, id), poly_(poly) {}
+	PolyParameter(int id, int actionMode = createMode, Poly poly = Poly()) :ShapeParameter(actionMode, id), poly_(poly) {}
 	Poly getPoly() const { return poly_; }
 };
 
@@ -55,13 +55,22 @@ class RigidBodyParameter : public ShapeParameter
 private:
 	RigidBody rb_;
 public:
-	RigidBodyParameter(int id = 0, int actionMode = createMode, RigidBody rb = RigidBody()) :ShapeParameter(actionMode, id), rb_(rb) {}
+	RigidBodyParameter(int id, int actionMode = createMode, RigidBody rb = RigidBody()) :ShapeParameter(actionMode, id), rb_(rb) {}
 	RigidBody getRigidBody() const { return rb_; }
 };
 
 class ImageSettingParameter : public ShapeParameter
 {
 private:
-	Fl_Color color_;
-
+	Fl_Color lineColor_;
+	Fl_Color fillColor_;
+	int lineWidth_;
+	bool visibility_;
+public:
+	ImageSettingParameter(int id, Fl_Color linecolor, Fl_Color fillcolor, int linewidth, bool visibility) :
+		ShapeParameter(adjustMode, id), lineColor_(linecolor), fillColor_(fillcolor), lineWidth_(linewidth), visibility_(visibility) {}
+	Fl_Color getLineColor() const { return lineColor_; }
+	Fl_Color getFillColor() const { return fillColor_; }
+	int getLineWidth() const { return lineWidth_; }
+	bool getVisibility() const { return visibility_; }
 };

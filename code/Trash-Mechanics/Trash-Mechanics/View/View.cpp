@@ -28,6 +28,7 @@ bool View::createViewWindow(const std::string & name, const Vec & topleft, const
 	printf("Window visibility : %s\n", v?"visible":"invisible");
 	m_system.setWINDOW(m_system.getWindow(name.c_str()));
 	std::cout << "Successfully set " << name << " as operating window.\n\n";
+	Fl::check(); Fl::redraw();	
 	m_system.drawSystem();
 	return true;
 }
@@ -683,7 +684,7 @@ bool View::createViewCircle(const int & id, const Vec & center, const double & r
 		std::cout << "ERROR: Already exists shape ID : " << id << " .\n\n";
 		return false;
 	}
-	ViewCircle* temp = new ViewCircle(center, r, id, v, ew, ec, fc);
+	ViewCircle* temp = new ViewCircle(ViewPoint(center), r, id, v, ew, ec, fc);
 	m_system.getWINDOW()->attach(temp);
 	std::cout << "Successfully create circle ID : " << id << " .\n\n";
 	m_system.drawSystem();
@@ -759,7 +760,7 @@ bool View::changeViewCircle(const int & id, const double & radius)
 		std::cout << "ERROR: Cannot find circle ID : " << id << " .\n\n";
 		return false;
 	}
-	((ViewCircle*)temp)->setCircle(((ViewCircle*)temp)->getcenter(), radius, id);
+	((ViewCircle*)temp)->setCircle(ViewPoint(((ViewCircle*)temp)->getcenter()), radius, id);
 	std::cout << "Successfully change the radius of circle ID : " << id << " .\n\n";
 	m_system.drawSystem();
 	return true;

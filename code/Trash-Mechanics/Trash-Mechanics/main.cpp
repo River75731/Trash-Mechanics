@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 	std::cout << "success!\n";
 	system("PAUSE");
 	*/
-	
+	/*
 	View view;
 	view.createViewWindow("Page 1");
 	//view.m_system.getWINDOW()->show();
@@ -92,7 +92,9 @@ int main(int argc, char *argv[])
 	view.deleteViewPolygon(1);
 	view.deleteViewWindow("Page 1");
 	view.changeViewPolygon(3, FL_GREEN, 1);
-	view.refresh();
+	view.refresh();*/
+	App app;
+	app.test();
 	/*
 	
 	ViewSystem sys;
