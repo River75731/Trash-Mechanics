@@ -72,7 +72,7 @@ bool View::createViewWindow(const std::string & name, const Vec & topleft, const
 	forceX_Input->value("0");
 	forceX_Input->labelcolor(fl_rgb_color(200, 200, 200));
 
-	forceY_Input = new Fl_Input(w - MarginX, MarginY + 11 * InputHeight + 1 * ButtonHeight + 7 * gap, Width, InputHeight, "FY(m/s^2)=");
+	forceY_Input = new Fl_Input(w - MarginX, MarginY + 11 * InputHeight + 1 * ButtonHeight + 7 * gap, Width, InputHeight, "Fy(m/s^2)=");
 	forceY_Input->value("9.8");
 	forceY_Input->labelcolor(fl_rgb_color(200, 200, 200));
 
@@ -84,7 +84,7 @@ bool View::createViewWindow(const std::string & name, const Vec & topleft, const
 	CMD_Output->labelcolor(fl_rgb_color(200, 200, 200));
 	CMD_Output->color(fl_rgb_color(50, 20, 20));
 	CMD_Output->textcolor(fl_rgb_color(250, 250, 250));
-	CMD_Output->value("$ Link Start");
+	CMD_Output->value("> Loading\n> Link start");
 
 	Fl_Button *simulate_Button = new Fl_Button(w - MarginX, MarginY + 30 * InputHeight, Width, ButtonHeight, "Simulate");
 	simulate_Button->callback(onSimulateTimeFlyTriggered);
