@@ -12,7 +12,7 @@ ViewPoint::ViewPoint(const ViewPoint & vp)
 
 ViewPoint::ViewPoint(const Vec & v)
 {
-	setXY(v.getX(), v.getY());
+	setXY(floor(v.getX()), floor(v.getY()));
 }
 
 ViewPoint::ViewPoint(const double & x, const double & y)
