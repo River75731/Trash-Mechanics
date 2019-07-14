@@ -19,25 +19,30 @@ void App::StartWorld()
 
 void App::test()
 {
+	view->createViewWindow("HAHA");
 	//View view;
-	view->createViewWindow();
+	//view->createViewWindow("HAHA");
 	//view->m_system.getWINDOW()->show();
 	//view->createViewPolygon(1, Poly(std::vector<Vec>{Vec(10, 10), Vec(100, 100), Vec(200, 50)}));
 	windows->onUpdateRigidBodyData(createMode,
-		RigidBody(Poly(std::vector<Vec>{Vec(1, 400), Vec(1, 450), Vec(800, 450), Vec(800, 400)}), INF, Vec(0, 0), 0));
+		RigidBody(Poly(std::vector<Vec>{Vec(100, 400), Vec(75, 450), Vec(800, 450), Vec(800, 300)}), INF, Vec(0, 0), 0));
+	Fl::check(); Fl::redraw(); system("pause");
 	windows->onUpdateRigidBodyData(createMode,
-		RigidBody(Poly(std::vector<Vec>{Vec(200, 600), Vec(200, 800), Vec(900, 900), Vec(900, 800)}), INF, Vec(0, 0), 0));
-//	windows->onUpdateRigidBodyData(adjustMode,
-//		RigidBody(Poly(std::vector<Vec>{Vec(1, 1000), Vec(1, 450), Vec(800, 450), Vec(800, 400)}), INF, Vec(0, 0), 0)
-//		,1);
-//	windows->onUpdateRigidBodyData(deleteMode, 1);
+		RigidBody(Poly(std::vector<Vec>{Vec(200, 200), Vec(200, 300), Vec(900, 290), Vec(900, 230)}), INF, Vec(0, 0), 0));
+	Fl::check(); Fl::redraw(); system("pause");
+	windows->onUpdateRigidBodyData(adjustMode,
+		RigidBody(Poly(std::vector<Vec>{Vec(1, 1000), Vec(1, 450), Vec(800, 450), Vec(800, 400)}), INF, Vec(0, 0), 0)
+		, 1);	
+	Fl::check(); Fl::redraw(); system("pause");
+	windows->onUpdateRigidBodyData(deleteMode, 1);
+	Fl::check(); Fl::redraw(); system("pause");
+
 
 
 	//windows->onUpdateRigidBodyData(adjustMode, RigidBody(), 1);
 	//windows->onUpdateRigidBodyData(deleteMode, 1);
 	//getchar();
-	//Fl::check();
-	//Fl::redraw();	//windows->test();
+		//windows->test();
 	//getchar();
 	//while (1) {}
 	//model->test();

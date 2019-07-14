@@ -132,6 +132,7 @@ public:
 	double getArea() const { return m_area; }
 	int getPointNum() const { return m_PointNum; }
 	std::vector<Vec> getPoint() const { return m_Point; }
+	void show() const;
 	//bool isIntersected(const Segment &s) const;
 	bool inPoly_Vec(const Vec &v) const;
 	bool inPoly_PolyVec(const Poly &pol) const;

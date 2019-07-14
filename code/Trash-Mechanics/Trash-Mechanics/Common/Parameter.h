@@ -58,3 +58,10 @@ public:
 	RigidBodyParameter(int id = 0, int actionMode = createMode, RigidBody rb = RigidBody()) :ShapeParameter(actionMode, id), rb_(rb) {}
 	RigidBody getRigidBody() const { return rb_; }
 };
+
+class ImageSettingParameter : public ShapeParameter
+{
+private:
+	Fl_Color color_;
+
+};

@@ -217,6 +217,14 @@ bool Poly::setPoly(const Vec &center, const std::vector<Vec> &P)
 	return false;
 }
 
+void Poly::show() const
+{
+	for (std::vector<Vec>::const_iterator i = m_Point.begin(); i != m_Point.end(); i++)
+	{
+		i->show();
+	}
+}
+
 bool Poly::inPoly_Vec(const Vec &v) const
 {
 	if (this->m_PointNum == 1)

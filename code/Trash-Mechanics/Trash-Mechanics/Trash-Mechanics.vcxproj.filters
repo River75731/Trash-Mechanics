@@ -102,6 +102,9 @@
     <ClCompile Include="Command\AddForceFieldDataCommand.cpp">
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
+    <ClCompile Include="Command\AdjustViewDefaultSettingCommand.cpp">
+      <Filter>SourceFile\Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h">
@@ -168,6 +171,9 @@
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
     <ClInclude Include="Command\AddForceFieldDataCommand.h">
+      <Filter>SourceFile\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\AdjustViewDefaultSettingCommand.h">
       <Filter>SourceFile\Command</Filter>
     </ClInclude>
   </ItemGroup>
