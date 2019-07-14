@@ -35,18 +35,23 @@ void App::startWorld()
 	view->resetLINECOLOR(fl_rgb_color(35, 35, 35));
 	view->resetFILLCOLOR(fl_rgb_color(35, 35, 35));
 	windows->onUpdateRigidBodyData(createMode, //left
-		RigidBody(Poly(std::vector<Vec>{bottomLeft - dx * 10, bottomLeft + dx, topLeft + dx, topLeft - dx * 10}), INF, Vec(0, 0), 0));
+		RigidBody(Poly(std::vector<Vec>{bottomLeft - dx * 100 - dy * 100, bottomLeft + dx - dy * 100, topLeft + dx + dy * 100, topLeft - dx * 100 + dy * 100}), INF, Vec(0, 0), 0));
 	windows->onUpdateRigidBodyData(createMode, //up
-		RigidBody(Poly(std::vector<Vec>{bottomLeft + dx - dy * 10, bottomRight - dx - dy * 10, bottomRight + dy - dx, bottomLeft + dy + dx}), INF, Vec(0, 0), 0));
+		RigidBody(Poly(std::vector<Vec>{bottomLeft - dx * 100 - dy * 100, bottomRight + dx * 100 - dy * 100, bottomRight + dy + dx * 100, bottomLeft + dy - dx * 100}), INF, Vec(0, 0), 0));
 	windows->onUpdateRigidBodyData(createMode, //right
-		RigidBody(Poly(std::vector<Vec>{bottomRight + dx * 10, bottomRight - dx, topRight - dx, topRight + dx *10}), INF, Vec(0, 0), 0));
+		RigidBody(Poly(std::vector<Vec>{bottomRight + dx * 100 , bottomRight - dx, topRight - dx, topRight + dx * 100}), INF, Vec(0, 0), 0));
 	windows->onUpdateRigidBodyData(createMode, //down
-		RigidBody(Poly(std::vector<Vec>{topLeft + dx + dy *10, topRight - dx + dy * 10, topRight - dy - dx, topLeft - dy + dx}), INF, Vec(0, 0), 0));
+		RigidBody(Poly(std::vector<Vec>{topLeft - dx * 100 + dy *100, topLeft - dx * 100 - dy, topRight + dx * 100 - dy, topRight + dx * 100 + dy * 100}), INF, Vec(0, 0), 0));
 	windows->onUpdateRigidBodyData(createMode,  //middle
-		RigidBody(Poly(std::vector<Vec>{bottomRight - dMx + dy, bottomRight - dx - dMx + dy, topRight - dx - dMx - dy, topRight - dMx - dy}), INF, Vec(0, 0), 0));
+		RigidBody(Poly(std::vector<Vec>{bottomRight - dMx - dx + dy, bottomRight - dMx + dy, topRight  - dMx - dy, topRight - dMx - dx - dy}), INF, Vec(0, 0), 0));
+	windows->onUpdateRigidBodyData(createInvisibleMode, // invisible rectangle
+		RigidBody(Poly(std::vector<Vec>{bottomRight - dx - dMx - dy * 100, bottomRight - dy * 100 + dx * 100, topRight + dy * 100 + dx * 100, topRight - dx - dMx + dy * 100}), INF, Vec(0, 0), 0));
+	//(bottomRight - dx - dMx + dy).show(); (bottomRight + dy + dx * 100).show(); (topRight - dy + dx * 100).show(); ( topRight - dx - dMx - dy).show();
+	//getchar();
 	view->changeViewWindow(fl_rgb_color(50, 50, 50));
 	view->resetLINECOLOR(FL_BLACK);
 	view->resetFILLCOLOR(FL_WHITE);
+	view->refresh();
 
 	return;
 }

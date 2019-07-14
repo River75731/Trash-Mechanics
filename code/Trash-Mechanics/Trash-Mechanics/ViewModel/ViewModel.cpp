@@ -45,6 +45,9 @@ void ViewModel::execUpdateRigidBodyDataCommand(const RigidBody &rb, const int &i
 	case adjustMode:
 		model->adjustRigidBodyData(rb, id);
 		break;
+	case createInvisibleMode:
+		model->createInvisibleRigidBodyData(rb);
+		break;
 	}
 }
 
@@ -60,6 +63,10 @@ void ViewModel::execUpdatePolyViewCommand(Poly poly, int id, int actionMode)
 		break;
 	case adjustMode:
 		view->changeViewPolygon(id, poly);
+		break;
+	case createInvisibleMode:
+		view->createViewPolygon(id, poly);
+		view->hideViewPolygon(id);
 		break;
 	}
 }

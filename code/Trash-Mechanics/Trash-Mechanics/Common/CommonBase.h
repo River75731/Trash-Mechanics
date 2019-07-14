@@ -19,7 +19,7 @@ const double pi = 3.141592653589793;
 const double NearDist = 2.0;
 const double eps = 0.01;
 const double INF = (double)1.0e100;
-const int cooldownTurn = 5;
+const int cooldownTurn = 0;
 
 static bool inPoint = false;
 static bool inEdge = false;
@@ -28,7 +28,8 @@ typedef enum
 {
 	createMode = 0,
 	adjustMode,
-	deleteMode
+	deleteMode,
+	createInvisibleMode
 } actionModeEnum;
 
 typedef enum

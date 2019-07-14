@@ -14,6 +14,6 @@ private:
 	std::shared_ptr<Windows> windows;
 public:
 	App();
-	void startWorld();
+	void startWorld(); //Draw menu & map bound
 	~App() {}
 };

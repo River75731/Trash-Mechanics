@@ -32,8 +32,8 @@ void PhysicsSpace::goStep(const int &n) {
 		for (std::vector<RigidBody>::iterator i = m_RigidBodySet.begin(); i != m_RigidBodySet.end(); i++) {			
 			if (i->m() < 0.5*INF)
 				i->applyForce(m_Force * i->m());
-			i->accelerate(m_StepSize);
 			i->move(m_StepSize);
+			i->accelerate(m_StepSize);		
 			i->rotate(m_StepSize);
 		}
 		/* Collision */
@@ -48,6 +48,11 @@ void PhysicsSpace::goStep(const int &n) {
 
 void PhysicsSpace::addForceField(const Vec & InputForce) {
 	m_Force += InputForce;
+}
+
+void PhysicsSpace::setForceField(const Vec & InputForce)
+{
+	m_Force = InputForce;
 }
 
 void PhysicsSpace::clearNonINFRigidBody()
@@ -89,6 +94,12 @@ void Model::deleteRigidBodyData(const int & id)
 	onDeletePolyView(id);
 }
 
+void Model::createInvisibleRigidBodyData(const RigidBody rb)
+{
+	physicsSpace.addRigidBody(rb);
+	onCreateInvisiblePolyView(rb.getShape(), rb.getIdCount());
+}
+
 void Model::simulateTimeFlyData(const int &turns)
 {
 	physicsSpace.goStep(turns);
@@ -107,6 +118,7 @@ void Model::addForceFieldData(const Vec & v)
 	onAddForceFieldView(v);
 }
 
+
 void Model::clearUserRigidBody()
 {
 	std::vector<RigidBody> rbs = physicsSpace.getRigidBodys();
@@ -115,6 +127,7 @@ void Model::clearUserRigidBody()
 			onDeletePolyView(i->getId());
 	}
 	physicsSpace.clearNonINFRigidBody();
+	physicsSpace.setForceField(originPoint);
 	onRefreshView();
 }
 
@@ -147,6 +160,13 @@ void Model::onDeletePolyView(const int &id)
 {
 	updatePolyViewCommand->set_parameters(std::static_pointer_cast<Parameter, PolyParameter>
 		(std::shared_ptr<PolyParameter>(new PolyParameter(id, deleteMode))));
+	updatePolyViewCommand->pass();
+}
+
+void Model::onCreateInvisiblePolyView(const Poly & poly, const int & id)
+{
+	updatePolyViewCommand->set_parameters(std::static_pointer_cast<Parameter, PolyParameter>
+		(std::shared_ptr<PolyParameter>(new PolyParameter(id, createInvisibleMode, poly))));
 	updatePolyViewCommand->pass();
 }
 

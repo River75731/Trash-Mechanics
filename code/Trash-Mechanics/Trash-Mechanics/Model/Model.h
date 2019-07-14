@@ -17,6 +17,7 @@ public:
 	void setStepSize(const double &dt);
 	void goStep(const int &n);
 	void addForceField(const Vec &InputForce);
+	void setForceField(const Vec &InputForce);
 	void clearNonINFRigidBody();
 	Vec getForceField();
 	std::vector<RigidBody> getRigidBodys() const;
@@ -40,6 +41,7 @@ public:
 	void createRigidBodyData(const RigidBody rb);
 	void adjustRigidBodyData(const RigidBody rb, const int &id);
 	void deleteRigidBodyData(const int &id);
+	void createInvisibleRigidBodyData(const RigidBody rb);
 	void simulateTimeFlyData(const int &turns);
 	void addForceFieldData(const Vec &v);
 	void clearUserRigidBody();
@@ -49,6 +51,7 @@ private: // the funtion to send message to ViewModel
 	void onCreatePolyView(const Poly &poly, const int &id);
 	void onAdjustPolyView(const Poly &poly, const int &id); 
 	void onDeletePolyView(const int &id);
+	void onCreateInvisiblePolyView(const Poly &poly, const int &id);
 	void onAddForceFieldView(const Vec &v);
 	void onRefreshView();
 	//void onUpdatePolyViewTriggered();

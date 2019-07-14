@@ -78,9 +78,6 @@
     <ClCompile Include="Windows\Windows.cpp">
       <Filter>SourceFile\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Common\CommandBase.cpp">
-      <Filter>SourceFile\Command</Filter>
-    </ClCompile>
     <ClCompile Include="Common\CommonBase.cpp">
       <Filter>SourceFile\Common</Filter>
     </ClCompile>

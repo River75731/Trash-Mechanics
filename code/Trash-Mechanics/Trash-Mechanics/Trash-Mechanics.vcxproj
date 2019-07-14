@@ -130,7 +130,6 @@
     <ClCompile Include="Command\UpdatePolyViewCommand.cpp" />
     <ClCompile Include="Command\UpdateRigidBodyDataCommand.cpp" />
     <ClCompile Include="Command\SimulateTimeFlyDataCommand.cpp" />
-    <ClCompile Include="Common\CommandBase.cpp" />
     <ClCompile Include="Common\CommonBase.cpp" />
     <ClCompile Include="Common\Parameter.cpp" />
     <ClCompile Include="Main.cpp" />

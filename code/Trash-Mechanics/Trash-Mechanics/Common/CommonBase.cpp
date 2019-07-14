@@ -3,7 +3,7 @@
 Vec originPoint(0, 0);
 Vec gravity(0, 9.8);
 Segment emptySegment(originPoint, originPoint);
-int RigidBody::IdCount = 0;
+int RigidBody::IdCount = -7; // There are 6 rigidbodys as map bound
 int RigidBody::getIdCount()
 {
 	return IdCount;
@@ -268,6 +268,7 @@ Vec Poly::getInterPoint(const Poly & pol) const
 	{
 		if (this->inPoly_Vec(*i)) {
 			ret+= *i;
+			return ret;
 			interpointnum++;
 		}
 			
@@ -380,7 +381,7 @@ void RigidBody::clacInertiaConstant()
 
 	m_InertiaConstant = 0.0;
 	double rou = m_Mass / m_Shape.getArea();
-	std::cout << "rou = " << rou << "mass = " << m_Mass << "area = " << m_Shape.getArea();
+	std::cout << "rou = " << rou << " mass = " << m_Mass << " area = " << m_Shape.getArea();
 	Vec v(*(m_Shape.getPoint().begin()));
 	Vec vc(m_Shape.getCenterPoint());
 	//std::cout << '?';	
@@ -395,7 +396,7 @@ void RigidBody::clacInertiaConstant()
 		double ICreal = ICaxis + dm * ((v - vc).getMagnitude() * (v - vc).getMagnitude());
 		m_InertiaConstant += ICreal;
 	}
-	std::cout << "IC = "<<m_InertiaConstant << std::endl;
+	std::cout << " Inertia Constant = "<<m_InertiaConstant << std::endl;
 
 }
 
@@ -481,14 +482,17 @@ void RigidBody::rotate(const double &dt) {
 }
 
 bool RigidBody::collide(RigidBody &Tag) {
-	if (m_Mass >= 0.5*INF && Tag.m_Mass >= 0.5*INF) {
+	if (Tag.m_Mass >= 0.5*INF ) {
+		//&& Tag.m_Mass >= 0.5*INF
 		return false;
 	}
+	if (m_Id == -2) // the virtual middle wall
+		return false;
 	if (m_Shape.inPoly_PolyVec(Tag.m_Shape) == false) {	
 		if (Tag.m_IdLastCollision == m_Id) Tag.m_IdLastCollision = NULL;
 		return false;
 	}
-	if (Tag.m_IdLastCollision == m_Id) return false;
+//	if (Tag.m_IdLastCollision == m_Id) return false;
 	m_IdLastCollision = Tag.m_Id;
 	m_CoolDown = cooldownTurn;
 	Tag.m_IdLastCollision = m_Id;
@@ -508,11 +512,16 @@ bool RigidBody::collide(RigidBody &Tag) {
 	double wb = w();
 	double mb = m();
 	double ib = i();
-	double ox = getShape().getInterPoint(Tag.getShape()).getX();
-	double oy = getShape().getInterPoint(Tag.getShape()).getY();
+	Vec point = getShape().getInterPoint(Tag.getShape());
+	Segment seg = getShape().getInterSegment(Tag.getShape());
+	double ox = point.getX();
+	double oy = point.getY();
 	double fx;
 	double fy;
-	Vec dir = getShape().getInterSegment(Tag.getShape()).getV2() - getShape().getInterSegment(Tag.getShape()).getV1();
+	Vec dir = seg.getV2() - seg.getV1();
+	Vec normal(dir.getY(), -dir.getX());
+	normal = normal / normal.getMagnitude();
+	/*
 	if (fabs(dir.getY()) < 0.01) {
 		fx = 0;
 		fy = K_Resilence ;
@@ -525,7 +534,12 @@ bool RigidBody::collide(RigidBody &Tag) {
 		fx = K_Resilence ;
 		fy = -dir.getX()*fx / dir.getY();
 	}
-	if (Vec(ox - cax, oy - cay) ^ Vec(fx, fy)) { fx *= -1; fy *= -1; }
+	if (Vec(ox - cax, oy - cay) ^ Vec(fx, fy)) { fx *= -1; fy *= -1; }*/
+	fx = normal.getX() * K_Resilence;
+	fy = normal.getY() * K_Resilence;
+	double distV2S = VecToSegmentDist(point, seg);
+	Vec positionCorrection(normal * distV2S); // avoid inserted bug
+
 	double k = 0.9;
 
 #if DEBUG_COMMON==1 
@@ -575,6 +589,21 @@ bool RigidBody::collide(RigidBody &Tag) {
 	Tag.m_AngularVelocity = wa;
 	m_Velocity = Vec(vbx, vby);
 	m_AngularVelocity = wb;
+	#if DEBUG_COMMON == 1
+	std::cout << "position correction = ";
+	positionCorrection.show();
+	#endif
+	if (m_Mass >= INF * 0.5)
+	{
+		Tag.m_Shape.move(positionCorrection);
+
+	}
+		
+	else
+	{
+		Tag.m_Shape.move(positionCorrection);
+		//this->m_Shape.move(positionCorrection * -0.6);
+	}
 #if DEBUG_COMMON==1
 	printf("collision time:%lf\n", deltat);
 	printf("A(after collision): m=%.2lf i=%.2lf v=(%lf,%lf) w=%lf\n", ma, ia, vax, vay, wa);
