@@ -841,7 +841,7 @@ bool View::changeViewCircle(const int & id, const double & radius)
 		std::cout << "ERROR: Cannot find circle ID : " << id << " .\n\n";
 		return false;
 	}
-	((ViewCircle*)temp)->setCircle(ViewPoint(((ViewCircle*)temp)->getcenter()), radius, id);
+	((ViewCircle*)temp)->setCircle(ViewPoint(((ViewCircle*)temp)->getcenter()), int(radius), id);
 	std::cout << "Successfully change the radius of circle ID : " << id << " .\n\n";
 	m_system.drawSystem();
 	return true;

@@ -20,7 +20,7 @@ App::App():view(new View), model(new Model), viewmodel(new ViewModel), windows(n
 
 void App::startWorld()
 {
-	srand(time(0));
+	srand((unsigned int)time(0));
 	view->createViewWindow("Mini Mechanics");
 	int w = view->getsystem().getWINDOW()->getwidth();
 	int h = view->getsystem().getWINDOW()->getheight();
