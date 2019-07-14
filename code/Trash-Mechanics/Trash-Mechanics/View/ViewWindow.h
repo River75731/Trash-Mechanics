@@ -7,11 +7,14 @@
 #include <string>
 
 #define DEFAULT_TOPLEFT ViewPoint(Fl::w()/4,Fl::h()/4)
-#define DEFAULT_WINWIDTH Fl::w()/2
-#define DEFAULT_WINHEIGHT Fl::h()/2
+#define DEFAULT_WINWIDTH (Fl::w()/2)
+#define DEFAULT_WINHEIGHT (Fl::h()/2)
 #define DEFAULT_WINNAME "New Page"
 #define DEFAULT_WINCOLOR FL_WHITE
 #define DEFAULT_WINVISIBLE true
+
+#define MAX_WINWIDTH Fl::w()
+#define MAX_WINHEIGHT Fl::h()
 
 class ViewWindow :public Fl_Double_Window {
 private:

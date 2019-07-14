@@ -8,6 +8,8 @@
 #define DEFAULT_FILLCOLOR FL_WHITE
 #define DEFAULT_VISIBLE true
 
+#define MAX_LINEWIDTH 10
+
 class ViewShape  {
 private:
 	int m_id;

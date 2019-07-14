@@ -253,16 +253,14 @@ ViewShape* ViewWindow::getviewshape(const int & id)
 
 bool ViewWindow::deleteshape(ViewShape* &vs)
 {
-	for (std::vector<ViewShape*>::const_iterator i = m_shapeset.begin(); i != m_shapeset.end();)
+	for (std::vector<ViewShape*>::const_iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++)
 	{
 		if (*i == vs)
 		{
 			delete *i;
-			i = m_shapeset.erase(i);
+			m_shapeset.erase(i);
+			return true;
 		}
-			
-		else
-			i++;
 	}
 	return false;
 }

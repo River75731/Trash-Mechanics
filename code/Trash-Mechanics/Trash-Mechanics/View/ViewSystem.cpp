@@ -26,7 +26,7 @@ bool ViewSystem::deletewindow(ViewWindow* &temp)
 		{
 			delete *i;
 			m_windowset.erase(i);
-			if (!m_windowset.empty()) m_DEFAULT_WINDOW = nullptr;
+			if (m_windowset.empty()) m_DEFAULT_WINDOW = nullptr;
 			else m_DEFAULT_WINDOW = *(m_windowset.end() - 1);
 			return true;
 		}
