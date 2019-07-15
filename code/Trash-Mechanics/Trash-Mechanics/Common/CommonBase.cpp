@@ -298,6 +298,21 @@ Segment Poly::getInterSegment(const Poly & pol) const
 	return ms;
 }
 
+Vec Poly::getNearestPoint(const Vec & v) const
+{
+	double m = INF, r;
+	Vec mv(originPoint);
+	for (std::vector<Vec>::const_iterator i = m_Point.begin(); i != m_Point.end(); i++)
+	{
+		if (m > (r = VecToVecDist(*i, v)))
+		{
+			mv = *i;
+			m = r;
+		}
+	}
+	return mv;
+}
+
 bool Poly::move(const Vec & v)
 {
 	for (std::vector<Vec>::iterator i = m_Point.begin(); i != m_Point.end(); i++)

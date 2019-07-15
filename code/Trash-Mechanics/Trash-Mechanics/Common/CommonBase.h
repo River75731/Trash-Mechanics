@@ -139,6 +139,7 @@ public:
 	bool inPoly_PolyVec(const Poly &pol) const;
 	Vec getInterPoint(const Poly &pol) const; //return the intersection point of this and pol polygons; if none, return originPoint
 	Segment getInterSegment(const Poly &pol) const; //return the intersection segment of this and pol polygons; if none, return emptySegment
+	Vec getNearestPoint(const Vec &v) const;
 	//Vec getPolyCenter();
 	bool move(const Vec &v);
 	bool rotate(const double &angle, const Vec &center);
