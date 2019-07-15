@@ -46,8 +46,6 @@ void App::startWorld()
 		RigidBody(Poly(std::vector<Vec>{bottomRight - dMx - dx + dy, bottomRight - dMx + dy, topRight  - dMx - dy, topRight - dMx - dx - dy}), INF, Vec(0, 0), 0));
 	windows->onUpdateRigidBodyData(createInvisibleMode, // invisible rectangle
 		RigidBody(Poly(std::vector<Vec>{bottomRight - dx - dMx - dy * 100, bottomRight - dy * 100 + dx * 100, topRight + dy * 100 + dx * 100, topRight - dx - dMx + dy * 100}), INF, Vec(0, 0), 0));
-	//(bottomRight - dx - dMx + dy).show(); (bottomRight + dy + dx * 100).show(); (topRight - dy + dx * 100).show(); ( topRight - dx - dMx - dy).show();
-	//getchar();
 	view->changeViewWindow(fl_rgb_color(50, 50, 50));
 	view->resetLINECOLOR(FL_BLACK);
 	view->resetFILLCOLOR(FL_WHITE);

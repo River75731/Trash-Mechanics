@@ -52,7 +52,5 @@ private: // the funtion to send message to ViewModel
 	void onAdjustPolyView(const Poly &poly, const int &id); 
 	void onDeletePolyView(const int &id);
 	void onCreateInvisiblePolyView(const Poly &poly, const int &id);
-	void onAddForceFieldView(const Vec &v);
 	void onRefreshView();
-	//void onUpdatePolyViewTriggered();
 };

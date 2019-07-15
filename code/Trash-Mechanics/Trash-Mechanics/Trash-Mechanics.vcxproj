@@ -78,6 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\include\FL;C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include\FL;C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.16.27023\include\FL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Comctl32.lib;fltkd.lib;fltkformsd.lib;fltkgld.lib;fltkimagesd.lib;fltkjpegd.lib;fltkpngd.lib;fltkzlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -133,13 +134,10 @@
     <ClCompile Include="Command\UpdateRigidBodyDataCommand.cpp" />
     <ClCompile Include="Command\SimulateTimeFlyDataCommand.cpp" />
     <ClCompile Include="Common\CommonBase.cpp" />
-    <ClCompile Include="Common\Parameter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model\Model.cpp" />
-    <ClCompile Include="demo.cpp" />
     <ClCompile Include="ViewModel\ViewModel.cpp" />
     <ClCompile Include="View\View.cpp" />
-    <ClCompile Include="View\ViewCircle.cpp" />
     <ClCompile Include="View\ViewPoint.cpp" />
     <ClCompile Include="View\ViewPolygon.cpp" />
     <ClCompile Include="View\ViewSegment.cpp" />
@@ -165,7 +163,6 @@
     <ClInclude Include="ViewModel\ViewModel.h" />
     <ClInclude Include="View\GUI.h" />
     <ClInclude Include="View\View.h" />
-    <ClInclude Include="View\ViewCircle.h" />
     <ClInclude Include="View\ViewPoint.h" />
     <ClInclude Include="View\ViewPolygon.h" />
     <ClInclude Include="View\ViewSegment.h" />

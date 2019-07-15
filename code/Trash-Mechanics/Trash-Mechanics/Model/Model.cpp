@@ -115,7 +115,6 @@ void Model::simulateTimeFlyData(const int &turns)
 void Model::addForceFieldData(const Vec & v)
 {
 	physicsSpace.addForceField(v);
-	onAddForceFieldView(v);
 }
 
 
@@ -175,8 +174,4 @@ void Model::onRefreshView()
 	refreshViewCommand->pass();
 }
 
-void Model::onAddForceFieldView(const Vec & v)
-{
-	//TBD
-	//Does it need to update view?
-}
+

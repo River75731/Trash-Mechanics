@@ -24,8 +24,6 @@ private:
 	static std::string m_DEFAULT_WINNAME;
 	static Fl_Color m_DEFAULT_WINCOLOR;
 	static bool m_DEFAULT_WINVISIBLE;
-	//static ViewWindow m_DEFAULT_WINDOW;
-	//static int m_WINDOWNUM;
 	bool m_winvisible;
 	std::vector<ViewShape*> m_shapeset;
 public:

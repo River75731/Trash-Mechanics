@@ -223,7 +223,6 @@ bool ViewWindow::setWINVISIBLE(const bool & v)
 bool ViewWindow::clearshapeset()
 {
 	if (m_shapeset.empty()) return true;
-	//for (std::vector<ViewShape*>::iterator i = m_shapeset.begin(); i != m_shapeset.end(); i++) free(*i);
 	m_shapeset.clear();
 	return true;
 }

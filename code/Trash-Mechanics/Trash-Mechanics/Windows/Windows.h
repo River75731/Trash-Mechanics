@@ -28,8 +28,4 @@ public: // the funtion to send message to ViewModel
 	void onAddForceFieldData(const Vec &v);
 	void onClearUserRigidBodyCommand();
 
-public:  // callback function body
-	/*void onCreateRigidBodyTriggered(Fl_Widget* sender, void*);
-	void onSimulateTimeFlyTriggered();
-	void onAddForceFieldTriggered();*/
 };

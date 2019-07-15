@@ -3,7 +3,6 @@
 #include "ViewShape.h"
 #include "ViewSegment.h"
 #include "ViewPolygon.h"
-#include "ViewCircle.h"
 #include "ViewWindow.h"
 #include "ViewSystem.h"
 #include "Fl_Input.H"

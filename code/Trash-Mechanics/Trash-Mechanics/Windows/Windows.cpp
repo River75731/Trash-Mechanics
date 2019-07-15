@@ -25,8 +25,6 @@ void Windows::setClearUserRigidBodyCommand(std::shared_ptr<Command> command)
 
 void Windows::test()
 {
-//	onUpdateRigidBodyTriggered(); // assume a trigger
-//	onSimulateTimeFlyTriggered();
 
 }
 
@@ -64,22 +62,3 @@ void Windows::onClearUserRigidBodyCommand()
 {
 	clearUserRigidBodyCommand->pass();
 }
-/*
-void Windows::onCreateRigidBodyTriggered(Fl_Widget* sender, void*)
-{
-	printf("Hi!");
-	getchar();
-	RigidBody rb;
-	onUpdateRigidBodyData(createMode, rb);
-}
-
-void Windows::onSimulateTimeFlyTriggered()
-{
-	// TBD
-	onSimulateTimeFlyData();
-}
-
-void Windows::onAddForceFieldTriggered()
-{
-	onAddForceFieldData();
-}*/

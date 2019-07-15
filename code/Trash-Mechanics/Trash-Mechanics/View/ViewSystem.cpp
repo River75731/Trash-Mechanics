@@ -74,6 +74,5 @@ void ViewSystem::drawSystem()
 ViewSystem::~ViewSystem()
 {
 	if(m_DEFAULT_WINDOW) delete m_DEFAULT_WINDOW;
-	// now we don't free the winsowset
 	return;
 }
