@@ -68,11 +68,11 @@ bool View::createViewWindow(const std::string & name, const Vec & topleft, const
 	createRB_Button->callback(onCreateRigidBodyTriggered);
 	createRB_Button->color(fl_rgb_color(100, 200, 100));
 	
-	forceX_Input = new Fl_Input(w - MarginX, MarginY + 10 * InputHeight + 1 * ButtonHeight + 6 * gap, Width, InputHeight, "Fx(m/s^2)=");
+	forceX_Input = new Fl_Input(w - MarginX, MarginY + 10 * InputHeight + 1 * ButtonHeight + 6 * gap, Width, InputHeight, "ax(m/s^2)=");
 	forceX_Input->value("0");
 	forceX_Input->labelcolor(fl_rgb_color(200, 200, 200));
 
-	forceY_Input = new Fl_Input(w - MarginX, MarginY + 11 * InputHeight + 1 * ButtonHeight + 7 * gap, Width, InputHeight, "Fy(m/s^2)=");
+	forceY_Input = new Fl_Input(w - MarginX, MarginY + 11 * InputHeight + 1 * ButtonHeight + 7 * gap, Width, InputHeight, "ay(m/s^2)=");
 	forceY_Input->value("9.8");
 	forceY_Input->labelcolor(fl_rgb_color(200, 200, 200));
 
@@ -86,11 +86,11 @@ bool View::createViewWindow(const std::string & name, const Vec & topleft, const
 	CMD_Output->textcolor(fl_rgb_color(250, 250, 250));
 	CMD_Output->value("> Loading\n> Link start");
 
-	Fl_Button *simulate_Button = new Fl_Button(w - MarginX, MarginY + 30 * InputHeight, Width, ButtonHeight, "Simulate");
+	Fl_Button *simulate_Button = new Fl_Button(w - MarginX, MarginY + 16 * InputHeight + 2 * ButtonHeight + 10 * gap, Width, ButtonHeight, "Simulate");
 	simulate_Button->callback(onSimulateTimeFlyTriggered);
 	simulate_Button->color(fl_rgb_color(250, 250, 100));
 
-	Fl_Button *clear_Button = new Fl_Button(w - MarginX, MarginY + 30 * InputHeight + 1* ButtonHeight + 1 * gap, Width, ButtonHeight, "Clear");
+	Fl_Button *clear_Button = new Fl_Button(w - MarginX, MarginY + 16 * InputHeight + 3 * ButtonHeight + 11 * gap, Width, ButtonHeight, "Clear");
 	clear_Button->callback(onClearTriggered);
 	clear_Button->color(fl_rgb_color(250, 100, 100));
 	Fl::add_timeout(0.1, simulate, temp);
@@ -1058,7 +1058,7 @@ void onCreateRigidBodyTriggered(Fl_Widget* sender, void*) {
 		Vec(atoi(velocityX_Input_str), atoi(velocityY_Input_str)),
 		atoi(angvelocity_Input_str) / 180.0*pi
 	);
-	View::CMD_Output->value("> SUCCESS\n@Creating RB\n");
+	View::CMD_Output->value("> SUCCESS\n@ Creating RB\n");
 	(View::getWindowsPtr())->onUpdateRigidBodyData(createMode, rb);
 }
 
