@@ -17,7 +17,7 @@
 
 const double pi = 3.141592653589793;
 const double NearDist = 2.0;
-const double eps = 0.01;
+const double eps = 0.001;
 const double INF = (double)1.0e100;
 const int cooldownTurn = 0;
 
