@@ -1,5 +1,6 @@
 #pragma once
 #include "ViewShape.h"
+#include "ViewPoint.h"
 
 #include <vector>
 

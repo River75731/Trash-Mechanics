@@ -57,74 +57,6 @@ public:
 	Window visibility: visible
 */
 
-	bool deleteViewWindow(const std::string &name) ;
-/*
-	This function delete the window of specific name
-*/
-
-	bool changeViewWindow(const std::string &name) ;
-/*
-	This function change the operating window to a specific window
-*/
-
-	bool changeViewWindow(const Vec &v);
-/*
-	This function change the topleft corner of the operating window
-*/
-
-	bool changeViewWindow(const int &d, const bool &status);
-/*
-	This function change the width or height of the operating window
-	status = 0 : change width
-	status = 1 : change height
-*/
-
-	bool changeViewWindow(const Fl_Color &c);
-/*
-	This function change the background color of the operating window
-*/
-
-	bool hideViewWindow() ;
-/*
-	This function set the operating window invisible
-*/
-
-	bool showViewWindow() ;
-/*
-	This function set the operating window visible
-*/
-
-	bool resetWINVISIBLE(const bool &v);
-/*
-	This function reset the default window visibility
-*/
-
-	bool resetWINTOPLEFT(const Vec &v);
-/*
-	This function reset the default top-left corner of window
-*/
-
-	bool resetWINWIDTH(const int &w);
-/*
-	This function reset the default window width
-*/
-
-	bool resetWINHEIGHT(const int &h);
-/*
-	This function reset the default window height
-*/
-
-	bool resetWINNAME(const std::string &name);
-/*
-	This function reset the default window name
-*/
-
-	bool resetWINCOLOR(const Fl_Color &c);
-/*
-	This function reset the default window background color
-*/
-
-
 
 /* SHAPE COMMAND */
 /*
@@ -149,6 +81,8 @@ public:
 	Polygon fill color: FL_WHITE
 	Polygon visibility: visible
 */
+	bool changeViewWindow(const Fl_Color & c);
+
 
 	bool deleteViewPolygon(const int &id);
 /*
@@ -176,31 +110,11 @@ public:
 /*
 	This function set specific polygon invisible
 */
-
-	bool showViewPolygon(const int &id);
-/*
-	This function set specific polygon visible
-*/
-
-	bool resetLINEWIDTH(const int &lw);
-/*
-	This function reset the default linewidth
-*/
-
-	bool resetLINECOLOR(const Fl_Color &lc);
-/*
-	This function reset the default linecolor
-*/
-
 	bool resetFILLCOLOR(const Fl_Color &fc);
 /*
 	This function reset the default fillcolor
 */
-
-	bool resetVISIBLE(const bool &v);
-/*
-	This function reset the default visibility
-*/
+	bool resetLINECOLOR(const Fl_Color & lc);
 
 };
 

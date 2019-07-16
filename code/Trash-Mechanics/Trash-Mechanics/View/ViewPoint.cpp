@@ -1,6 +1,6 @@
 #include "ViewPoint.h"
 
-ViewPoint::ViewPoint():Vec()
+ViewPoint::ViewPoint() :Vec()
 {
 	return;
 }
@@ -56,7 +56,3 @@ ViewPoint::~ViewPoint()
 {
 	return;
 }
-
-
-
-

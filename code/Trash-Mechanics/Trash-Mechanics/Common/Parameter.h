@@ -59,18 +59,3 @@ public:
 	RigidBody getRigidBody() const { return rb_; }
 };
 
-class ImageSettingParameter : public ShapeParameter
-{
-private:
-	Fl_Color lineColor_;
-	Fl_Color fillColor_;
-	int lineWidth_;
-	bool visibility_;
-public:
-	ImageSettingParameter(int id, Fl_Color linecolor, Fl_Color fillcolor, int linewidth, bool visibility) :
-		ShapeParameter(adjustMode, id), lineColor_(linecolor), fillColor_(fillcolor), lineWidth_(linewidth), visibility_(visibility) {}
-	Fl_Color getLineColor() const { return lineColor_; }
-	Fl_Color getFillColor() const { return fillColor_; }
-	int getLineWidth() const { return lineWidth_; }
-	bool getVisibility() const { return visibility_; }
-};

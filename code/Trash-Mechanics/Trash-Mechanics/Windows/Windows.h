@@ -19,7 +19,6 @@ public:
 	void setSimulateTimeFlyDataCommand(std::shared_ptr<Command> command);
 	void setAddForceFieldDataCommand(std::shared_ptr<Command> command);
 	void setClearUserRigidBodyCommand(std::shared_ptr<Command> command);
-	void test();
 
 public: // the funtion to send message to ViewModel
 	void onUpdateRigidBodyData(const int & actionMode, const RigidBody &rb, const int &id = 0); // create & adjust

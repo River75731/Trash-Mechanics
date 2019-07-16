@@ -10,7 +10,7 @@
 
 #define MAX_LINEWIDTH 10
 
-class ViewShape  {
+class ViewShape {
 private:
 	int m_id;
 	bool m_visible;

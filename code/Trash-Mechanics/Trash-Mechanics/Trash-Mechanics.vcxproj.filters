@@ -28,9 +28,6 @@
     <Filter Include="SourceFile\Model">
       <UniqueIdentifier>{67f42434-4791-477b-bac5-76015d769387}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFile\Others">
-      <UniqueIdentifier>{b06b85ac-f19b-4b35-85bb-2341712311ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SourceFile\App">
       <UniqueIdentifier>{8efbe492-a4df-46e2-bf6e-11b166f631cb}</UniqueIdentifier>
     </Filter>
@@ -48,19 +45,10 @@
     <ClCompile Include="App\App.cpp">
       <Filter>SourceFile\App</Filter>
     </ClCompile>
-    <ClCompile Include="View\ViewPoint.cpp">
-      <Filter>SourceFile\View</Filter>
-    </ClCompile>
-    <ClCompile Include="View\ViewShape.cpp">
-      <Filter>SourceFile\View</Filter>
-    </ClCompile>
     <ClCompile Include="View\ViewPolygon.cpp">
       <Filter>SourceFile\View</Filter>
     </ClCompile>
     <ClCompile Include="View\ViewWindow.cpp">
-      <Filter>SourceFile\View</Filter>
-    </ClCompile>
-    <ClCompile Include="View\ViewSegment.cpp">
       <Filter>SourceFile\View</Filter>
     </ClCompile>
     <ClCompile Include="ViewModel\ViewModel.cpp">
@@ -96,21 +84,18 @@
     <ClCompile Include="Command\ClearUserRigidBodyCommand.cpp">
       <Filter>SourceFile\Command</Filter>
     </ClCompile>
+    <ClCompile Include="View\ViewShape.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\ViewPoint.cpp">
+      <Filter>SourceFile\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h">
       <Filter>SourceFile\App</Filter>
     </ClInclude>
-    <ClInclude Include="View\ViewPoint.h">
-      <Filter>SourceFile\View</Filter>
-    </ClInclude>
     <ClInclude Include="View\GUI.h">
-      <Filter>SourceFile\View</Filter>
-    </ClInclude>
-    <ClInclude Include="View\ViewShape.h">
-      <Filter>SourceFile\View</Filter>
-    </ClInclude>
-    <ClInclude Include="View\ViewSegment.h">
       <Filter>SourceFile\View</Filter>
     </ClInclude>
     <ClInclude Include="View\ViewPolygon.h">
@@ -166,6 +151,12 @@
     </ClInclude>
     <ClInclude Include="Command\ClearUserRigidBodyCommand.h">
       <Filter>SourceFile\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ViewShape.h">
+      <Filter>SourceFile\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ViewPoint.h">
+      <Filter>SourceFile\View</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -23,10 +23,7 @@ void Windows::setClearUserRigidBodyCommand(std::shared_ptr<Command> command)
 	clearUserRigidBodyCommand = command;
 }
 
-void Windows::test()
-{
 
-}
 
 
 

@@ -2,7 +2,7 @@
 #include "../Common/Common.h"
 
 const int RB_MAXN = 100;
-const double DEFAULT_STEPSIZE = 0.1;
+const double DEFAULT_STEPSIZE = 0.01;
 
 class PhysicsSpace {
 private:
@@ -45,7 +45,6 @@ public:
 	void simulateTimeFlyData(const int &turns);
 	void addForceFieldData(const Vec &v);
 	void clearUserRigidBody();
-	void test() { physicsSpace.getForceField().show(); }
 
 private: // the funtion to send message to ViewModel
 	void onCreatePolyView(const Poly &poly, const int &id);

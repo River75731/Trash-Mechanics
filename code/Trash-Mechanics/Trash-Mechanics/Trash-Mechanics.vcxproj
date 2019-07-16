@@ -140,7 +140,6 @@
     <ClCompile Include="View\View.cpp" />
     <ClCompile Include="View\ViewPoint.cpp" />
     <ClCompile Include="View\ViewPolygon.cpp" />
-    <ClCompile Include="View\ViewSegment.cpp" />
     <ClCompile Include="View\ViewShape.cpp" />
     <ClCompile Include="View\ViewSystem.cpp" />
     <ClCompile Include="View\ViewWindow.cpp" />
@@ -165,7 +164,6 @@
     <ClInclude Include="View\View.h" />
     <ClInclude Include="View\ViewPoint.h" />
     <ClInclude Include="View\ViewPolygon.h" />
-    <ClInclude Include="View\ViewSegment.h" />
     <ClInclude Include="View\ViewShape.h" />
     <ClInclude Include="View\ViewSystem.h" />
     <ClInclude Include="View\ViewWindow.h" />

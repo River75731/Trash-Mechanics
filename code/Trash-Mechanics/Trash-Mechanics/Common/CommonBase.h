@@ -47,13 +47,6 @@ typedef enum
 	Custom
 } DiffcultyType;
 
-typedef enum
-{
-	Harzardous = 0, //harmful
-	Recyclable,
-	Residnal, //dry
-	Household //wet
-} TrashType;
 
 class Vec
 {
