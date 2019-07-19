@@ -32,22 +32,6 @@ typedef enum
 	createInvisibleMode
 } actionModeEnum;
 
-typedef enum
-{
-	PractiseMode = 0,
-	RealityMode
-} ModeType;
-
-typedef enum
-{
-	Easy = 0,
-	Medium,
-	Hard,
-	Nightmare,
-	Custom
-} DiffcultyType;
-
-
 class Vec
 {
 private:

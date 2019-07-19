@@ -1,0 +1,64 @@
+﻿\documentclass[a4paper,fleqn]{article}
+\usepackage{pgf-umlsd}
+\usepackage{changepage}
+\usepackage{pdflscape}
+
+
+
+\begin{document}
+%page 1
+\thispagestyle{empty}
+\begin{landscape}
+\textbf{}\\
+\textbf{\leftline{onCommand(ModelData-Changed and ViewData-Changed)Triggered}}\\
+\textbf{\leftline{e.g. AddForceFieldCommand, ClearUserRigidBodyCommand, SimulateTimeFlyCommand, UpdateRigidBodyCommand}}\\
+\begin{adjustwidth}{2cm}{2cm}
+\begin{sequencediagram}
+\newthread{MW}{Window and View}
+\newinst{QC}{QueryCommand}
+\newinst{VM}{ViewModel}
+\newinst{VNC}{ViewNotificationCommand}
+\newinst{DM}{DataModel}
+
+\begin{call}{MW}{Set}{QC}{}
+ \begin{call}{QC}{Query}{VM}{}
+  \begin{call}{VM}{Update}{DM}{}
+   \begin{call}{DM}{Set}{VNC}{}
+    \begin{call}{VNC}{Query}{VM}{}\end{call}
+   \end{call}
+  \end{call}
+  \begin{call}{VM}{Update}{MW}{}
+  \end{call}
+ \end{call}
+\end{call}
+\end{sequencediagram}
+\end{adjustwidth}
+\end{landscape}
+
+%page 2
+\thispagestyle{empty}
+\begin{landscape}
+\newpage
+\textbf{}\\
+\textbf{\leftline{onCommand(Only ViewData-Changed)Triggered}}\\
+\textbf{\leftline{e.g. RefreshCommand}}\\
+\begin{adjustwidth}{2cm}{2cm}
+\begin{sequencediagram}
+\newthread{MW}{Window and View}
+\newinst{QC}{QueryCommand}
+\newinst{VM}{ViewModel}
+
+\begin{call}{MW}{Set}{QC}{}
+ \begin{call}{QC}{Query}{VM}{}
+  \begin{call}{VM}{Update}{MW}{}
+  \end{call}
+ \end{call}
+\end{call}
+\end{sequencediagram}
+\end{adjustwidth}
+\end{landscape}
+
+\end{document}
+
+
+
