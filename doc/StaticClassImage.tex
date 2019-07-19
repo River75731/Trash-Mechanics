@@ -1,0 +1,364 @@
+﻿\documentclass{article}
+\usepackage{./pgf-umlcd-f}
+%xeCJK
+\usepackage[BoldFont,SlantFont,CJKchecksingle]{xeCJK}
+\setCJKmainfont[BoldFont=SimHei,SlantedFont=KaiTi]{SimSun}
+
+\begin{document}
+\section{Common Layer}
+\begin{tikzpicture}
+\begin{class}[text width=7cm]{Vec}{0,-0.3}
+\attribute{- m\_X : double}
+\attribute{- m\_Y : double}
+\operation{+ setX(x:double) : bool}
+\operation{+ setY(y:double) : bool}
+\operation{+ getX() : double}
+\operation{+ getY() : double}
+\operation{+ getAngle() : double}
+\operation{+ getMagnitude() : double}
+\operation{+ rotate(center:Vec,angle:double) : void}
+\end{class}
+\begin{class}[text width=7cm]{Segment}{4,6.2}
+\attribute{- m\_Vertex1 : Vec}
+\attribute{- m\_Vertex2 : Vec}
+\operation{+ getV1() : Vec}
+\operation{+ getV2() : Vec}
+\operation{+ setV1(v:Vec) : bool}
+\operation{+ setV2(v:Vec) : bool}
+\end{class}
+\begin{class}[text width=7.2cm]{Poly}{-4,6.2}
+\attribute{- m\_CenterPoint: Vec}
+\attribute{- m\_Point : vector<Vec>}
+\attribute{- m\_PointNum : int}
+\attribute{- m\_area : double}
+\operation{+ calcCenterPointAndArea() : void}
+\operation{+ setPoly(center:Vec,pol:vector<Vec>) : bool}
+\operation{+ inPoly\_Vec(v:Vec) : bool}
+\operation{+ getNearestPoint(v:Vec) : Vec}
+\operation{+ getInterSegment(p:Poly) : Segment}
+\operation{+ rotate(center:Vec,angle:double) : bool}
+\operation{+ move(v:Vec) : bool}
+\end{class}
+\begin{class}{RigidBody}{-4,13.5}
+\attribute{- m\_Shape : Poly}
+\attribute{- m\_Force : Vec}
+\attribute{- m\_Veolocity : Vec}
+\attribute{- m\_Mass : double}
+\attribute{- m\_InertiaConstant : double}
+\attribute{- m\_AngularVelocity : double}
+\attribute{- m\_Id : int}
+\attribute{- m\_CoolDown : int}
+\operation{- applyForce() : void}
+\operation{- move(dt:double) : void}
+\operation{- accelerate(dt:double) : void}
+\operation{- rotate(dt:double) : void}
+\operation{- collide(Tag:RigidBody) : bool}
+\end{class}
+\composition{Segment}{m\_vertex1}{m\_vertex2}{Vec}
+\composition{Poly}{m\_CenterPoint}{m\_Point}{Vec}
+\composition{RigidBody}{m\_Shape}{}{Poly}
+\end{tikzpicture}
+\newpage
+	
+\clearpage
+\begin{tikzpicture}
+\begin{class}[text width=5cm]{Parameter}{0,1}
+\end{class}
+\begin{class}[text width=5cm]{IntParameter}{-4,3}
+\inherit{Parameter}
+\attribute{- val\_ : int}
+\operation{+ getInt() : int}
+\end{class}
+\begin{class}[text width=5cm]{VecParameter}{4,3}
+\inherit{Parameter}
+\attribute{- v\_ : Vec}
+\operation{+ getVec() : Vec}
+\end{class}
+\begin{class}[text width=5cm]{ShapeParameter}{0,6.5}
+\inherit{Parameter}
+\attribute{- id\_ : int}
+\attribute{- actionMode\_ : int}
+\operation{+ getId() : int}
+\operation{+ getActionMode() : int}
+\end{class}
+\begin{class}[text width=5cm]{PolyParameter}{-4,9}
+\inherit{Parameter}
+\attribute{- poly\_ : Poly}
+\operation{+ getPoly() : Poly}
+\end{class}
+\begin{class}[text width=5cm]{RigidBodyParameter}{4,9}
+\inherit{Parameter}
+\attribute{- rb\_ : RigidBody}
+\operation{+ getRigidBody() : RigidBody}
+\end{class}
+\end{tikzpicture}
+
+\section{Model Layer}
+\begin{tikzpicture}
+\begin{class}[text width=7cm]{PhysicsSpace}{0,-10}
+\attribute{- m\_RigidBodySet : vector<RigidBody>}
+\attribute{- m\_Force : Vec}
+\attribute{- m\_Stepsize : double}
+\operation{+ addRigidBody(InputRigidBody:RigidBody) : void}
+\operation{+ deleteRigidBody(InputId:int) : void}
+\operation{+ setStepSize(dt:double) : void}
+\operation{+ goStep(n:int) : void}
+\operation{+ addFprceField(InputForce:Vec) : void}
+\operation{+ setForceField(InputForce:Vec) : void}
+\operation{+ clearNonINFRigidBody() : void}
+\end{class}
+\begin{class}[text width=8.2cm]{Model}{0,0}
+\attribute{- physicsSpace : PhysicsSpace}
+\attribute{- updatePolyViewCommand : shared\_ptr<Command>}
+\attribute{- refreshViewCommand : shared\_ptr<Command>}
+\operation{+ createRigidBodyData(rb:RigidBody) : void}
+\operation{+ adjustRigidBodyData(rb:RigidBody,id:int) : void}
+\operation{+ deleteRigidBodyData(id:int) : void}
+\operation{+ simulateTimeFlyData(turns:int) : void}
+\operation{+ addForceFieldData(v:Vec) : void}
+\operation{+ clearUserRigidBody() : void}
+\operation{+ onCreatePolyView(poly:Poly,id:int) : void}
+\operation{+ onAdjustPolyView(poly:Poly,id:int) : void}
+\operation{+ onDeletePolyView(id:int) : void}
+\operation{+ onCreateInvisiblePolyView(poly:Poly,id:int) : void}
+\operation{+ onRefreshView() : void}
+\end{class}
+\begin{class}[text width=4cm]{RigidBody}{0,-18}
+\end{class}
+
+\composition{Model}{}{physicsSpace}{PhysicsSpace}
+\composition{PhysicsSpace}{}{m\_RigidBodySet}{RigidBody}
+\end{tikzpicture}
+\newpage
+
+\section{ViewModel Layer}
+\begin{tikzpicture}
+\begin{class}[text width = 3cm]{Model}{6,-3.2}\end{class}
+\begin{class}[text width = 3cm]{View}{6,-1.6}\end{class}
+\begin{class}[text width = 3cm]{Windows}{6,0}\end{class}
+\begin{class}[text width = 5cm]{Parameter}{-4,-3.2}
+\end{class}
+\begin{class}[text width = 10cm]{Command}{-2.5,0}
+\attribute{- param\_ : shared\_ptr<parameter>}
+\operation{+ set\_parameters(param:shared\_ptr<Parameter>) : void}
+\operation{+ pass() : virtual void}
+\end{class}
+\composition{Command}{param\_}{}{Parameter}
+\begin{class}[text width = 7cm]{AddForceFieldDataCommand}{-4,2}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 7cm]{ClearUserRigidBodyCommand}{4,2}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 7cm]{RefreshViewCommand}{-4,4}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 7cm]{SimulateTimeFlyDataCommand}{4,4}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 7cm]{UpdatePolyViewCommand}{-4,6}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 7cm]{UpdateRigidBodyDataCommand}{4,6}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 12cm]{ViewModel}{0,15}
+\inherit{View}
+\inherit{Model}
+\inherit{Windows}
+\inherit{UpdatePolyViewCommand}
+\inherit{UpdateRigidBodyDataCommand}
+\inherit{RefreshViewCommand}
+\inherit{SimulateTimeFlyDataCommand}
+\inherit{AddForceFieldDataCommand}
+\inherit{ClearUserRigidBodyCommand}
+\inherit{Command}
+\attribute{- model : shared\_ptr<Model>}
+\attribute{- view : shared\_ptr<View>}
+\attribute{- windows : shared\_ptr<Windows>}
+\attribute{- updateRigidBodyDataCommand : shared\_ptr<Command>}
+\attribute{- updatePolyViewCommand : shared\_ptr<Command>}
+\attribute{- simulateTimeFlyDataCommand : shared\_ptr<Command>}
+\attribute{- addForceFieldDataCommand : shared\_ptr<Command>}
+\attribute{- refreshViewCommand : shared\_ptr<Command>}
+\attribute{- clearUserRigidBodyCommand : shared\_ptr<Command>}
+\operation{+ bind(model:shared\_ptr<Model>) : void}
+\operation{+ bind(view:shared\_ptr<View>) : void}
+\operation{+ bind(windows:shared\_ptr<Windows>) : void}
+\operation{+ execUpdateRigidBodyDataCommand(rb:RigidBody,id:int,mode:int) : void}
+\operation{+ execUpdatePolyViewCommand(poly:Poly,id:int,mode:int) : void}
+\operation{+ execSimulateTimeFlyDataCommand(turns:int) : void}
+\operation{+ execAddForceFieldDataCommand(v:Vec) : void}
+\operation{+ execRefreshViewCommand() : void}
+\operation{+ execClearUserRigidBodyCommand() : void}
+\end{class}
+\end{tikzpicture}
+\newpage
+
+\section{View Layer}
+\begin{tikzpicture}
+\begin{class}[text width = 5cm]{Vec}{8,0}
+\end{class}
+\begin{class}[text width = 5cm]{ViewPoint}{8,2.8}
+\inherit{Vec}
+\operation{+ getintX() : int}
+\operation{+ getintY() : int}
+\operation{+ getintMagnitude() : int}
+\end{class}
+\begin{class}[text width = 5cm]{ViewShape}{1,4}
+\attribute{- m\_id : int}
+\attribute{- m\_visible : bool}
+\operation{+ drawShape() : virtual void}
+\operation{+ setShape(id:int,v:bool) : bool}
+\operation{+ getid() : int}
+\operation{+ getvisible() : bool}
+\end{class}
+\begin{class}[text width = 8cm]{ViewPolygon}{8,9}
+\inherit{ViewShape}
+\attribute{- m\_pointset : vector<ViewPoint>}
+\attribute{- m\_edgewidth : int}
+\attribute{- m\_edgecolor : Fl\_Color}
+\attribute{- m\_fillcolor : Fl\_Color}
+\operation{+ setPolygon(p:Poly,id:int) : bool}
+\operation{+ setPolygon(id:int,ew:int,ec:Fl\_Color,fc:Fl\_Color) : bool}
+\operation{+ getedgewidth() : int}
+\operation{+ getedgecolor() : Fl\_Color}
+\operation{+ getfillcolor() : Fl\_Color}
+\end{class}
+\begin{class}[text width = 5cm]{Fl Double Window}{-1,0}
+\end{class}
+\begin{class}[text width = 6.5cm]{ViewWindow}{0,10.5}
+\inherit{Fl Double Window}
+\attribute{- m\_winvisible : bool}
+\attribute{- m\_shapeset : vector<ViewShape*>}
+\operation{+ getwidth() : int}
+\operation{+ getheight() : int}
+\operation{+ gettopleftX() : int}
+\operation{+ gettopleftY() : int}
+\operation{+ clearshapeset() : bool}
+\operation{+ attach(vs:ViewShape*) : bool}
+\operation{+ getviewshape(id:int) : ViewShape*}
+\operation{+ deleteshape(vs:ViewShape*) : bool}
+\operation{+ draw() : void}
+\end{class}
+\begin{class}[text width = 7cm]{ViewSystem}{0,17}
+\attribute{- m\_windowset : vector<ViewWindow*>}
+\attribute{- m\_DEFAULT\_WINDOW : ViewWindow*}
+\operation{+ getwindownum() : int}
+\operation{+ getWindow(name:char*) : ViewWindow*}
+\operation{+ deletewindow(temp:ViewWindow*) : bool}
+\operation{+ getWINDOW() : ViewWindow*}
+\operation{+ setWINDOW(vw:ViewWindow*) : bool}
+\operation{+ attach(vw:ViewWindow*) : bool}
+\operation{+ drawSystem() : void}
+\end{class}
+\begin{class}[text width = 7cm]{View}{9,18}
+\attribute{- m\_system : ViewSystem}
+\attribute{- windows : shared\_ptr<Windows>}
+\attribute{- viewPtr : shared\_ptr<View>}
+\operation{+ createViewWindow(name:string) : bool}
+\operation{+ createViewPolygon(id:int,p:Poly) : bool}
+\operation{+ changeViewWindow(c:Fl\_Color) : bool}
+\operation{+ deleteViewPolygon(id:int) : bool}
+\operation{+ changeViewPolygon(id:int,p:Poly) : bool}
+\operation{+ changeViewPolygon(id:int,lw:int) : bool}
+\operation{+ changeViewPolygon(id:int,c:Fl\_Color,sta:bool) : bool}
+\operation{+ hideViewPolygon(id:int) : bool}
+\operation{+ showViewPolygon(id:int) : bool}
+\operation{+ getsystem() : ViewSystem}
+\operation{+ refresh() : void}
+\end{class}
+\begin{class}[text width = 4cm]{Windows}{9,10.3}
+\end{class}
+\composition{View}{m\_system}{}{ViewSystem}
+\composition{ViewPolygon}{m\_pointset}{}{ViewPoint}
+\composition{ViewWindow}{m\_shapeset}{}{ViewShape}
+\composition{ViewSystem}{m\_DEFAULT\_WINDOW}{m\_windowset}{ViewWindow}
+\composition{View}{windows}{}{Windows}
+\end{tikzpicture}
+\newpage
+
+\section{Window Layer}
+\begin{tikzpicture}
+\begin{class}[text width = 7cm]{Parameter}{0,-5}
+\end{class}
+\begin{class}[text width = 10cm]{Command}{0,-1}
+\attribute{- param\_ : shared\_ptr<parameter>}
+\operation{+ set\_parameters(param:shared\_ptr<Parameter>) : void}
+\operation{+ pass() : virtual void}
+\end{class}
+\composition{Command}{param\_}{}{Parameter}
+\begin{class}[text width = 7cm]{AddForceFieldDataCommand}{-4,2}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 7cm]{ClearUserRigidBodyCommand}{4,2}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 7cm]{SimulateTimeFlyDataCommand}{4,4}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 7cm]{UpdateRigidBodyDataCommand}{-4,4}
+\inherit{Command}
+\attribute{- viewmodel : shared\_ptr<ViewModel>}
+\operation{pass() : void}
+\end{class}
+\begin{class}[text width = 12cm]{Windows}{0,12}
+\inherit{UpdateRigidBodyDataCommand}
+\inherit{SimulateTimeFlyDataCommand}
+\inherit{AddForceFieldDataCommand}
+\inherit{ClearUserRigidBodyCommand}
+\inherit{Command}
+\attribute{- updateRigidBodyDataCommand : shared\_ptr<Command>}
+\attribute{- simulateTimeFlyDataCommand : shared\_ptr<Command>}
+\attribute{- addForceFieldDataCommand : shared\_ptr<Command>}
+\attribute{- clearUserRigidBodyCommand : shared\_ptr<Command>}
+\operation{+ setUpdateRigidBodyDataCommand(shared\_ptr<Command>) : void}
+\operation{+ setSimulateTimeFlyDataCommand(shared\_ptr<Command>) : void}
+\operation{+ setAddForceFieldDataCommand(shared\_ptr<Command>) : void}
+\operation{+ setClearUserRigidBodyCommand(shared\_ptr<Command>) : void}
+\operation{+ onUpdateRigidBodyData(mode:int,rb:RigidBody,id:int) : void}
+\operation{+ onUpdateRigidBodyData(mode:int,id:int) : void}
+\operation{+ onSimulateTimeFlyData(turns:int) : void}
+\operation{+ onAddForceFieldData(v:Vec) : void}
+\operation{+ onClearUserRigidBodyCommand() : void}
+\end{class}
+\end{tikzpicture}
+\newpage
+
+\section{App Layer}
+\begin{tikzpicture}
+\begin{class}[text width = 3cm]{Model}{-2,-1}\end{class}
+\begin{class}[text width = 3cm]{View}{2,-1}\end{class}
+\begin{class}[text width = 3cm]{Windows}{4,2}\end{class}
+\begin{class}[text width = 3cm]{ViewModel}{-4,2}\end{class}
+\begin{class}[text width = 8cm]{App}{0,6}
+\attribute{- view : shared\_ptr<View>}
+\attribute{- model : shared\_ptr<Model>}
+\attribute{- windows : shared\_ptr<Windows>}
+\attribute{- viewmodel : ViewModel*}
+\operation{+ startWorld() : void}
+\end{class}
+\composition{App}{view}{}{View}
+\composition{App}{model}{}{Model}
+\composition{App}{windows}{}{Windows}
+\composition{App}{viewmodel}{}{ViewModel}
+\end{tikzpicture}
+\end{document}
