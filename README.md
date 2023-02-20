@@ -1,6 +1,8 @@
 # Trash-Mechanics
 A simple mechanic simulator, coded with C++ and FLTK library.
 
+![](doc/images%20%26%20videos/final.png)
+
 # Tool Specification
 Coding System : Visual Studio (Windows 10 SDK Ver 10.0.17134.0) 
 
